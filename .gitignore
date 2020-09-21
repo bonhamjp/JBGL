@@ -264,6 +264,10 @@ __pycache__/
 
 # Custom
 dist/
+
 client/node_modules/
-engine/assets/engine/
-engine/assets/webpack/
+
+server/assets/engine/engine.js
+server/assets/engine/engine.wasm
+
+server/assets/webpack/
