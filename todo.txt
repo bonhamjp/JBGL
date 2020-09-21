@@ -1,0 +1,8 @@
+Windows sucks!!!
+
+Figure out how to address these things in Makefile
+
+1.) Running make commands add flag -B. Thinks nothing needs to be built even when it does
+2.) Running go server, and hitting ctrl-c does not kill process. Annoying because port is still bound.
+Find port by running: netstat -ano | findstr 8080
+Kill pid by running: tskill <pid>

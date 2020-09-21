@@ -1,0 +1,23 @@
+{{ define "layout" }}
+
+<!DOCTYPE html>
+<html lang="eng">
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>DataGarden</title>
+
+    <link href="/assets/css/app/main.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <noscript>JavaScript is required to run this app.</noscript>
+    
+    {{ template "content" . }}
+
+    <script src="/assets/webpack/bundle.js"></script>  
+  </body>
+</html>
+
+{{ end }}

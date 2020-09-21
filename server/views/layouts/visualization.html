@@ -1,0 +1,24 @@
+{{ define "layout" }}
+
+<!DOCTYPE html>
+<html lang="eng">
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>DataGarden</title>
+
+    <link href="/assets/css/visualization/main.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="/assets/engine/engine_interface.js"></script>
+    <script src="/assets/engine/engine.js"></script>
+  </head>
+
+  <body>
+    {{ template "content" . }}
+  </body>
+</html>
+
+{{ end }}
