@@ -3,6 +3,8 @@
 
 #include "Shader.h"
 
+#include "core/object/camera/Camera.h"
+
 namespace DataGarden
 {
 	class Renderer
@@ -12,16 +14,16 @@ namespace DataGarden
 		~Renderer();
 
 		void PreRender();
+    void PostRender();
 
-    // void SetViewProjection(Entity* entity);
+    void SetViewProjection(Camera* camera);
+
     // void SetLights(EntityManager* lightManager);
 
     // void SetLights();
 
     // TODO: Figure out better batching
     // void RenderEntity(Entity* entity);
-    
-    void PostRender();
     
     // void SetClearColor(glm::vec4 clearColor);
 
@@ -58,6 +60,12 @@ namespace DataGarden
     void BindVertexArray(unsigned int vertexArrayID);
     void unbindVertexArray();
     void DeleteVertexArray(unsigned int vertexArrayID);
+
+    void SetUniformMatrix4fv(unsigned int programID, const char* uniformName, glm::mat4 uniformMatrix);
+		void SetUniform4fv(unsigned int programID, const char* uniformName, glm::vec4 uniformVector);
+		void SetUniform3fv(unsigned int programID, const char* uniformName, glm::vec3 uniformVector);
+		void SetUniform1f(unsigned int programID, const char* uniformName, float uniformFloat);
+		void SetUniform1i(unsigned int programID, const char* uniformName, int uniformInteger);
 		
   private:
 		// glm::vec4 m_ClearColor;

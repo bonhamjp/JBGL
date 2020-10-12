@@ -1,6 +1,6 @@
 #include "Canvas.h"
 
-#include "CanvasInterface.h"
+#include "canvas_interface/CanvasInterface.h"
 
 namespace DataGarden
 {

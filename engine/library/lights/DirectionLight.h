@@ -7,11 +7,12 @@
 
 namespace DataGarden
 {
-  class DirectionLight : Light
+  class DirectionLight : public Light
   {
   public:
     DirectionLight();
     DirectionLight(glm::vec4 direction);
+    DirectionLight(glm::vec4 direction, glm::vec4 color);
     DirectionLight(glm::vec4 color, float ambientStrength, float diffuseStrength, float specularStrength, glm::vec4 direction);
     ~DirectionLight();
     

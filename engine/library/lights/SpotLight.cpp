@@ -15,8 +15,34 @@ namespace DataGarden
 		m_OuterCutoff = 17.5f;
   }
 
-  SpotLight::SpotLight(glm::vec4 direction, float constant, float linear, float quadratic, float innerCutoff, float outerCutoff) :
-  Light()
+	SpotLight::SpotLight(glm::vec4 direction) :
+	Light()
+	{
+		m_Direction = direction;
+
+		m_Constant = 1.0f;
+		m_Linear = 0.2f;
+		m_Quadratic = 0.02f;
+
+		m_InnerCutoff = 14.0f;
+		m_OuterCutoff = 17.5f;
+	}
+
+	SpotLight::SpotLight(glm::vec4 direction, glm::vec4 color) :
+	Light(color)
+	{
+		m_Direction = direction;
+
+		m_Constant = 1.0f;
+		m_Linear = 0.2f;
+		m_Quadratic = 0.02f;
+
+		m_InnerCutoff = 14.0f;
+		m_OuterCutoff = 17.5f;
+	}
+
+  SpotLight::SpotLight(glm::vec4 direction, glm::vec4 color, float constant, float linear, float quadratic, float innerCutoff, float outerCutoff) :
+  Light(color)
   {
 		m_Direction = direction;
 
@@ -28,7 +54,7 @@ namespace DataGarden
 		m_OuterCutoff = outerCutoff;
   }
 
-  SpotLight::SpotLight(glm::vec4 color, float ambientStrength, float diffuseStrength, float specularStrength, glm::vec4 direction, float constant, float linear, float quadratic, float innerCutoff, float outerCutoff) :
+  SpotLight::SpotLight(glm::vec4 direction, glm::vec4 color, float ambientStrength, float diffuseStrength, float specularStrength, float constant, float linear, float quadratic, float innerCutoff, float outerCutoff) :
   Light(color, ambientStrength, diffuseStrength, specularStrength)
   {
 		m_Direction = direction;

@@ -5,7 +5,7 @@
 
 #include "core/Engine.h"
 
-#include "Canvas.h"
+#include "core/canvas/Canvas.h"
 
 #include "core/scene/Scene.h"
 #include "core/object/camera/Camera.h"

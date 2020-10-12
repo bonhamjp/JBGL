@@ -2,9 +2,13 @@
 
 #include <emscripten.h>
 
-#include "WebGLInterface.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtx/string_cast.hpp>
 
 #include "Renderer.h"
+
+#include "webgl_interface/WebGLInterface.h"
 
 #include "core/Engine.h"
 #include "core/canvas/Canvas.h"
@@ -38,6 +42,8 @@ namespace DataGarden
   void Renderer::PreRender()
   {
     ClearBuffer();
+
+    m_Shader->Bind();
   }
 
   void Renderer::PostRender()
@@ -45,147 +51,187 @@ namespace DataGarden
 
   void Renderer::SetBufferColor(float r, float g, float b, float a)
   {
-    glSetBufferColor(r, g, b, a);
+    webGLInterfaceSetBufferColor(r, g, b, a);
+  }
+
+  void Renderer::SetViewProjection(Camera* camera)
+  {
+    glm::mat4 viewProjection = camera->GetViewProjection() * camera->GetTransform().ViewMatrix();
+		
+    // SetUniformMatrix4fv(m_Shader->GetProgramID(), "u_ViewProjection", viewProjection);
+
+    // Render::SetUniformMatrix4fv(shader, viewProjection, "u_ViewProjection");
+
+		// Render::SetUniform3fv(shader, camera->GetTransform().GetPosition(), "u_ViewPosition");
   }
   
   void Renderer::ClearBuffer()
   {
-    glClearBuffer();
+    webGLInterfaceClearBuffer();
   }
 
   void Renderer::SetViewport()
   {
     Canvas& canvas = Engine::Get().GetCanvas();
 
-    glSetViewport(0, 0, canvas.GetWidth(), canvas.GetHeight());
+    webGLInterfaceSetViewport(0, 0, canvas.GetWidth(), canvas.GetHeight());
   }
 
   unsigned int Renderer::CreateProgram()
   {
-    return glCreateProgram();
+    return webGLInterfaceCreateProgram();
   }
 
   void Renderer::UseProgram(unsigned int programID)
   {
-    glUseProgram(programID);
+    webGLInterfaceUseProgram(programID);
   }
 
   void Renderer::AttachShader(unsigned int programID, unsigned int shaderID)
   {
-    glAttachShader(programID, shaderID);
+    webGLInterfaceAttachShader(programID, shaderID);
   }
   
   void Renderer::LinkProgram(unsigned int programID)
   {
-    glLinkProgram(programID);
+    webGLInterfaceLinkProgram(programID);
   }
 
   void Renderer::StopProgram()
   {
-    glStopProgram();
+    webGLInterfaceStopProgram();
   }
 
   void Renderer::DeleteProgram(unsigned int programID)
   {
-    glDeleteProgram(programID);
+    webGLInterfaceDeleteProgram(programID);
   }
 
   unsigned int Renderer::CreateVertexShader()
   {
-    return glCreateVertexShader();
+    return webGLInterfaceCreateVertexShader();
   }
 
   unsigned int Renderer::CreateFragmentShader()
   {
-    return glCreateFragmentShader();
+    return webGLInterfaceCreateFragmentShader();
   }
     
   void Renderer::ShaderSource(unsigned int programID, std::string shaderSourceString)
   {
     char* shaderSource = (char*) shaderSourceString.c_str();
-    glShaderSource(programID, shaderSource);
+    webGLInterfaceShaderSource(programID, shaderSource, strlen(shaderSource));
   }
   
   void Renderer::CompileShader(unsigned int shaderID)
   {
-    glCompileShader(shaderID);
+    webGLInterfaceCompileShader(shaderID);
   }
 
   void Renderer::DeleteShader(unsigned int shaderID)
   {
-    glDeleteShader(shaderID);
+    webGLInterfaceDeleteShader(shaderID);
   }
 
   unsigned int Renderer::CreateBuffer()
   {
-    return glCreateBuffer();
+    return webGLInterfaceCreateBuffer();
   }
 
   void Renderer::DeleteBuffer(unsigned int bufferID)
   {
-    glDeleteBuffer(bufferID);
+    webGLInterfaceDeleteBuffer(bufferID);
   }
 
   void Renderer::BindVertexBuffer(unsigned int bufferID)
   {
-    glBindVertexBuffer(bufferID);
+    webGLInterfaceBindVertexBuffer(bufferID);
   }
 
   void Renderer::VertexBufferData(float* vertexData)
   {
-    glVertexBufferData(vertexData);
+    webGLInterfaceVertexBufferData(vertexData, sizeof(vertexData) / sizeof(vertexData[0]));
   }
 
   void Renderer::UnbindVertexBuffer()
   {
-    glBindVertexBuffer(0);
+    webGLInterfaceBindVertexBuffer(0);
   }
 
   void Renderer::BindIndexBuffer(unsigned int bufferID)
   {
-    glBindIndexBuffer(bufferID);
+    webGLInterfaceBindIndexBuffer(bufferID);
   }
 
   void Renderer::IndexBufferData(unsigned int* indexData)
   {
-    glIndexBufferData(indexData);
+    webGLInterfaceIndexBufferData(indexData, sizeof(indexData) / sizeof(indexData[0]));
   }
 
   void Renderer::UnbindIndexBuffer()
   {
-    glBindIndexBuffer(0);
+    webGLInterfaceBindIndexBuffer(0);
   }
 
   unsigned int Renderer::CreateVertexArray()
   {
-    return glCreateVertexArray();
+    return webGLInterfaceCreateVertexArray();
   }
 
   void Renderer::BindVertexArray(unsigned int vertexArrayID)
   {
-    glBindVertexArray(vertexArrayID);
+    webGLInterfaceBindVertexArray(vertexArrayID);
   }
 
   void Renderer::unbindVertexArray()
   {
-    glBindVertexArray(0);
+    webGLInterfaceBindVertexArray(0);
   }
 
-    void Renderer::DeleteVertexArray(unsigned int vertexArrayID)
+  void Renderer::DeleteVertexArray(unsigned int vertexArrayID)
   {
-    glDeleteVertexArray(vertexArrayID);
+    webGLInterfaceDeleteVertexArray(vertexArrayID);
+  }
+
+  void Renderer::SetUniformMatrix4fv(unsigned int shaderID, const char* uniformName, glm::mat4 uniformMatrix)
+  {
+    webGLInterfaceSetUniformMatrix4fv(shaderID, uniformName, strlen(uniformName), glm::value_ptr(uniformMatrix));
+  }
+
+  void Renderer::SetUniform4fv(unsigned int shaderID, const char* uniformName, glm::vec4 uniformVector)
+  {
+    webGLInterfaceSetUniform4fv(shaderID, uniformName, strlen(uniformName), glm::value_ptr(uniformVector));
+  }
+
+  void Renderer::SetUniform3fv(unsigned int shaderID, const char* uniformName, glm::vec3 uniformVector)
+  {
+    webGLInterfaceSetUniform3fv(shaderID, uniformName, strlen(uniformName), glm::value_ptr(uniformVector));
+  }
+
+  void Renderer::SetUniform1f(unsigned int shaderID, const char* uniformName, float uniformFloat)
+  {
+
+  }
+
+  void Renderer::SetUniform1i(unsigned int shaderID, const char* uniformName, int uniformInteger)
+  {
+
   }
 
   void Renderer::_Setup()
   {
-    new Shader(ShaderVertexSource::BASE, ShaderFragmentSource::BASE);
+    webGLInterfaceSetupContext();
+
+    m_Shader = new Shader(ShaderVertexSource::BASE, ShaderFragmentSource::BASE);
   
-    glSetBufferColor(1.0f, 0.0f, 0.0f, 1.0f);
-    glClearBuffer();
+    webGLInterfaceSetBufferColor(0.0f, 0.0f, 0.0f, 1.0f);
+    webGLInterfaceClearBuffer();
   }
 
   void Renderer::_Teardown()
   {
     delete m_Shader;
+
+    webGLInterfaceTeardownContext();
   }
 }

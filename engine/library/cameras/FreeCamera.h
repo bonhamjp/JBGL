@@ -14,6 +14,8 @@ namespace DataGarden
     virtual void Update() override;
 
   private:
+    float m_MovementSensitivity = 36.0f;
+		float m_LookSensitivity = 0.5f;
 
   };
 }

@@ -20,7 +20,6 @@ void mainLoop()
 int main(int argc, char** argv) 
 {
   DataGarden::CreateEngine();
-
   engine = &DataGarden::Engine::Get();
 
   DataGarden::TestScene* testScene = new DataGarden::TestScene();

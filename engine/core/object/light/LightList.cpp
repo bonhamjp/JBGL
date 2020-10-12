@@ -7,10 +7,14 @@ namespace DataGarden
   LightList::LightList()
   {
     _MakeAllLightsClean();
+
+    _Setup();
   }
   
   LightList::~LightList()
-  {}
+  {
+    _Teardown();
+  }
   
   void LightList::PushLightOfType(LightType lightType, Light* light)
   {
@@ -126,6 +130,21 @@ namespace DataGarden
     return { 0, nullptr };
   }
 
+  bool LightList::NeedsToUpdateRendererLightUniforms()
+  {
+    return m_PointLightDirty || m_DirectionLightDirty || m_SpotLightDirty;
+  }
+
+  void LightList::UpdateRendererLightUniforms()
+  {
+    
+  }
+
+  void LightList::CleanDirtyLists()
+  {
+    _MakeAllLightsClean();
+  }
+
   void LightList::_MakeLightTypeClean(LightType lightType)
   {
     switch(lightType) 
@@ -173,5 +192,13 @@ namespace DataGarden
     m_PointLightDirty = true;
     m_DirectionLightDirty = true;
     m_SpotLightDirty = true;
+  }
+
+  void LightList::_Setup()
+  {}
+
+  void LightList::_Teardown()
+  {
+    // TODO: Free all lights
   }
 }

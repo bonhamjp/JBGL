@@ -14,6 +14,12 @@ namespace DataGarden
     m_Direction = direction;
   }
 
+  DirectionLight::DirectionLight(glm::vec4 direction, glm::vec4 color) :
+  Light(color)
+  {
+    m_Direction = direction;
+  }
+
   DirectionLight::DirectionLight(glm::vec4 color, float ambientStrength, float diffuseStrength, float specularStrength, glm::vec4 direction) :
   Light(color, ambientStrength, specularStrength, diffuseStrength)
   {

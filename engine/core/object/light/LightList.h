@@ -29,17 +29,22 @@ namespace DataGarden
 
     unsigned int GetLightLengthOfType(LightType lightType);
     LightListOfType GetLightListOfType(LightType lightType);
+
+    bool NeedsToUpdateRendererLightUniforms();
+    void UpdateRendererLightUniforms();
+
+    void CleanDirtyLists();
     
   private:
-    unsigned int m_PointLightCount;
+    unsigned int m_PointLightCount = 0;
     bool m_PointLightDirty;
     Light* m_PointLights[MAX_LIGHT_COUNT];
 
-    unsigned int m_DirectionLightCount;
+    unsigned int m_DirectionLightCount = 0;
     bool m_DirectionLightDirty;
     Light* m_DirectionLights[MAX_LIGHT_COUNT];
 
-    unsigned int m_SpotLightCount;
+    unsigned int m_SpotLightCount = 0;
     bool m_SpotLightDirty;
     Light* m_SpotLights[MAX_LIGHT_COUNT];
 
@@ -48,6 +53,9 @@ namespace DataGarden
 
     void _MakeLightTypeDirty(LightType lightType);
     void _MakeAllLightsDirty();
+
+    void _Setup();
+    void _Teardown();
   };
 }
 

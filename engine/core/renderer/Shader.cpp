@@ -11,30 +11,32 @@ namespace DataGarden
   {
     Renderer& renderer = Engine::Get().GetRenderer();
 
-		m_ID = renderer.CreateProgram();
-
 		ShaderSource shaderSource = ShaderParser::RetrieveShaders(vertexSource, fragmentSource);
 
 		unsigned int vertexShaderID = _CompileVertexShader(shaderSource.vertexSource);
 		unsigned int fragmentShaderID = _CompileFragmentShader(shaderSource.fragmentSource);
 
-		renderer.AttachShader(m_ID, vertexShaderID);
-		renderer.AttachShader(m_ID, fragmentShaderID);
+		m_ProgramID = renderer.CreateProgram();
 
-		renderer.LinkProgram(m_ID);
+		renderer.AttachShader(m_ProgramID, vertexShaderID);
+		renderer.AttachShader(m_ProgramID, fragmentShaderID);
+
+		renderer.LinkProgram(m_ProgramID);
 
 		renderer.DeleteShader(vertexShaderID);
 		renderer.DeleteShader(fragmentShaderID);
+
+		renderer.UseProgram(m_ProgramID);
   }
 
 	Shader::~Shader()
 	{
-		Engine::Get().GetRenderer().DeleteProgram(m_ID);
+		Engine::Get().GetRenderer().DeleteProgram(m_ProgramID);
 	}
 
 	void Shader::Bind()
 	{
-		Engine::Get().GetRenderer().UseProgram(m_ID);
+		Engine::Get().GetRenderer().UseProgram(m_ProgramID);
 	}
 
 	void Shader::Unbind()

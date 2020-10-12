@@ -7,12 +7,14 @@
 
 namespace DataGarden
 {
-  class SpotLight : Light
+  class SpotLight : public Light
   {
   public:
     SpotLight();
-    SpotLight(glm::vec4 direction, float constant, float linear, float quadratic, float innerCutoff, float outerCutoff);
-    SpotLight(glm::vec4 color, float ambientStrength, float diffuseStrength, float specularStrength, glm::vec4 direction, float constant, float linear, float quadratic, float innerCutoff, float outerCutoff);
+    SpotLight(glm::vec4 direction);
+    SpotLight(glm::vec4 direction, glm::vec4 color);
+    SpotLight(glm::vec4 direction, glm::vec4 color, float constant, float linear, float quadratic, float innerCutoff, float outerCutoff);
+    SpotLight(glm::vec4 direction, glm::vec4 color, float ambientStrength, float diffuseStrength, float specularStrength, float constant, float linear, float quadratic, float innerCutoff, float outerCutoff);
     ~SpotLight();
     
   private:

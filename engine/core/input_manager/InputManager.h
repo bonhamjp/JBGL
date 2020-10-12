@@ -26,6 +26,8 @@ namespace DataGarden
 		~InputManager();
 
     void MouseMoved(int mouseX, int mouseY);
+    int GetDeltaMouseX();
+    int GetDeltaMouseY();
     std::pair<int, int> GetDeltaMouseCoords();
     void MousePressed(int clickType);
     void MouseUp(int clickType);
@@ -35,8 +37,8 @@ namespace DataGarden
 
     void Clear();
 
-		// bool IsKeyPressed(int keycode);
-    // bool IsMouseButtonPressed(int button);
+		bool IsKeyPressed(int keyCode);
+    bool IsMouseButtonPressed(int button);
     // std::pair<float, float> GetMousePosition();
     // float GetMouseX();
     // float GetMouseDeltaX();
@@ -48,6 +50,9 @@ namespace DataGarden
   private:
     InputFrame m_PreviousFrame;
     InputFrame m_CurrentFrame;
+
+    void _Setup();
+    void _Teardown();
 
   };
 }

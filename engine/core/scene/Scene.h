@@ -13,12 +13,7 @@
 
 namespace DataGarden
 {
-  // // forward declarations
-  // class UI;
-  // class LightList;
-  // class NodeGraph;
-
-	class Scene
+  class Scene
 	{
 	public:
     Scene();
@@ -43,7 +38,11 @@ namespace DataGarden
 
     LightList* m_LightList;
     NodeGraph* m_NodeGraph;
-    Camera* m_Camera;
+    Camera* m_Camera; // TODO: Updating naming to make it clear this is the 3D camera
+    // TODO: Add second camera for 2D
+    // TODO: Add camera
+
+    // TODO: Maybe store references to shaders here, one for each shader
 
   private:
     void _DeleteCamera();

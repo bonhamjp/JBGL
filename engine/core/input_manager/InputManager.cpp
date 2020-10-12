@@ -2,8 +2,11 @@
 
 #include "InputManager.h"
 
-#include "InputInterface.h"
+#include "input_interface/InputInterface.h"
+
 #include "KeyCodes.h"
+
+#include "core/renderer/Renderer.h"
 
 namespace DataGarden
 {
@@ -37,12 +40,16 @@ namespace DataGarden
 
   InputManager::InputManager()
 	{
+    _Setup();
+
     clearInputFrame(m_PreviousFrame);
     clearInputFrame(m_CurrentFrame);
   }
 
   InputManager::~InputManager()
-  {}
+  {
+    _Teardown();
+  }
 
   void InputManager::MouseMoved(int mouseX, int mouseY)
   {
@@ -50,9 +57,19 @@ namespace DataGarden
     m_CurrentFrame.mouseY = mouseY;
   }
 
+  int InputManager::GetDeltaMouseX()
+  {
+    return m_CurrentFrame.mouseX - m_PreviousFrame.mouseX;
+  }
+
+  int InputManager::GetDeltaMouseY()
+  {
+    return m_CurrentFrame.mouseY - m_PreviousFrame.mouseY;
+  }
+
   std::pair<int, int> InputManager::GetDeltaMouseCoords()
   {
-    return { m_CurrentFrame.mouseX - m_PreviousFrame.mouseX, m_CurrentFrame.mouseY - m_PreviousFrame.mouseY };
+    return { GetDeltaMouseX(), GetDeltaMouseY() };
   }
   
   void InputManager::MousePressed(int clickType)
@@ -93,6 +110,19 @@ namespace DataGarden
 
   void InputManager::KeyDown(int keyCode)
   {
+    Renderer& renderer = Engine::Get().GetRenderer();
+
+    float r = ((float) (rand() % 255)) / 255.0f;
+    float g = ((float) (rand() % 255)) / 255.0f;
+    float b = ((float) (rand() % 255)) / 255.0f;
+    
+    std::cout << "R: " << r << std::endl;
+    std::cout << "G: " << g << std::endl;
+    std::cout << "B: " << b << std::endl;
+
+    renderer.SetBufferColor(r, g, b, 1);
+    renderer.ClearBuffer();
+
     switch(keyCode) {
       case KEY_UP_CODE:
         m_CurrentFrame.upPressed = true;
@@ -144,5 +174,45 @@ namespace DataGarden
   void InputManager::Clear()
   {
     copyInputFrame(m_PreviousFrame, m_CurrentFrame);
+  }
+
+  bool InputManager::IsKeyPressed(int keyCode)
+  {
+    switch(keyCode) {
+      case KEY_UP_CODE:
+        return m_CurrentFrame.upPressed;
+        break;
+
+      case KEY_DOWN_CODE:
+        return m_CurrentFrame.downPressed;
+        break;
+
+      case KEY_LEFT_CODE:
+        return m_CurrentFrame.leftPressed;
+        break;
+
+      case KEY_RIGHT_CODE:
+        return m_CurrentFrame.rightPressed;
+        break;
+
+      case KEY_SPACE_BAR_CODE:
+        return m_CurrentFrame.spaceBarPressed;
+        break;
+    }
+  }
+
+  bool InputManager::IsMouseButtonPressed(int button)
+  {
+    return false;
+  }
+
+  void InputManager::_Setup()
+  {
+    inputInterfaceSetup();
+  }
+
+  void InputManager::_Teardown()
+  {
+    inputInterfaceTeardown();
   }
 }

@@ -15,9 +15,11 @@ namespace DataGarden
 
 		void Bind();
 		void Unbind();
+
+		inline unsigned int GetProgramID() { return m_ProgramID; };
   
   private:
-    unsigned int m_ID;
+    unsigned int m_ProgramID;
 
 		unsigned int _CompileVertexShader(const std::string& shaderSource);
 		unsigned int _CompileFragmentShader(const std::string& shaderSource);

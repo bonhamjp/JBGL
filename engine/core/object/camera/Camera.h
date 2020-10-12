@@ -28,6 +28,8 @@ namespace DataGarden
 
     virtual void Update();
 
+    inline glm::mat4 GetViewProjection() { return m_Projection; };
+
   protected:
     float m_ViewAngle;
     float m_NearClipping;

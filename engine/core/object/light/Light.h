@@ -18,6 +18,7 @@ namespace DataGarden
   {
   public:
     Light();
+    Light(glm::vec4 color);
     Light(glm::vec4 color, float ambientStrength, float diffuseStrength, float specularStrength);
     ~Light();
 

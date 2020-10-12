@@ -4,16 +4,19 @@
 #include <string>
 
 const std::string BASE_FRAGMENT_SHADER_SOURCE = R"( 
-attribute vec4 a_position;
- 
-uniform vec4 u_offset;
- 
-varying vec4 v_positionWithOffset;
+
+#version 100
+
+precision mediump float;
+
+varying vec3 v_Position;
+varying vec3 v_Normal;
+varying vec2 v_TextureCoordinates;
  
 void main() {
-  gl_Position = a_position + u_offset;
-  v_positionWithOffset = a_position + u_offset;
+  gl_FragColor = vec4(0.18, 0.54, 0.34, 1.0);
 }
+
 )";
 
 #endif

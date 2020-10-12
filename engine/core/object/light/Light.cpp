@@ -15,7 +15,7 @@ namespace DataGarden
     m_SpecularStrength = 0.75f;
   }
 
-  Light::Light(glm::vec4 color, float ambientStrength, float diffuseStrength, float specularStrength)
+  Light::Light(glm::vec4 color)
   {
     m_Active = true;
 
@@ -24,6 +24,17 @@ namespace DataGarden
     m_AmbientStrength = 0.1f;
     m_DiffuseStrength = 0.5f;
     m_SpecularStrength = 0.75f;
+  }
+
+  Light::Light(glm::vec4 color, float ambientStrength, float diffuseStrength, float specularStrength)
+  {
+    m_Active = true;
+
+    m_Color = color;
+
+    m_AmbientStrength = ambientStrength;
+    m_DiffuseStrength = diffuseStrength;
+    m_SpecularStrength = specularStrength;
   }
   
   Light::~Light()

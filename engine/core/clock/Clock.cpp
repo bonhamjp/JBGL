@@ -16,7 +16,7 @@ namespace DataGarden
 
   void Clock::Update()
   {
-    double currentTime = emscripten_get_now();
+    double currentTime = emscripten_get_now() / 1000.0f;
 
     m_PreviousTime = m_CurrentTime;
     m_CurrentTime = (float) currentTime;

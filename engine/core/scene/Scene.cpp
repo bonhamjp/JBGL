@@ -4,6 +4,8 @@
 
 #include "core/Engine.h"
 
+#include "core/renderer/Renderer.h"
+
 namespace DataGarden
 {
   Scene::Scene()
@@ -11,9 +13,6 @@ namespace DataGarden
     m_UI_Count = 0;
 
     _SetupScene();
-
-    // m_Camera = new Entity(); // Scope<Camera>(new Camera("Final Camera", 45.0f, 0.1f, 100.0f));
-    // m_Camera->AddTransform(glm::vec3(-6.0f, 0.0f, 3.0f), glm::vec3(1.0f, 1.0f, 1.0f), 0.0f, 0.0f, 0.0f);
   }
 
   Scene::~Scene()
@@ -21,36 +20,29 @@ namespace DataGarden
     _TeardownScene();
   }
 
-  // void Scene::PreUpdate()
-  // {}
-
   void Scene::Update()
   {
     m_Camera->Update();
 
-    // m_EntityManager->Update();
-    // m_LightManager->Update();
-
-    // m_EntityManager.Update();
-
+    m_NodeGraph->Update();
+    
     // for (int i = 0; i < m_UI_Count; i++)
     // {
     //   m_UIs[i]->Update();
     // }
   }
 
-  // void Scene::PostUpdate()
-  // {}
-
-  // void Scene::PreRender()
-  // {}
-
   void Scene::Render()
   {
-    // Renderer& renderer = Engine::Get().GetRenderer();
+    Renderer& renderer = Engine::Get().GetRenderer();
    
-    // set camera projection first
-    // renderer.SetViewProjection(m_CameraEntity);
+    if (m_LightList->NeedsToUpdateRendererLightUniforms())
+    {
+      m_LightList->UpdateRendererLightUniforms();
+    }
+
+    // TODO: Use dirty camera variable to set view projection up only when needed... maybe
+    renderer.SetViewProjection(m_Camera);
     
     // TODO: figure out a way to only dynamically update lights, but attach lights to entities
     // set lighting
@@ -68,13 +60,10 @@ namespace DataGarden
     // {
     //   m_UIs[i]->Render();
     // }
-  }
 
-  // void Scene::PostRender()
-  // {
-  //   // m_EntityManager->ResetUpdateStatus();
-  //   // m_LightManager->ResetUpdateStatus();
-  // }
+    // prevent expensive light setup, until there are changes
+    m_LightList->CleanDirtyLists();
+  }
 
   void Scene::PushUi(UI* ui)
   {
