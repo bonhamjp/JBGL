@@ -48,7 +48,7 @@ EM_JS(
   webGLInterfaceSetUniform3fv, (
     unsigned int programID, 
     const char* uniformName, 
-    unsigned int uniformNameLength, 
+    unsigned int uniformNameLength,
     float* vectorData
   ), {
   
@@ -60,7 +60,8 @@ EM_JS(
   
   var vector = new Float32Array(webGLInterfaceGetFloatData(vector, 3));
 
-  document.webGLModule.context.uniform3fv(location, false, vector);
+  // document.webGLModule.context.uniform3fv(location, false, vector);
+  document.webGLModule.context.uniform3fv(location, vector, 3);
 });
 
 EM_JS(

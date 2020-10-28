@@ -16,7 +16,7 @@ namespace DataGarden
   class Mesh;
   class Material;
 
-  class Node : Object
+  class Node : public Object
   {
   public:
     Node();
@@ -25,6 +25,14 @@ namespace DataGarden
 
     void Update(glm::mat4 space);
     void Render();
+
+		void SetMesh(Mesh* mesh);
+		inline Mesh* GetMesh() { return m_Mesh; };
+
+    void SetMaterial(Material* material);
+		inline Material* GetMaterial() { return m_Material; };
+
+    inline bool CanRender() { return m_Mesh != nullptr && m_Material != nullptr; };
 
     template<typename T, typename... TArgs>
     T* AddComponent(TArgs&&... args) // TODO: Stop returning raw pointer
@@ -56,6 +64,7 @@ namespace DataGarden
     
   protected:
     bool m_Active;
+    bool m_CanRender;
 
     Mesh* m_Mesh;
     Material* m_Material;
@@ -69,6 +78,8 @@ namespace DataGarden
 
   private:
     void _ClearChildAtIndex(unsigned int childIndex);
+
+    void _UpdateCanRender();
   };
 }
 

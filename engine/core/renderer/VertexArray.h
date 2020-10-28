@@ -11,6 +11,7 @@ namespace DataGarden
 
 	class VertexArray
 	{
+	public:
 		VertexArray();
 		~VertexArray();
 

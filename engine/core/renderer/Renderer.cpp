@@ -10,8 +10,16 @@
 
 #include "webgl_interface/WebGLInterface.h"
 
+#include "VertexArray.h"
+#include "IndexBuffer.h"
+
 #include "core/Engine.h"
 #include "core/canvas/Canvas.h"
+
+#include "core/object/node/Mesh.h"
+#include "core/object/node/Material.h"
+
+#include "core/object/Geometry.h"
 
 namespace DataGarden
 {
@@ -57,12 +65,73 @@ namespace DataGarden
   void Renderer::SetViewProjection(Camera* camera)
   {
     glm::mat4 viewProjection = camera->GetViewProjection() * camera->GetTransform().ViewMatrix();
-		
-    // SetUniformMatrix4fv(m_Shader->GetProgramID(), "u_ViewProjection", viewProjection);
+    SetUniformMatrix4fv(m_Shader->GetProgramID(), "u_ViewProjection", viewProjection);
 
-    // Render::SetUniformMatrix4fv(shader, viewProjection, "u_ViewProjection");
+    glm::vec3 position = camera->GetTransform().GetPosition();
+    SetUniform3fv(m_Shader->GetProgramID(), "u_ViewPosition", position);
+  }
 
-		// Render::SetUniform3fv(shader, camera->GetTransform().GetPosition(), "u_ViewPosition");
+  void Renderer::RenderNode(Node* node)
+  {
+    Mesh* mesh = node->GetMesh();
+    Material* material = node->GetMaterial();
+
+    Geometry* geometry = mesh->GetGeometry();
+
+    geometry->GetVertexArray().Bind();
+    geometry->GetIndexBuffer().Bind();
+
+    glm::mat4 model = node->GetTransform().GetModel();
+		SetUniformMatrix4fv(m_Shader->GetProgramID(), "m_Vertex.Model", model);
+
+    // TODO: Move shader implementation to better place
+		// Fragment data
+		SetUniform1f(m_Shader->GetProgramID(), "u_Material.Shininess", material->GetShininess());
+
+		DrawIndexed(geometry->GetIndexCount());
+
+
+
+    // Mesh& mesh = entity->GetMesh();
+    // Material& material = entity->GetMaterial();
+
+    // Geometry* geometry = mesh.GetGeometry();
+    
+    // geometry->GetVertexArray().Bind();
+
+		// // TODO: Move shader implementation to better place
+		// // Vertex data
+		// glm::mat4 model = entity->GetTransform().GetModel();
+		// Render::SetUniformMatrix4fv(m_BaseShader.get(), model, "m_Vertex.Model");
+    
+		// // TODO: Move shader implementation to better place
+		// // Fragment data
+		// Render::SetUniform1f(m_BaseShader.get(), material.GetShininess(), "u_Material.Shininess");
+
+    // auto ambientTextures = material.GetTextures(TextureType::Ambient);
+    // Render::SetUniform1i(m_BaseShader.get(), ambientTextures.size(), "u_AmbientTextures");
+    // if (ambientTextures.size() > 0)
+    // {
+    //   ambientTextures[0]->Bind();
+    // }
+    
+    // auto diffuseTextures = material.GetTextures(TextureType::Diffuse);
+    // Render::SetUniform1i(m_BaseShader.get(), diffuseTextures.size(), "u_DiffuseTextures");
+    // if (diffuseTextures.size() > 0)
+    // { 
+    //   diffuseTextures[0]->Bind();
+    // }
+    
+    // auto specularTextures = material.GetTextures(TextureType::Specular);
+    // Render::SetUniform1i(m_BaseShader.get(), specularTextures.size(), "u_SpecularTextures");
+    // if (specularTextures.size() > 0)
+    // {
+    //   specularTextures[0]->Bind();
+    // }
+
+    // geometry->GetIndexBuffer().Bind();
+
+		// Render::DrawIndexed(geometry->GetIndexCount());
   }
   
   void Renderer::ClearBuffer()
@@ -148,14 +217,14 @@ namespace DataGarden
     webGLInterfaceBindVertexBuffer(bufferID);
   }
 
-  void Renderer::VertexBufferData(float* vertexData)
+  void Renderer::VertexBufferData(float* vertexData, unsigned int vertexLength)
   {
-    webGLInterfaceVertexBufferData(vertexData, sizeof(vertexData) / sizeof(vertexData[0]));
+    webGLInterfaceVertexBufferData(vertexData, vertexLength);
   }
 
   void Renderer::UnbindVertexBuffer()
   {
-    webGLInterfaceBindVertexBuffer(0);
+    webGLInterfaceBindVertexBuffer(-1);
   }
 
   void Renderer::BindIndexBuffer(unsigned int bufferID)
@@ -163,14 +232,14 @@ namespace DataGarden
     webGLInterfaceBindIndexBuffer(bufferID);
   }
 
-  void Renderer::IndexBufferData(unsigned int* indexData)
+  void Renderer::IndexBufferData(unsigned int* indexData, unsigned int indexLength)
   {
-    webGLInterfaceIndexBufferData(indexData, sizeof(indexData) / sizeof(indexData[0]));
+    webGLInterfaceIndexBufferData(indexData, indexLength);
   }
 
   void Renderer::UnbindIndexBuffer()
   {
-    webGLInterfaceBindIndexBuffer(0);
+    webGLInterfaceBindIndexBuffer(-1);
   }
 
   unsigned int Renderer::CreateVertexArray()
@@ -183,9 +252,19 @@ namespace DataGarden
     webGLInterfaceBindVertexArray(vertexArrayID);
   }
 
-  void Renderer::unbindVertexArray()
+  void Renderer::EnableVertexAttribArray(unsigned int vertexAttribPosition)
   {
-    webGLInterfaceBindVertexArray(0);
+    webGLInterfaceEnableVertexAttribArray(vertexAttribPosition);
+  }
+
+  void Renderer::VertexAttribPointer(unsigned int vertexAttribPosition, unsigned int size, unsigned int type, bool normalize, unsigned int stride, unsigned int offset)
+  {
+    webGLInterfaceVertexAttribPointer(vertexAttribPosition, size, type, normalize, stride, offset);
+  }
+
+  void Renderer::UnbindVertexArray()
+  {
+    webGLInterfaceBindVertexArray(-1);
   }
 
   void Renderer::DeleteVertexArray(unsigned int vertexArrayID)
@@ -216,6 +295,11 @@ namespace DataGarden
   void Renderer::SetUniform1i(unsigned int shaderID, const char* uniformName, int uniformInteger)
   {
 
+  }
+
+  void Renderer::DrawIndexed(unsigned int count)
+  {
+    // glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
   }
 
   void Renderer::_Setup()

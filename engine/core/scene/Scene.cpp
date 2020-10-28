@@ -44,16 +44,7 @@ namespace DataGarden
     // TODO: Use dirty camera variable to set view projection up only when needed... maybe
     renderer.SetViewProjection(m_Camera);
     
-    // TODO: figure out a way to only dynamically update lights, but attach lights to entities
-    // set lighting
-    // if (m_LightManager->UpdatedInFrame())
-    // {
-    //   renderer.SetLights(m_LightManager.get());
-    // }
-    // renderer.SetLights(m_LightManager.get());
-    
-    // render entities
-    // m_EntityManager->Render();
+    m_NodeGraph->Render();
 
     // render uis
     // for (int i = 0; i < m_UI_Count; i++)

@@ -1,3 +1,4 @@
+#include "BufferLayout.h"
 #include "VertexArray.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
@@ -5,6 +6,8 @@
 #include "Renderer.h"
 
 #include "core/Engine.h"
+
+#include <iostream>
 
 namespace DataGarden
 {
@@ -51,29 +54,30 @@ namespace DataGarden
 	
 	void VertexArray::AddVertexLayout(VertexBuffer* vertexBuffer)
 	{
-		// Bind();
-		// vertexBuffer->Bind();
+		Bind();
+		vertexBuffer->Bind();
 
-		// uint32_t i = 0;
-		// const auto& layout = vertexBuffer->GetLayout();
-		// for (const auto& element : layout)
-		// {
-		// 	glEnableVertexAttribArray(i);
+		Renderer& renderer = Engine::Get().GetRenderer();
 
-		// 	glVertexAttribPointer(
-		// 		i,
-		// 		element.GetComponentCount(),
-		// 		BufferDataTypeTopOpenGLBaseType(element.dataType),
-		// 		element.normalized,
-		// 		layout.GetStride(),
-		// 		(const void*)element.offset
-		// 	);
+		uint32_t i = 0;
+		const auto& layout = vertexBuffer->GetLayout();
+		for (const auto& element : layout)
+		{
+			renderer.EnableVertexAttribArray(i);
+			renderer.VertexAttribPointer(
+				i,
+				element.GetComponentCount(),
+				(unsigned int) element.dataType,
+				element.normalized,
+				layout.GetStride(),
+				element.offset
+			);
 
-		// 	i++;
-		// }
+			i++;
+		}
 
-		// vertexBuffer->Unbind();
-		// Unbind();
+		vertexBuffer->Unbind();
+		Unbind();
 	}
 
 	void VertexArray::AddIndexLayout(IndexBuffer* indexBuffer)
@@ -86,6 +90,6 @@ namespace DataGarden
 	
 	void VertexArray::Unbind()
 	{
-		Engine::Get().GetRenderer().unbindVertexArray();
+		Engine::Get().GetRenderer().UnbindVertexArray();
 	}
 }

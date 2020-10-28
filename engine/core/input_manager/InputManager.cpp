@@ -116,10 +116,6 @@ namespace DataGarden
     float g = ((float) (rand() % 255)) / 255.0f;
     float b = ((float) (rand() % 255)) / 255.0f;
     
-    std::cout << "R: " << r << std::endl;
-    std::cout << "G: " << g << std::endl;
-    std::cout << "B: " << b << std::endl;
-
     renderer.SetBufferColor(r, g, b, 1);
     renderer.ClearBuffer();
 
@@ -199,6 +195,8 @@ namespace DataGarden
         return m_CurrentFrame.spaceBarPressed;
         break;
     }
+
+    return false;
   }
 
   bool InputManager::IsMouseButtonPressed(int button)

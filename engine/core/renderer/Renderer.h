@@ -3,6 +3,8 @@
 
 #include "Shader.h"
 
+#include "core/object/node/Node.h"
+
 #include "core/object/camera/Camera.h"
 
 namespace DataGarden
@@ -20,10 +22,8 @@ namespace DataGarden
 
     // void SetLights(EntityManager* lightManager);
 
-    // void SetLights();
-
     // TODO: Figure out better batching
-    // void RenderEntity(Entity* entity);
+    void RenderNode(Node* node);
     
     // void SetClearColor(glm::vec4 clearColor);
 
@@ -49,16 +49,18 @@ namespace DataGarden
     void DeleteBuffer(unsigned int bufferID);
     
     void BindVertexBuffer(unsigned int bufferID);
-    void VertexBufferData(float* vertexData);
+    void VertexBufferData(float* vertexData, unsigned int vertexLength);
     void UnbindVertexBuffer();
 
     void BindIndexBuffer(unsigned int bufferID);
-    void IndexBufferData(unsigned int* indexData);
+    void IndexBufferData(unsigned int* indexData, unsigned int indexLength);
     void UnbindIndexBuffer();
 
     unsigned int CreateVertexArray();
     void BindVertexArray(unsigned int vertexArrayID);
-    void unbindVertexArray();
+    void EnableVertexAttribArray(unsigned int vertexAttribPosition);
+    void VertexAttribPointer(unsigned int vertexAttribPosition, unsigned int size, unsigned int type, bool normalize, unsigned int stride, unsigned int offset);
+    void UnbindVertexArray();
     void DeleteVertexArray(unsigned int vertexArrayID);
 
     void SetUniformMatrix4fv(unsigned int programID, const char* uniformName, glm::mat4 uniformMatrix);
@@ -67,6 +69,8 @@ namespace DataGarden
 		void SetUniform1f(unsigned int programID, const char* uniformName, float uniformFloat);
 		void SetUniform1i(unsigned int programID, const char* uniformName, int uniformInteger);
 		
+    void DrawIndexed(unsigned int count);
+
   private:
 		// glm::vec4 m_ClearColor;
     

@@ -4,17 +4,14 @@
 
 #include "core/object/node/Node.h"
 
+#include "core/object/Geometry.h"
+
 namespace DataGarden
 {
-  Mesh::Mesh(Node* node)
+  Mesh::Mesh(Node* node, ResourceDescriptor* geometryDescriptor, Geometry*(*f)(ResourceDescriptor* descriptor))
   {
-    // TODO: Remove, needs geometry descriptor
-    m_Node = node;
-  }
+    m_Geometry = Engine::Get().GetGeometryManager().AddResource(geometryDescriptor, f);
 
-  Mesh::Mesh(Node* node, ResourceDescriptor* geometryDescriptor, Geometry(*Geometry)(ResourceDescriptor* descriptor))
-  {
-    // m_Geometry = Engine::Get().GetGeometryManager().AddResource(meshDescriptor, meshF);
     m_Node = node;
   }
   

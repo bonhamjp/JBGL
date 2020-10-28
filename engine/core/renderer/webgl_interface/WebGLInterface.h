@@ -10,6 +10,7 @@
 #include "WebGLInterfaceBuffer.h"
 #include "WebGLInterfaceVertexArray.h"
 #include "WebGLInterfaceUniform.h"
+#include "WebGLInterfaceTexture.h"
 
 // Executed from JavaScript
 extern "C"

@@ -7,6 +7,8 @@
 
 #include "core/renderer/Texture.h"
 
+#include <vector>
+
 namespace DataGarden
 {
   // forward declarations
@@ -15,14 +17,23 @@ namespace DataGarden
   class Material
   {
   public:
-    Material(Node* node);
-    Material(Node* node, ResourceDescriptor* meshDescriptor, Texture(*texture)(ResourceDescriptor* descriptor));
+    Material(Node* node, std::vector<ResourceDescriptor*> descriptors, Texture*(*f)(ResourceDescriptor* descriptor));
     ~Material();
 
-    inline Texture* GetTexture() { return m_Texture; };
+    inline void SetShininess(float shininess) { m_Shininess = shininess; };
+		inline float GetShininess() { return m_Shininess; };
+
+    bool HasTexture(TextureType textureType, std::string texturePath);
+
+    inline std::vector<Texture*>& GetTextures(TextureType textureType) { return m_Textures[textureType]; };
 
   private:
-    Texture* m_Texture;
+		float m_Shininess;
+
+    std::map<TextureType, std::vector<Texture*>> m_Textures;
+
+    void _CreateTexture(ResourceDescriptor* descriptor, Texture*(*f)(ResourceDescriptor* descriptor));
+
   };
 }
 

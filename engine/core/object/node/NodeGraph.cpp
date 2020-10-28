@@ -1,5 +1,7 @@
 #include "NodeGraph.h"
 
+#include <iostream>
+
 namespace DataGarden
 {
   NodeGraph::NodeGraph()
@@ -12,7 +14,6 @@ namespace DataGarden
   
   void NodeGraph::Update()
   {
-    // TESTING
     m_UpdatedInFrame = true;
 
     // root node at origin

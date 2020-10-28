@@ -2,10 +2,24 @@
 
 namespace DataGarden
 {
-  Texture::Texture(const std::string& source)
+  Texture::Texture(TextureType type, const std::string& source)
   {
     m_FilePath = source;
 
+    // glGenTextures(1, &m_ID);
+    // glBindTexture(GL_TEXTURE_2D, m_ID);
+
+    // // TODO: Provide customization of texture wrapping/filtering options
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    _LoadTexture(m_FilePath);
+  }
+
+  Texture::Texture(TextureType type, glm::vec4 colorOne, glm::vec4 colorTwo, glm::vec4 colorThree, glm::vec4 colorFour)
+  {
     // glGenTextures(1, &m_ID);
     // glBindTexture(GL_TEXTURE_2D, m_ID);
 
@@ -81,5 +95,28 @@ namespace DataGarden
     // glGenerateMipmap(GL_TEXTURE_2D);
 
     // stbi_image_free(textureData);
+  }
+
+  // Texture* CreateTextureFromFile(ResourceDescriptor* descriptor)
+  // {
+  //   TextureFileResourceDescriptor* textureDescriptor = (TextureFileResourceDescriptor*)descriptor;
+
+  //   TextureType type = textureDescriptor->Type;
+  //   std::string filePath = textureDescriptor->FilePath;
+
+  //   return new Texture(type, filePath);
+  // }
+
+  Texture* CreateTextureFromData(ResourceDescriptor* descriptor)
+  {
+    TextureDataResourceDescriptor* textureDescriptor = (TextureDataResourceDescriptor*)descriptor;
+
+    TextureType type = textureDescriptor->Type;
+    glm::vec4 colorOne = textureDescriptor->ColorOne;
+    glm::vec4 colorTwo = textureDescriptor->ColorTwo;
+    glm::vec4 colorThree = textureDescriptor->ColorThree;
+    glm::vec4 colorFour = textureDescriptor->ColorFour;
+
+    return new Texture(type, colorOne, colorTwo, colorThree, colorFour);
   }
 }

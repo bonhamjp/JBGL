@@ -5,18 +5,16 @@
 
 #include "core/resource_manager/ResourceManager.h"
 
-#include "core/renderer/Geometry.h"
-
 namespace DataGarden
 {
   // forward declarations
   class Node;
+  class Geometry;
 
   class Mesh
   {
   public:
-    Mesh(Node* node);
-    Mesh(Node* node, ResourceDescriptor* geometryDescriptor, Geometry(*Geometry)(ResourceDescriptor* descriptor));
+    Mesh(Node* node, ResourceDescriptor* geometryDescriptor, Geometry*(*f)(ResourceDescriptor* descriptor));
     ~Mesh();
 
     inline Geometry* GetGeometry() { return m_Geometry; };

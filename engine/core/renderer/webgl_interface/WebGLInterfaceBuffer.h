@@ -25,7 +25,7 @@ EM_JS(void, webGLInterfaceVertexBufferData, (float* vertexData, unsigned int ver
 
 EM_JS(void, webGLInterfaceBindIndexBuffer, (unsigned int bufferID), {
   var buffer = document.webGLModule.buffers[bufferID];
-  document.webGLModule.context.bindBuffer(document.webGLModule.context.INDEX_BUFFER, buffer);
+  document.webGLModule.context.bindBuffer(document.webGLModule.context.ELEMENT_ARRAY_BUFFER, buffer);
 });
 
 EM_JS(void, webGLInterfaceIndexBufferData, (unsigned int* indexData, unsigned int indexLength), {

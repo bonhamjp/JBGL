@@ -10,9 +10,10 @@
 
 #include "core/input_manager/InputManager.h"
 
+#include "core/object/Geometry.h"
+
 #include "core/renderer/Renderer.h"
 #include "core/renderer/Texture.h"
-#include "core/renderer/Geometry.h"
 
 namespace DataGarden
 {

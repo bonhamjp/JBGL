@@ -1,0 +1,8 @@
+#ifndef DATA_GARDEN_WEBGL_INTERFACE_TEXTURE
+#define DATA_GARDEN_WEBGL_INTERFACE_TEXTURE
+
+#include <emscripten.h>
+
+
+
+#endif

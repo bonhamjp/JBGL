@@ -3,20 +3,19 @@
 
 #include <string>
 
-const std::string BASE_FRAGMENT_SHADER_SOURCE = R"( 
-
-#version 100
+const std::string BASE_FRAGMENT_SHADER_SOURCE = R"(#version 300 es
 
 precision mediump float;
 
-varying vec3 v_Position;
-varying vec3 v_Normal;
-varying vec2 v_TextureCoordinates;
+in vec3 f_Position;
+in vec3 f_Normal;
+in vec2 f_TextureCoordinates;
+
+out vec4 o_Color;
  
 void main() {
-  gl_FragColor = vec4(0.18, 0.54, 0.34, 1.0);
+  o_Color = vec4(0.18, 0.54, 0.34, 1.0);
 }
-
 )";
 
 #endif

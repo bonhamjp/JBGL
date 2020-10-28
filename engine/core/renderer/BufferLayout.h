@@ -40,6 +40,8 @@ namespace DataGarden
 				return 4 * 4;
 			case BufferDataType::Bool:     
 				return 1;
+			default:
+				return 0;
 		}
 		
 		return 0;
@@ -83,6 +85,8 @@ namespace DataGarden
 					return 4;
 				case BufferDataType::Bool:    
 					return 1;
+				default:
+					return 0;
 			}
 
 			return 0;

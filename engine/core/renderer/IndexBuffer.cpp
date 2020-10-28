@@ -8,13 +8,13 @@ namespace DataGarden
 {
   IndexBuffer::IndexBuffer(uint32_t* indices, uint32_t size)
   {
-    // glGenBuffers(1, &m_ID);
-		// glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ID);
-		// glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(unsigned int), indices, GL_STATIC_DRAW);
-
-		Renderer& renderer = Engine::Get().GetRenderer();
+    Renderer& renderer = Engine::Get().GetRenderer();
 
 		m_ID = renderer.CreateBuffer();
+
+		renderer.BindIndexBuffer(m_ID);
+		renderer.IndexBufferData(indices, size);
+		renderer.UnbindIndexBuffer();
   }
 
 	IndexBuffer::~IndexBuffer()

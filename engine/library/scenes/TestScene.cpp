@@ -6,10 +6,15 @@
 
 #include "core/object/node/Node.h"
 
+#include "utility/ColorTools.h"
+
 #include "library/cameras/FreeCamera.h"
+
 #include "library/lights/PointLight.h"
 #include "library/lights/DirectionLight.h"
 #include "library/lights/SpotLight.h"
+
+#include "library/factories/CubeFactory.h"
 
 namespace DataGarden
 {
@@ -40,9 +45,12 @@ namespace DataGarden
       new SpotLight(glm::vec4(3.0f, 3.0f, 3.0f, 0.0f), whiteLight, 1.0f, 0.045f, 0.0075f, 12.5f, 17.5f)
     );
 
-    // WaterBear::Entity* molequle = MolequleFactory().Generate(m_EntityManager->RootEntity());
-    // m_EntityManager->PushEntity(molequle);
-    // molequle->GetTransform().SetPosition(glm::vec3(-1.0f, 2.0f, 3.0f));
+    Node* cube = CubeFactory::Create(
+      glm::vec3(-1.0f, 2.0f, 3.0f),
+      glm::vec3(1.0f),
+      ColorFromHex(0x06AED5)
+    );
+    m_NodeGraph->PushNode(cube);
   }
 
   TestScene::~TestScene()

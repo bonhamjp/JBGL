@@ -4,8 +4,12 @@
 
 #include "core/Engine.h"
 
+#include "core/renderer/Renderer.h"
+
 #include "Mesh.h"
 #include "Material.h"
+
+#include <iostream>
 
 namespace DataGarden
 {
@@ -13,6 +17,11 @@ namespace DataGarden
   Object()
   {
     m_Active = true;
+    m_CanRender = false;
+
+    m_Mesh = nullptr;
+    m_Material = nullptr;
+
     m_ChildCount = 0;
   }
 
@@ -22,6 +31,11 @@ namespace DataGarden
     m_Parent = parentNode;
 
     m_Active = true;
+    m_CanRender = false;
+
+    m_Mesh = nullptr;
+    m_Material = nullptr;
+
     m_ChildCount = 0;
   }
   
@@ -55,16 +69,30 @@ namespace DataGarden
 
   void Node::Render()
   {
-    // if (m_CanRender)
-    // {
-    //   Engine::Get().GetRenderer().RenderNode(this);
-    // }
+    if (m_CanRender)
+    {
+      Engine::Get().GetRenderer().RenderNode(this);
+    }
 
-    // // render children next
-    // for (int i = 0; i < m_ChildCount; i++)
-    // {
-    //   m_Children[i]->Render();
-    // }
+    // render children next
+    for (int i = 0; i < m_ChildCount; i++)
+    {
+      m_Children[i]->Render();
+    }
+  }
+
+  void Node::SetMesh(Mesh* mesh)
+  {
+    m_Mesh = mesh;
+
+    _UpdateCanRender();
+  }
+
+  void Node::SetMaterial(Material* material)
+  {
+    m_Material = material;
+
+    _UpdateCanRender();
   }
 
   void Node::PushChild(Node* childNode)
@@ -98,5 +126,10 @@ namespace DataGarden
     }
 
     m_ChildCount--;
+  }
+
+  void Node::_UpdateCanRender()
+  {
+    m_CanRender = (m_Mesh != nullptr && m_Material != nullptr);
   }
 }

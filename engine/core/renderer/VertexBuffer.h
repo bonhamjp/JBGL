@@ -14,8 +14,8 @@ namespace DataGarden
 		VertexBuffer(float* vertices, uint32_t size);
 		~VertexBuffer();
 
-		void SetLayout(BufferLayout* layout);
-		BufferLayout* GetLayout();
+		void SetLayout(BufferLayout layout);
+		BufferLayout GetLayout();
 
 		void Bind();
 		void Unbind();
@@ -23,7 +23,7 @@ namespace DataGarden
 	protected:
 		unsigned int m_ID;
 		
-		BufferLayout* m_Layout;
+		BufferLayout m_Layout;
 	};
 }
 
