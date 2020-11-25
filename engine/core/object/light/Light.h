@@ -11,7 +11,7 @@ namespace DataGarden
 {
   enum class LightType
   {
-    Point = 0, Direction, Spot
+    Point = 0, Directional, Spot
   };
 
   class Light

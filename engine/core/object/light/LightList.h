@@ -30,23 +30,24 @@ namespace DataGarden
     unsigned int GetLightLengthOfType(LightType lightType);
     LightListOfType GetLightListOfType(LightType lightType);
 
-    bool NeedsToUpdateRendererLightUniforms();
     void UpdateRendererLightUniforms();
-
-    void CleanDirtyLists();
     
   private:
     unsigned int m_PointLightCount = 0;
     bool m_PointLightDirty;
     Light* m_PointLights[MAX_LIGHT_COUNT];
 
-    unsigned int m_DirectionLightCount = 0;
-    bool m_DirectionLightDirty;
-    Light* m_DirectionLights[MAX_LIGHT_COUNT];
+    unsigned int m_DirectionalLightCount = 0;
+    bool m_DirectionalLightDirty;
+    Light* m_DirectionalLights[MAX_LIGHT_COUNT];
 
     unsigned int m_SpotLightCount = 0;
     bool m_SpotLightDirty;
     Light* m_SpotLights[MAX_LIGHT_COUNT];
+
+    void _UpdateRendererPointLightUniforms();
+    void _UpdateRendererDirectionalLightUniforms();
+    void _UpdateRendererSpotLightUniforms();
 
     void _MakeLightTypeClean(LightType lightType);
     void _MakeAllLightsClean();

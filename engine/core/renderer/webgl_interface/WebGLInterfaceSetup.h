@@ -6,6 +6,8 @@
 EM_JS(void, webGLInterfaceSetupContext, (), {
   var canvasNode = document.createElement("canvas");
   canvasNode.setAttribute("id", "visualization-canvas");
+  canvasNode.setAttribute("width", window.innerWidth + "px");
+  canvasNode.setAttribute("height", window.innerHeight + "px");
   document.body.appendChild(canvasNode);
 
   canvasElement = document.getElementById("visualization-canvas");

@@ -2,6 +2,8 @@
 
 #include "core/Engine.h"
 
+#include <iostream>
+
 namespace DataGarden
 {
   LightList::LightList()
@@ -26,8 +28,8 @@ namespace DataGarden
         _MakeLightTypeDirty(lightType);
         break;
       
-      case LightType::Direction:
-        m_DirectionLights[m_DirectionLightCount++] = light;
+      case LightType::Directional:
+        m_DirectionalLights[m_DirectionalLightCount++] = light;
 
         _MakeLightTypeDirty(lightType);
         break;
@@ -62,15 +64,15 @@ namespace DataGarden
         _MakeLightTypeDirty(lightType);
         break;
       
-      case LightType::Direction:
-        delete m_DirectionLights[childIndex];
+      case LightType::Directional:
+        delete m_DirectionalLights[childIndex];
 
-        for (int i = childIndex; i < m_DirectionLightCount - 1; i++)
+        for (int i = childIndex; i < m_DirectionalLightCount - 1; i++)
         {
-          m_DirectionLights[i] = m_DirectionLights[i + 1];
+          m_DirectionalLights[i] = m_DirectionalLights[i + 1];
         }
 
-        m_DirectionLightCount--;
+        m_DirectionalLightCount--;
 
         _MakeLightTypeDirty(lightType);
         break;
@@ -98,8 +100,8 @@ namespace DataGarden
         return m_PointLightCount;
         break;
       
-      case LightType::Direction:
-        return m_DirectionLightCount;
+      case LightType::Directional:
+        return m_DirectionalLightCount;
         break;
 
       case LightType::Spot:
@@ -118,8 +120,8 @@ namespace DataGarden
         return LightListOfType { m_PointLightCount, m_PointLights };
         break;
       
-      case LightType::Direction:
-        return LightListOfType { m_DirectionLightCount, m_DirectionLights };
+      case LightType::Directional:
+        return LightListOfType { m_DirectionalLightCount, m_DirectionalLights };
         break;
 
       case LightType::Spot:
@@ -130,19 +132,55 @@ namespace DataGarden
     return { 0, nullptr };
   }
 
-  bool LightList::NeedsToUpdateRendererLightUniforms()
-  {
-    return m_PointLightDirty || m_DirectionLightDirty || m_SpotLightDirty;
-  }
-
   void LightList::UpdateRendererLightUniforms()
   {
-    
+    if (m_PointLightDirty)
+    {
+      _UpdateRendererPointLightUniforms();
+      _MakeLightTypeClean(LightType::Point);
+    }
+
+    if (m_DirectionalLightDirty)
+    {
+      _UpdateRendererDirectionalLightUniforms();
+      _MakeLightTypeClean(LightType::Directional);
+    }
+
+    if (m_SpotLightDirty)
+    {
+      _UpdateRendererSpotLightUniforms();
+      _MakeLightTypeClean(LightType::Spot);
+    }
   }
 
-  void LightList::CleanDirtyLists()
+  void LightList::_UpdateRendererPointLightUniforms()
   {
-    _MakeAllLightsClean();
+    for (int i = 0; i < m_PointLightCount; i++)
+    {
+      std::cout << "Updatating Point Light #" << i << " Uniforms!!!" << std::endl;
+      
+      Light* light = m_PointLights[i];
+    }
+  }
+
+  void LightList::_UpdateRendererDirectionalLightUniforms()
+  {
+    for (int i = 0; i < m_DirectionalLightCount; i++)
+    {
+      std::cout << "Updatating Directional Light #" << i << " Uniforms!!!" << std::endl;
+      
+      Light* light = m_DirectionalLights[i];
+    }
+  }
+
+  void LightList::_UpdateRendererSpotLightUniforms()
+  {
+    for (int i = 0; i < m_SpotLightCount; i++)
+    {
+      std::cout << "Updatating Spot Light #" << i << " Uniforms!!!" << std::endl;
+      
+      Light* light = m_SpotLights[i];
+    }
   }
 
   void LightList::_MakeLightTypeClean(LightType lightType)
@@ -153,8 +191,8 @@ namespace DataGarden
         m_PointLightDirty = false;
         break;
       
-      case LightType::Direction:
-        m_DirectionLightDirty = false;
+      case LightType::Directional:
+        m_DirectionalLightDirty = false;
         break;
 
       case LightType::Spot:
@@ -166,7 +204,7 @@ namespace DataGarden
   void LightList::_MakeAllLightsClean()
   {
     m_PointLightDirty = false;
-    m_DirectionLightDirty = false;
+    m_DirectionalLightDirty = false;
     m_SpotLightDirty = false;
   }
 
@@ -177,8 +215,8 @@ namespace DataGarden
         m_PointLightDirty = true;
         break;
       
-      case LightType::Direction:
-        m_DirectionLightDirty = true;
+      case LightType::Directional:
+        m_DirectionalLightDirty = true;
         break;
 
       case LightType::Spot:
@@ -190,7 +228,7 @@ namespace DataGarden
   void LightList::_MakeAllLightsDirty()
   {
     m_PointLightDirty = true;
-    m_DirectionLightDirty = true;
+    m_DirectionalLightDirty = true;
     m_SpotLightDirty = true;
   }
 

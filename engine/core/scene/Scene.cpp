@@ -36,11 +36,8 @@ namespace DataGarden
   {
     Renderer& renderer = Engine::Get().GetRenderer();
    
-    if (m_LightList->NeedsToUpdateRendererLightUniforms())
-    {
-      m_LightList->UpdateRendererLightUniforms();
-    }
-
+    m_LightList->UpdateRendererLightUniforms();
+    
     // TODO: Use dirty camera variable to set view projection up only when needed... maybe
     renderer.SetViewProjection(m_Camera);
     
@@ -51,9 +48,6 @@ namespace DataGarden
     // {
     //   m_UIs[i]->Render();
     // }
-
-    // prevent expensive light setup, until there are changes
-    m_LightList->CleanDirtyLists();
   }
 
   void Scene::PushUi(UI* ui)

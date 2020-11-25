@@ -58,7 +58,7 @@ EM_JS(
   var name = webGLInterfaceGetCharData(uniformName, uniformNameLength);
   var location = document.webGLModule.context.getUniformLocation(program, name);
   
-  var vector = new Float32Array(webGLInterfaceGetFloatData(vector, 3));
+  var vector = new Float32Array(webGLInterfaceGetFloatData(vectorData, 3));
 
   // document.webGLModule.context.uniform3fv(location, false, vector);
   document.webGLModule.context.uniform3fv(location, vector, 3);

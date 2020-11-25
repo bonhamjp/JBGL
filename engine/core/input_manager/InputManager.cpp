@@ -112,12 +112,12 @@ namespace DataGarden
   {
     Renderer& renderer = Engine::Get().GetRenderer();
 
-    float r = ((float) (rand() % 255)) / 255.0f;
-    float g = ((float) (rand() % 255)) / 255.0f;
-    float b = ((float) (rand() % 255)) / 255.0f;
+    // float r = ((float) (rand() % 255)) / 255.0f;
+    // float g = ((float) (rand() % 255)) / 255.0f;
+    // float b = ((float) (rand() % 255)) / 255.0f;
     
-    renderer.SetBufferColor(r, g, b, 1);
-    renderer.ClearBuffer();
+    // renderer.SetBufferColor(r, g, b, 1);
+    // renderer.ClearBuffer();
 
     switch(keyCode) {
       case KEY_UP_CODE:

@@ -5,6 +5,14 @@
 
 #include "WebGLInterfaceUtility.h"
 
+EM_JS(void, webGLInterfaceEnableSampleCoverage, (), {
+  document.webGLModule.context.enable(document.webGLModule.context.SAMPLE_COVERAGE);
+});
+
+EM_JS(void, webGLInterfaceSetSampleCoverage, (float sampleCoverage), {
+  document.webGLModule.context.sampleCoverage(sampleCoverage, false);
+});
+
 EM_JS(void, webGLInterfaceSetBufferColor, (float r, float g, float b, float a), {
   document.webGLModule.context.clearColor(r, g, b, a);
 });
@@ -15,6 +23,10 @@ EM_JS(void, webGLInterfaceClearBuffer, (), {
 
 EM_JS(void, webGLInterfaceSetViewport, (unsigned int x, int y, unsigned int width, unsigned int height), {
   document.webGLModule.context.viewport(x, y, width, height);
+});
+
+EM_JS(void, webGLInterfaceDrawIndexed, (unsigned int count), {
+  document.webGLModule.context.drawElements(document.webGLModule.context.TRIANGLES, count, document.webGLModule.context.UNSIGNED_INT, 0);
 });
 
 #endif

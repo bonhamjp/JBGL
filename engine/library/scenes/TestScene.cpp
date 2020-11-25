@@ -31,7 +31,7 @@ namespace DataGarden
     glm::vec4 whiteLight = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 
     m_LightList->PushLightOfType(
-      LightType::Direction, 
+      LightType::Directional, 
       new DirectionLight(glm::vec4(0.0f, 0.0f, -1.0f, 0.0f), whiteLight)
     );
     

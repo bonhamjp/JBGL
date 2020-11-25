@@ -65,10 +65,18 @@ namespace DataGarden
   void Renderer::SetViewProjection(Camera* camera)
   {
     glm::mat4 viewProjection = camera->GetViewProjection() * camera->GetTransform().ViewMatrix();
+    
+    // std::cout << "View Projection: " << std::endl;
+    // std::cout << glm::to_string(viewProjection) << std::endl;
+    
     SetUniformMatrix4fv(m_Shader->GetProgramID(), "u_ViewProjection", viewProjection);
 
-    glm::vec3 position = camera->GetTransform().GetPosition();
-    SetUniform3fv(m_Shader->GetProgramID(), "u_ViewPosition", position);
+    glm::vec3 viewPosition = camera->GetTransform().GetPosition();
+
+    // std::cout << "View Position: " << std::endl;
+    // std::cout << glm::to_string(viewPosition) << std::endl;
+
+    SetUniform3fv(m_Shader->GetProgramID(), "u_ViewPosition", viewPosition);
   }
 
   void Renderer::RenderNode(Node* node)
@@ -82,11 +90,17 @@ namespace DataGarden
     geometry->GetIndexBuffer().Bind();
 
     glm::mat4 model = node->GetTransform().GetModel();
-		SetUniformMatrix4fv(m_Shader->GetProgramID(), "m_Vertex.Model", model);
+
+    // std::cout << "Model: " << std::endl;
+    // std::cout << glm::to_string(model) << std::endl;
+
+		SetUniformMatrix4fv(m_Shader->GetProgramID(), "u_Vertex.Model", model);
 
     // TODO: Move shader implementation to better place
 		// Fragment data
 		SetUniform1f(m_Shader->GetProgramID(), "u_Material.Shininess", material->GetShininess());
+
+    // std::cout << "Geometry count: " << geometry->GetIndexCount() << std::endl;
 
 		DrawIndexed(geometry->GetIndexCount());
 
@@ -299,7 +313,7 @@ namespace DataGarden
 
   void Renderer::DrawIndexed(unsigned int count)
   {
-    // glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
+    webGLInterfaceDrawIndexed(count);
   }
 
   void Renderer::_Setup()
@@ -308,7 +322,10 @@ namespace DataGarden
 
     m_Shader = new Shader(ShaderVertexSource::BASE, ShaderFragmentSource::BASE);
   
-    webGLInterfaceSetBufferColor(0.0f, 0.0f, 0.0f, 1.0f);
+    // webGLInterfaceEnableSampleCoverage();
+    // webGLInterfaceSetSampleCoverage(4.5f);
+
+    webGLInterfaceSetBufferColor(1.0f, 1.0f, 1.0f, 1.0f);
     webGLInterfaceClearBuffer();
   }
 
