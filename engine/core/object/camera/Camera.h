@@ -28,7 +28,10 @@ namespace DataGarden
 
     virtual void Update();
 
-    inline glm::mat4 GetViewProjection() { return m_Projection; };
+    // inline glm::mat4 GetViewProjection() { return m_Projection; };
+    glm::mat4 GetViewProjection();
+
+    void SetCameraUniforms();
 
   protected:
     float m_ViewAngle;

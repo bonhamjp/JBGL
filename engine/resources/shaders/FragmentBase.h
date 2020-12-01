@@ -8,10 +8,18 @@ const std::string BASE_FRAGMENT_SHADER_SOURCE = R"(#version 300 es
 precision highp float;
 
 in vec4 f_Position;
+in vec4 f_FragPosition;
 in vec3 f_Normal;
 in vec2 f_TextureCoordinates;
 
 out vec4 o_Color;
+
+struct Material
+{
+  float Shininess;
+  vec4 Color;
+};
+uniform Material u_Material;
 
 #define NUMBER_OF_POINT_LIGHTS 32 
 uniform int u_PointLightCount;
@@ -64,24 +72,105 @@ struct SpotLight
 };
 uniform SpotLight u_SpotLights[NUMBER_OF_POINT_LIGHTS];
 
-float clampColor(float color)
+vec4 CalculatePointLight(PointLight light, vec3 normal, vec3 fragPosition, vec3 viewDirection, vec4 ambientColor, vec4 diffuseColor, vec4 specularColor)
 {
-  float clampedColor = color;
-  if (clampedColor < 0.0f)
-  {
-    clampedColor = 0.0f;
-  }
-  else if (clampedColor > 1.0f)
-  {
-    clampedColor = 1.0f;
-  }
-  return clampedColor;
+  // Calculations
+  float distance = length(vec3(light.Position) - fragPosition);
+  vec3 lightDirection = normalize(vec3(light.Position) - fragPosition);
+  vec3 lightReflection = reflect(-lightDirection, normal);
+
+  // Attenuation
+  float attenuation = 1.0 / (light.ConstantS + light.LinearS * distance + light.QuadraticS * (distance * distance));
+
+  // Ambient
+  vec4 ambient = (light.AmbientColor * ambientColor) * attenuation;
+
+  // Diffuse
+  float lightNormalAngle = max(dot(normal, lightDirection), 0.0);
+  vec4 diffuse = (light.DiffuseColor * (lightNormalAngle * diffuseColor)) * attenuation;
+
+  // Specular
+  float specularHighlight = pow(max(dot(viewDirection, lightReflection), 0.0), u_Material.Shininess);
+  vec4 specular = (light.SpecularColor * (specularHighlight * specularColor)) * attenuation;
+
+  return ambient + diffuse + specular;
+}
+
+vec4 CalculateDirectionalLight(DirectionalLight light, vec3 normal, vec3 viewDirection, vec4 ambientColor, vec4 diffuseColor, vec4 specularColor)
+{
+  // Calculations
+  vec3 fragmentTowardsLightDirection = normalize(vec3(-light.Direction));
+  vec3 lightReflection = reflect(-fragmentTowardsLightDirection, normal);
+
+  // Ambient
+  vec4 ambient = light.AmbientColor * ambientColor;
+
+  // Diffuse
+  float lightAngle = max(dot(normal, fragmentTowardsLightDirection), 0.0);
+  vec4 diffuse = light.DiffuseColor * (lightAngle * diffuseColor);
+
+  // Specular
+  float specularHighlight = pow(max(dot(viewDirection, lightReflection), 0.0), u_Material.Shininess);
+  vec4 specular = light.SpecularColor * (specularHighlight * specularColor);
+
+  return ambient + diffuse + specular;
+}
+
+vec4 CalculateSpotLight(SpotLight light, vec3 normal, vec3 fragPosition, vec3 viewDirection, vec4 ambientColor, vec4 diffuseColor, vec4 specularColor)
+{
+  // Calculations
+  float distance = length(vec3(light.Position) - fragPosition);
+  vec3 lightDirection = normalize(vec3(light.Position) - fragPosition);
+  vec3 lightReflection = reflect(-lightDirection, normal);
+
+  // Attenuation
+  float attenuation = 1.0 / (light.ConstantS + light.LinearS * distance + light.QuadraticS * (distance * distance));
+
+  // Spotlight boundries
+  float theta = dot(lightDirection, normalize(vec3(-light.Direction)));
+  float epsilon = light.InnerCutoff - light.OuterCutoff;
+  float intensity = clamp((theta - light.OuterCutoff) / epsilon, 0.0, 1.0);
+
+  // Ambient
+  vec4 ambient = (light.AmbientColor * ambientColor) * attenuation;
+
+  // Diffuse
+  float lightNormalAngle = max(dot(normal, lightDirection), 0.0);
+  vec4 diffuse = (light.DiffuseColor * (lightNormalAngle * diffuseColor)) * attenuation * intensity;
+
+  // Specular
+  float specularHighlight = pow(max(dot(viewDirection, lightReflection), 0.0), u_Material.Shininess);
+  vec4 specular = (light.SpecularColor * (specularHighlight * specularColor)) * attenuation * intensity;
+
+  return ambient + diffuse + specular;
 }
 
 void main() {
-  o_Color = vec4(0.0, 0.5, 0.0, 1.0);
+  vec3 normal = normalize(vec3(f_Normal));
+  vec3 viewDirection = normalize(vec3(f_Position) - vec3(f_FragPosition));
 
-  // gl_FragColor = vec4(0.0f, 1.0f, 0.0f, 1.0f);
+  o_Color = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+
+  vec4 ambientColor = u_Material.Color; // texture(u_AmbientTexture, f_TextureCoordinates);
+  vec4 diffuseColor = u_Material.Color; // texture(u_DiffuseTexture, f_TextureCoordinates);// vec4(1.0f, 0.0f, 0.0f, 1.0f);
+
+  // FIX: Specular color does not work correctly
+  vec4 specularColor = vec4(0.0f, 0.0f, 0.0f, 1.0f); //texture(u_SpecularTexture, f_TextureCoordinates);
+
+  for (int i = 0; i < u_PointLightCount; i++)
+  {
+    o_Color += CalculatePointLight(u_PointLights[i], normal, vec3(f_FragPosition), viewDirection, ambientColor, diffuseColor, specularColor);
+  }
+
+  for (int i = 0; i < u_DirectionalLightCount; i++)
+  {
+    o_Color += CalculateDirectionalLight(u_DirectionalLights[i], normal, viewDirection, ambientColor, diffuseColor, specularColor);
+  }
+
+  for (int i = 0; i < u_SpotLightCount; i++)
+  {
+    o_Color += CalculateSpotLight(u_SpotLights[i], normal, vec3(f_FragPosition), viewDirection, ambientColor, diffuseColor, specularColor);
+  }
 }
 )";
 

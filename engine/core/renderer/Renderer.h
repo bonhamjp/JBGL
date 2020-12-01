@@ -18,15 +18,6 @@ namespace DataGarden
 		void PreRender();
     void PostRender();
 
-    void SetViewProjection(Camera* camera);
-
-    // void SetLights(EntityManager* lightManager);
-
-    // TODO: Figure out better batching
-    void RenderNode(Node* node);
-    
-    // void SetClearColor(glm::vec4 clearColor);
-
     void SetBufferColor(float r, float g, float b, float a);
     void ClearBuffer();
 
@@ -71,6 +62,8 @@ namespace DataGarden
 		
     void DrawIndexed(unsigned int count);
 
+    inline unsigned int GetMainProgramID() { return m_Shader->GetProgramID(); };
+
   private:
 		// glm::vec4 m_ClearColor;
     
@@ -80,6 +73,9 @@ namespace DataGarden
     Shader* m_Shader;
 
     void _Setup();
+
+    void _SetGlobalGraphicsState();
+
     void _Teardown();
   };
 }

@@ -2,6 +2,12 @@
 
 #include "core/Engine.h"
 
+#include "core/renderer/Renderer.h"
+
+#include "library/lights/PointLight.h"
+#include "library/lights/DirectionalLight.h"
+#include "library/lights/SpotLight.h"
+
 #include <iostream>
 
 namespace DataGarden
@@ -155,32 +161,17 @@ namespace DataGarden
 
   void LightList::_UpdateRendererPointLightUniforms()
   {
-    for (int i = 0; i < m_PointLightCount; i++)
-    {
-      std::cout << "Updatating Point Light #" << i << " Uniforms!!!" << std::endl;
-      
-      Light* light = m_PointLights[i];
-    }
+    UpdatePointLightUniforms(GetLightListOfType(LightType::Point));
   }
 
   void LightList::_UpdateRendererDirectionalLightUniforms()
   {
-    for (int i = 0; i < m_DirectionalLightCount; i++)
-    {
-      std::cout << "Updatating Directional Light #" << i << " Uniforms!!!" << std::endl;
-      
-      Light* light = m_DirectionalLights[i];
-    }
+    UpdateDirectionalLightUniforms(GetLightListOfType(LightType::Directional));
   }
 
   void LightList::_UpdateRendererSpotLightUniforms()
   {
-    for (int i = 0; i < m_SpotLightCount; i++)
-    {
-      std::cout << "Updatating Spot Light #" << i << " Uniforms!!!" << std::endl;
-      
-      Light* light = m_SpotLights[i];
-    }
+    UpdateSpotLightUniforms(GetLightListOfType(LightType::Spot));
   }
 
   void LightList::_MakeLightTypeClean(LightType lightType)

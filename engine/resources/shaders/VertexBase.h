@@ -12,6 +12,7 @@ layout(location = 1) in vec3 v_Normal;
 layout(location = 2) in vec2 v_TextureCoordinates;
 
 out vec4 f_Position;
+out vec4 f_FragPosition;
 out vec3 f_Normal;
 out vec2 f_TextureCoordinates;
 
@@ -31,6 +32,8 @@ void main()
   gl_Position = u_ViewProjection * u_Vertex.Model * vec4(v_Position, 1.0f);
 
   f_Position = u_ViewProjection * u_Vertex.Model * vec4(v_Position, 1.0f); // vec3(u_Vertex.Model * vec4(f_Position, 1.0f);
+  f_FragPosition = u_Vertex.Model * vec4(v_Position, 1.0f);
+
   f_Normal = mat3(transpose(inverse(u_Vertex.Model))) * v_Normal;
 }
 )";

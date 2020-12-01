@@ -80,6 +80,9 @@ namespace DataGarden
     void _ClearChildAtIndex(unsigned int childIndex);
 
     void _UpdateCanRender();
+
+    void _SetNodeUniforms();
+    void _DrawIndexed();
   };
 }
 

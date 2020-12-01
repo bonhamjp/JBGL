@@ -6,6 +6,8 @@
 
 #include "core/Engine.h"
 
+#include "core/renderer/Renderer.h"
+
 #include "core/canvas/Canvas.h"
 
 namespace DataGarden
@@ -65,5 +67,19 @@ namespace DataGarden
 
     m_Projection = glm::mat4(1.0f);
     m_Projection = glm::perspective(viewAngleRadians, aspectRatio, m_NearClipping, m_FarClipping);
+  }
+
+  glm::mat4 Camera::GetViewProjection()
+  {
+    return m_Projection * m_Transform.ViewMatrix();
+  }
+
+  void Camera::SetCameraUniforms()
+  {
+    Renderer& renderer = Engine::Get().GetRenderer();
+    unsigned int programID = renderer.GetMainProgramID();
+
+    renderer.SetUniformMatrix4fv(programID, "u_ViewProjection", GetViewProjection());
+    renderer.SetUniform3fv(programID, "u_ViewPosition", m_Transform.GetPosition());
   }
 }

@@ -4,8 +4,6 @@
 
 #include "core/Engine.h"
 
-#include "core/renderer/Renderer.h"
-
 namespace DataGarden
 {
   Scene::Scene()
@@ -34,12 +32,11 @@ namespace DataGarden
 
   void Scene::Render()
   {
-    Renderer& renderer = Engine::Get().GetRenderer();
-   
     m_LightList->UpdateRendererLightUniforms();
     
     // TODO: Use dirty camera variable to set view projection up only when needed... maybe
-    renderer.SetViewProjection(m_Camera);
+    // TODO: Add method on Camera to do Renderer setup
+    m_Camera->SetCameraUniforms();
     
     m_NodeGraph->Render();
 
@@ -52,8 +49,6 @@ namespace DataGarden
 
   void Scene::PushUi(UI* ui)
   {
-    // WATER_BEAR_ASSERT(m_UI_Count + 1 < (MAX_UI_COUNT), "UI limit exceeded");
-
     // m_UIs[m_UI_Count++] = std::unique_ptr<Ui>(ui);
   }
 

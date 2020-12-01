@@ -11,7 +11,7 @@
 #include "library/cameras/FreeCamera.h"
 
 #include "library/lights/PointLight.h"
-#include "library/lights/DirectionLight.h"
+#include "library/lights/DirectionalLight.h"
 #include "library/lights/SpotLight.h"
 
 #include "library/factories/CubeFactory.h"
@@ -28,11 +28,11 @@ namespace DataGarden
     );
     SetCamera(freeCamera);
 
-    glm::vec4 whiteLight = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+    glm::vec4 whiteLight = glm::vec4(0.2f, 0.2f, 0.2f, 1.0f);
 
     m_LightList->PushLightOfType(
       LightType::Directional, 
-      new DirectionLight(glm::vec4(0.0f, 0.0f, -1.0f, 0.0f), whiteLight)
+      new DirectionalLight(glm::vec4(0.0f, 0.0f, -1.0f, 0.0f), whiteLight)
     );
     
     m_LightList->PushLightOfType(
@@ -40,9 +40,18 @@ namespace DataGarden
       new PointLight(Transform(glm::vec3(-4.0f, 8.0f, -4.0f)), whiteLight, 1.0f, 0.045f, 0.0075f)
     );
 
+    // m_LightList->PushLightOfType(
+    //   LightType::Point, 
+    //   new PointLight(Transform(glm::vec3(20.0f, -3.0f, 6.0f)), whiteLight, 1.0f, 0.045f, 0.0075f)
+    // );
+
     m_LightList->PushLightOfType(
       LightType::Spot,
-      new SpotLight(glm::vec4(3.0f, 3.0f, 3.0f, 0.0f), whiteLight, 1.0f, 0.045f, 0.0075f, 12.5f, 17.5f)
+      new SpotLight(
+        glm::vec4(3.0f, 3.0f, 3.0f, 0.0f), 
+        glm::vec4(1.0f, 0.0f, 0.0f, 0.0f), 
+        whiteLight, 1.0f, 0.045f, 0.0075f, 12.5f, 17.5f
+      )
     );
 
     Node* cube = CubeFactory::Create(

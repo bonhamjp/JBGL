@@ -38,9 +38,9 @@ EM_JS(
   var name = webGLInterfaceGetCharData(uniformName, uniformNameLength);
   var location = document.webGLModule.context.getUniformLocation(program, name);
   
-  var vector = new Float32Array(webGLInterfaceGetFloatData(vector, 4));
+  var vector = new Float32Array(webGLInterfaceGetFloatData(vectorData, 4));
 
-  document.webGLModule.context.uniform4fv(location, false, vector);
+  document.webGLModule.context.uniform4fv(location, vector);
 });
 
 EM_JS(
@@ -61,7 +61,7 @@ EM_JS(
   var vector = new Float32Array(webGLInterfaceGetFloatData(vectorData, 3));
 
   // document.webGLModule.context.uniform3fv(location, false, vector);
-  document.webGLModule.context.uniform3fv(location, vector, 3);
+  document.webGLModule.context.uniform3fv(location, vector);
 });
 
 EM_JS(
@@ -79,7 +79,7 @@ EM_JS(
   var name = webGLInterfaceGetCharData(uniformName, uniformNameLength);
   var location = document.webGLModule.context.getUniformLocation(program, name);
   
-  document.webGLModule.context.uniform1f(location, false, floatData);
+  document.webGLModule.context.uniform1f(location, floatData);
 });
 
 EM_JS(
@@ -97,7 +97,7 @@ EM_JS(
   var name = webGLInterfaceGetCharData(uniformName, uniformNameLength);
   var location = document.webGLModule.context.getUniformLocation(program, name);
   
-  document.webGLModule.context.uniform1i(location, false, intData);
+  document.webGLModule.context.uniform1i(location, intData);
 });
 
 #endif

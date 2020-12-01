@@ -4,7 +4,6 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <glm/gtx/string_cast.hpp>
 
 #include "Renderer.h"
 
@@ -62,92 +61,6 @@ namespace DataGarden
     webGLInterfaceSetBufferColor(r, g, b, a);
   }
 
-  void Renderer::SetViewProjection(Camera* camera)
-  {
-    glm::mat4 viewProjection = camera->GetViewProjection() * camera->GetTransform().ViewMatrix();
-    
-    // std::cout << "View Projection: " << std::endl;
-    // std::cout << glm::to_string(viewProjection) << std::endl;
-    
-    SetUniformMatrix4fv(m_Shader->GetProgramID(), "u_ViewProjection", viewProjection);
-
-    glm::vec3 viewPosition = camera->GetTransform().GetPosition();
-
-    // std::cout << "View Position: " << std::endl;
-    // std::cout << glm::to_string(viewPosition) << std::endl;
-
-    SetUniform3fv(m_Shader->GetProgramID(), "u_ViewPosition", viewPosition);
-  }
-
-  void Renderer::RenderNode(Node* node)
-  {
-    Mesh* mesh = node->GetMesh();
-    Material* material = node->GetMaterial();
-
-    Geometry* geometry = mesh->GetGeometry();
-
-    geometry->GetVertexArray().Bind();
-    geometry->GetIndexBuffer().Bind();
-
-    glm::mat4 model = node->GetTransform().GetModel();
-
-    // std::cout << "Model: " << std::endl;
-    // std::cout << glm::to_string(model) << std::endl;
-
-		SetUniformMatrix4fv(m_Shader->GetProgramID(), "u_Vertex.Model", model);
-
-    // TODO: Move shader implementation to better place
-		// Fragment data
-		SetUniform1f(m_Shader->GetProgramID(), "u_Material.Shininess", material->GetShininess());
-
-    // std::cout << "Geometry count: " << geometry->GetIndexCount() << std::endl;
-
-		DrawIndexed(geometry->GetIndexCount());
-
-
-
-    // Mesh& mesh = entity->GetMesh();
-    // Material& material = entity->GetMaterial();
-
-    // Geometry* geometry = mesh.GetGeometry();
-    
-    // geometry->GetVertexArray().Bind();
-
-		// // TODO: Move shader implementation to better place
-		// // Vertex data
-		// glm::mat4 model = entity->GetTransform().GetModel();
-		// Render::SetUniformMatrix4fv(m_BaseShader.get(), model, "m_Vertex.Model");
-    
-		// // TODO: Move shader implementation to better place
-		// // Fragment data
-		// Render::SetUniform1f(m_BaseShader.get(), material.GetShininess(), "u_Material.Shininess");
-
-    // auto ambientTextures = material.GetTextures(TextureType::Ambient);
-    // Render::SetUniform1i(m_BaseShader.get(), ambientTextures.size(), "u_AmbientTextures");
-    // if (ambientTextures.size() > 0)
-    // {
-    //   ambientTextures[0]->Bind();
-    // }
-    
-    // auto diffuseTextures = material.GetTextures(TextureType::Diffuse);
-    // Render::SetUniform1i(m_BaseShader.get(), diffuseTextures.size(), "u_DiffuseTextures");
-    // if (diffuseTextures.size() > 0)
-    // { 
-    //   diffuseTextures[0]->Bind();
-    // }
-    
-    // auto specularTextures = material.GetTextures(TextureType::Specular);
-    // Render::SetUniform1i(m_BaseShader.get(), specularTextures.size(), "u_SpecularTextures");
-    // if (specularTextures.size() > 0)
-    // {
-    //   specularTextures[0]->Bind();
-    // }
-
-    // geometry->GetIndexBuffer().Bind();
-
-		// Render::DrawIndexed(geometry->GetIndexCount());
-  }
-  
   void Renderer::ClearBuffer()
   {
     webGLInterfaceClearBuffer();
@@ -303,12 +216,12 @@ namespace DataGarden
 
   void Renderer::SetUniform1f(unsigned int shaderID, const char* uniformName, float uniformFloat)
   {
-
+    webGLInterfaceSetUniform1f(shaderID, uniformName, strlen(uniformName), uniformFloat);
   }
 
   void Renderer::SetUniform1i(unsigned int shaderID, const char* uniformName, int uniformInteger)
   {
-
+    webGLInterfaceSetUniform1i(shaderID, uniformName, strlen(uniformName), uniformInteger);
   }
 
   void Renderer::DrawIndexed(unsigned int count)
@@ -318,10 +231,16 @@ namespace DataGarden
 
   void Renderer::_Setup()
   {
-    webGLInterfaceSetupContext();
+    _SetGlobalGraphicsState();
 
     m_Shader = new Shader(ShaderVertexSource::BASE, ShaderFragmentSource::BASE);
-  
+  }
+
+  void Renderer::_SetGlobalGraphicsState()
+  {
+    webGLInterfaceSetupContext();
+
+    webGLInterfaceEnableDepthTest();
     // webGLInterfaceEnableSampleCoverage();
     // webGLInterfaceSetSampleCoverage(4.5f);
 

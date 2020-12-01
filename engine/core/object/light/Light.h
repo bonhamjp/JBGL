@@ -27,6 +27,10 @@ namespace DataGarden
 
     inline bool ShouldRemove() { return !m_Active; };
     void Destroy();
+
+    inline glm::vec4 GetAmbientColor() { return m_Color; };
+    inline glm::vec4 GetDiffuseColor() { return m_Color; };
+    inline glm::vec4 GetSpecularColor() { return m_Color; };
     
   private:
     bool m_Active;
@@ -37,9 +41,9 @@ namespace DataGarden
     float m_DiffuseStrength;
     float m_SpecularStrength;
 
-		// glm::vec4 m_AmbientColor;
-		// glm::vec4 m_DiffuseColor;
-		// glm::vec4 m_SpecularColor;
+		glm::vec4 m_AmbientColor;
+		glm::vec4 m_DiffuseColor;
+		glm::vec4 m_SpecularColor;
 
     void _CalculateValues();
   };

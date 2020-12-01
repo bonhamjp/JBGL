@@ -9,6 +9,10 @@ EM_JS(void, webGLInterfaceEnableSampleCoverage, (), {
   document.webGLModule.context.enable(document.webGLModule.context.SAMPLE_COVERAGE);
 });
 
+EM_JS(void, webGLInterfaceEnableDepthTest, (), {
+  document.webGLModule.context.enable(document.webGLModule.context.DEPTH_TEST);
+});
+
 EM_JS(void, webGLInterfaceSetSampleCoverage, (float sampleCoverage), {
   document.webGLModule.context.sampleCoverage(sampleCoverage, false);
 });

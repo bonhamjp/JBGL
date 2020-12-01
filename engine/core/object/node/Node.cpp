@@ -5,6 +5,10 @@
 #include "core/Engine.h"
 
 #include "core/renderer/Renderer.h"
+#include "core/renderer/VertexArray.h"
+#include "core/renderer/IndexBuffer.h"
+
+#include "core/object/Geometry.h"
 
 #include "Mesh.h"
 #include "Material.h"
@@ -71,7 +75,9 @@ namespace DataGarden
   {
     if (m_CanRender)
     {
-      Engine::Get().GetRenderer().RenderNode(this);
+      _SetNodeUniforms();
+      // TODO: Batch draw alike Nodes
+      _DrawIndexed();
     }
 
     // render children next
@@ -131,5 +137,30 @@ namespace DataGarden
   void Node::_UpdateCanRender()
   {
     m_CanRender = (m_Mesh != nullptr && m_Material != nullptr);
+  }
+
+  void Node::_SetNodeUniforms()
+  {
+    Renderer& renderer = Engine::Get().GetRenderer();
+    unsigned int programID = renderer.GetMainProgramID();
+
+    Geometry* geometry = m_Mesh->GetGeometry();
+
+    geometry->GetVertexArray().Bind();
+    geometry->GetIndexBuffer().Bind();
+
+    renderer.SetUniformMatrix4fv(programID, "u_Vertex.Model", m_Transform.GetModel());
+
+    // TODO: Move Material unfiform setting to Material
+		renderer.SetUniform1f(programID, "u_Material.Shininess", m_Material->GetShininess());
+    renderer.SetUniform4fv(programID, "u_Material.Color", glm::vec4(0.0f, 0.8f, 0.0f, 1.0f));
+  }
+
+  void Node::_DrawIndexed()
+  {
+    Renderer& renderer = Engine::Get().GetRenderer();
+    Geometry* geometry = m_Mesh->GetGeometry();
+
+    renderer.DrawIndexed(geometry->GetIndexCount());
   }
 }
