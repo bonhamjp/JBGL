@@ -1,22 +1,51 @@
 {
-    "configurations": [
-        {
-            "name": "Win32",
-            "includePath": [
-                "${workspaceFolder}/engine/**",
-                "C:/emsdk/upstream/emscripten/system/include/**",
-                "C:/glm/**"    
-            ],
-            "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
-            ],
-            "windowsSdkVersion": "10.0.18362.0",
-            "compilerPath": "C:/emsdk/upstream/emscripten/em++.bat",
-            "cStandard": "c11",
-            "cppStandard": "c++17"
-        }
-    ],
-    "version": 4
+  "configurations":
+  [
+    {
+      "name": "Mac",
+      "includePath":
+      [
+        "${workspaceFolder}/**",
+        "${workspaceFolder}/engine/**",
+        "/Users/johnbonham/Documents/emscripten/system/include/**",
+        "/Users/johnbonham/Documents/glm",
+        "/Users/johnbonham/Documents/emscripten/system/include"
+      ],
+      "defines":
+      [
+        "_DEBUG",
+        "UNICODE",
+        "_UNICODE",
+        "__EMSCRIPTEN__"
+      ],
+      "macFrameworkPath":
+      [
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+      ],
+      "compilerPath": "/usr/bin/clang",
+      "cStandard": "c11",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "clang-x64"
+    },
+    {
+      "name": "Win32",
+      "includePath":
+      [
+        "${workspaceFolder}/engine/**",
+        "C:/emsdk/upstream/emscripten/system/include/**",
+        "C:/glm/**"
+      ],
+      "defines":
+      [
+        "_DEBUG",
+        "UNICODE",
+        "_UNICODE"
+      ],
+      "windowsSdkVersion": "10.0.18362.0",
+      "compilerPath": "C:/emsdk/upstream/emscripten/em++.bat",
+      "cStandard": "c11",
+      "cppStandard": "c++17"
+    }
+  ],
+  "version": 4
 }

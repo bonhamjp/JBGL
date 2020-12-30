@@ -9,21 +9,22 @@ class TopMenu extends Component {
     return (
       <div id="top-menu">
         <h1>DataGarden</h1>
-        
+
         <ul>
           <li>Account</li>
           <li>Dashboard</li>
+          <li>Contact</li>
           <li>Settings</li>
         </ul>
       </div>
     );
   }
 
-  componentDidMount() {
-  }
+  componentDidMount()
+  {}
 
-  componentWillUnmount() {
-  }
+  componentWillUnmount()
+  {}
 }
 
 export default TopMenu;

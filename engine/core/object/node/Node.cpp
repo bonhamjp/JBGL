@@ -153,7 +153,7 @@ namespace DataGarden
 
     // TODO: Move Material unfiform setting to Material
 		renderer.SetUniform1f(programID, "u_Material.Shininess", m_Material->GetShininess());
-    renderer.SetUniform4fv(programID, "u_Material.Color", glm::vec4(0.0f, 0.8f, 0.0f, 1.0f));
+    renderer.SetUniform4fv(programID, "u_Material.Color", glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
   }
 
   void Node::_DrawIndexed()
