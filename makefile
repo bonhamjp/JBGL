@@ -1,4 +1,4 @@
-WILD_CARDS=*.cpp **/*.cpp **/**/*.cpp **/**/**/*.cpp **/**/**/**/*.cpp **/**/**/**/**/*.cpp **/**/**/**/**/*.cpp
+WILD_CARDS=*.cpp **/*.cpp **/**/*.cpp **/**/**/*.cpp **/**/**/**/*.cpp **/**/**/**/**/*.cpp **/**/**/**/**/**/*.cpp **/**/**/**/**/**/**/*.cpp
 SOURCE_FILES=$(foreach w, $(WILD_CARDS), $(wildcard ./engine/$w))
 FLAGS=-s WASM=1 -s LINKABLE=1 -s EXPORT_ALL=1 -s EXTRA_EXPORTED_RUNTIME_METHODS='["getValue"]' -s ENVIRONMENT='web'
 OUTPUT_DIRECTORY=./server/assets/engine
