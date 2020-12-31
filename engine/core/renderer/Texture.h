@@ -37,24 +37,23 @@ namespace DataGarden
   class Texture
   {
   public:
-    Texture(TextureType type, const std::string& source);
-    Texture(TextureType type, glm::vec4 colorOne, glm::vec4 colorTwo, glm::vec4 colorThree, glm::vec4 colorFour);
+    Texture(TextureDataResourceDescriptor* textureDataResourceDescriptor);
     ~Texture();
 
     void Bind();
     void Unbind();
 
-    virtual std::string GetPath();
+    std::string GetPath();
 
   private:
     unsigned int m_ID;
 
+    TextureType m_Type;
     std::string m_FilePath;
 
-    void _LoadTexture(const std::string& source);
+    void _GenerateTextureData(TextureDataResourceDescriptor* textureDataResourceDescriptor);
   };
 
-  // Texture* CreateTextureFromFile(ResourceDescriptor* descriptor);
   Texture* CreateTextureFromData(ResourceDescriptor* descriptor);
 }
 

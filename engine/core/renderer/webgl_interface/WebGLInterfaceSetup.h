@@ -11,7 +11,7 @@ EM_JS(void, webGLInterfaceSetupContext, (), {
   document.body.appendChild(canvasNode);
 
   canvasElement = document.getElementById("visualization-canvas");
-  
+
   // Event listeners
   canvasElement.addEventListener("mouseenter", function(e) {
     // Module._onMouseEnter();
@@ -46,6 +46,8 @@ EM_JS(void, webGLInterfaceSetupContext, (), {
   webGLModule["bufferCount"] = 0;
   webGLModule["vertexArrays"] = [];
   webGLModule["vertexArrayCount"] = 0;
+  webGLModule["textures"] = [];
+  webGLModule["textureCount"] = 0;
 
   document.webGLModule = webGLModule;
 });
@@ -54,7 +56,7 @@ EM_JS(void, webGLInterfaceSetupContext, (), {
 
 EM_JS(void, webGLInterfaceTeardownContext, (), {
   // TODO: Clear up Webgl state
-  
+
   document.webGLModule = null;
 });
 

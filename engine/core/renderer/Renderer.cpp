@@ -87,7 +87,7 @@ namespace DataGarden
   {
     webGLInterfaceAttachShader(programID, shaderID);
   }
-  
+
   void Renderer::LinkProgram(unsigned int programID)
   {
     webGLInterfaceLinkProgram(programID);
@@ -112,13 +112,13 @@ namespace DataGarden
   {
     return webGLInterfaceCreateFragmentShader();
   }
-    
+
   void Renderer::ShaderSource(unsigned int programID, std::string shaderSourceString)
   {
     char* shaderSource = (char*) shaderSourceString.c_str();
     webGLInterfaceShaderSource(programID, shaderSource, strlen(shaderSource));
   }
-  
+
   void Renderer::CompileShader(unsigned int shaderID)
   {
     webGLInterfaceCompileShader(shaderID);
@@ -199,6 +199,81 @@ namespace DataGarden
     webGLInterfaceDeleteVertexArray(vertexArrayID);
   }
 
+  unsigned int Renderer::GenerateTexture()
+  {
+    return webGLInterfaceGenerateTexture();
+  }
+
+  void Renderer::TextureParameterITextureMinFilterNearest()
+  {
+    webGLInterfaceTextureParameterITextureMinFilterNearest();
+  }
+
+  void Renderer::TextureParameterITextureMagFilterNearest()
+  {
+    webGLInterfaceTextureParameterITextureMagFilterNearest();
+  }
+
+  void Renderer::TextureParameterITextureWrapSClampToEdge()
+  {
+    webGLInterfaceTextureParameterITextureWrapSClampToEdge();
+  }
+
+  void Renderer::TextureParameterITextureWrapTClampToEdge()
+  {
+    webGLInterfaceTextureParameterITextureWrapTClampToEdge();
+  }
+
+  void Renderer::BindTexture(unsigned int textureID)
+  {
+    webGLInterfaceBindTexture(textureID);
+  }
+
+  void Renderer::TexImage2D(unsigned char* textureData, unsigned int textureDataLength)
+  {
+    webGLInterfaceTexImage2D(textureData, textureDataLength);
+  }
+
+  void Renderer::activeTexture(TextureType textureType, unsigned int index)
+  {
+    // TODO: Manage Texture indices from Texture class
+    unsigned int indicesPerType = 3;
+    unsigned int indexMultiplier;
+
+    switch(textureType) {
+      case TextureType::Ambient:
+        indexMultiplier = 0;
+        break;
+
+      case TextureType::Diffuse:
+        indexMultiplier = 1;
+        break;
+
+      case TextureType::Specular:
+        indexMultiplier = 2;
+        break;
+    }
+
+    unsigned int textureIndex = (indicesPerType * indexMultiplier) + index;
+
+    webGLInterfaceActiveTexture(textureIndex);
+  }
+
+  void Renderer::UnbindTexture()
+  {
+    webGLInterfaceBindTexture(-1);
+  }
+
+  void Renderer::GenerateMipmap()
+  {
+    webGLInterfaceGenerateMipmap();
+  }
+
+  void Renderer::DeleteTexture(unsigned int textureID)
+  {
+    webGLInterfaceDeleteTexture(textureID);
+  }
+
   void Renderer::SetUniformMatrix4fv(unsigned int shaderID, const char* uniformName, glm::mat4 uniformMatrix)
   {
     webGLInterfaceSetUniformMatrix4fv(shaderID, uniformName, strlen(uniformName), glm::value_ptr(uniformMatrix));
@@ -234,6 +309,8 @@ namespace DataGarden
     _SetGlobalGraphicsState();
 
     m_Shader = new Shader(ShaderVertexSource::BASE, ShaderFragmentSource::BASE);
+
+    _SetupShaderUniforms();
   }
 
   void Renderer::_SetGlobalGraphicsState()
@@ -246,6 +323,15 @@ namespace DataGarden
 
     webGLInterfaceSetBufferColor(1.0f, 1.0f, 1.0f, 1.0f);
     webGLInterfaceClearBuffer();
+  }
+
+  void Renderer::_SetupShaderUniforms()
+  {
+    // TODO: Support more texture types
+    // TODO: Move this setup to main 3D shader
+    SetUniform1i(GetMainProgramID(), "u_AmbientTexture", 0);
+    SetUniform1i(GetMainProgramID(), "u_DiffuseTexture", 3);
+    SetUniform1i(GetMainProgramID(), "u_SpecularTexture", 6);
   }
 
   void Renderer::_Teardown()

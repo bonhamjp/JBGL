@@ -10,8 +10,9 @@ namespace DataGarden
   class VertexArray;
   class VertexBuffer;
   class IndexBuffer;
+  struct ResourceDescriptor;
 
-	struct GeometryBufferObject
+  struct GeometryBufferObject
 	{
 		float* Vertices;
 		unsigned int* Indices;
@@ -22,7 +23,7 @@ namespace DataGarden
 	public:
     Geometry();
 		virtual ~Geometry();
-		
+
     virtual std::string& GetName() = 0;
 
     inline float* GetVertices() { return m_GeometryBuffer.Vertices; };

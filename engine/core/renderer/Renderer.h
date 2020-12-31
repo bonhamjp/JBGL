@@ -4,8 +4,9 @@
 #include "Shader.h"
 
 #include "core/object/node/Node.h"
-
 #include "core/object/camera/Camera.h"
+
+#include "core/renderer/Texture.h"
 
 namespace DataGarden
 {
@@ -38,7 +39,7 @@ namespace DataGarden
 
     unsigned int CreateBuffer();
     void DeleteBuffer(unsigned int bufferID);
-    
+
     void BindVertexBuffer(unsigned int bufferID);
     void VertexBufferData(float* vertexData, unsigned int vertexLength);
     void UnbindVertexBuffer();
@@ -54,20 +55,31 @@ namespace DataGarden
     void UnbindVertexArray();
     void DeleteVertexArray(unsigned int vertexArrayID);
 
+    unsigned int GenerateTexture();
+    // TODO: Modularize these parameters so I don't need to create a method for each variation
+    void TextureParameterITextureMinFilterNearest();
+    void TextureParameterITextureMagFilterNearest();
+    void TextureParameterITextureWrapSClampToEdge();
+    void TextureParameterITextureWrapTClampToEdge();
+    void BindTexture(unsigned int textureID);
+    void TexImage2D(unsigned char* textureData, unsigned int textureDataLength);
+    void activeTexture(TextureType textureType, unsigned int index);
+    void UnbindTexture();
+    void GenerateMipmap();
+    void DeleteTexture(unsigned int textureID);
+
     void SetUniformMatrix4fv(unsigned int programID, const char* uniformName, glm::mat4 uniformMatrix);
 		void SetUniform4fv(unsigned int programID, const char* uniformName, glm::vec4 uniformVector);
 		void SetUniform3fv(unsigned int programID, const char* uniformName, glm::vec3 uniformVector);
 		void SetUniform1f(unsigned int programID, const char* uniformName, float uniformFloat);
 		void SetUniform1i(unsigned int programID, const char* uniformName, int uniformInteger);
-		
+
     void DrawIndexed(unsigned int count);
 
     inline unsigned int GetMainProgramID() { return m_Shader->GetProgramID(); };
 
   private:
-		// glm::vec4 m_ClearColor;
-    
-    // Scope<RenderCommandQueue> m_CommandQueue
+		// Scope<RenderCommandQueue> m_CommandQueue
 
     // TODO: Allow custom shaders
     Shader* m_Shader;
@@ -75,6 +87,7 @@ namespace DataGarden
     void _Setup();
 
     void _SetGlobalGraphicsState();
+    void _SetupShaderUniforms();
 
     void _Teardown();
   };

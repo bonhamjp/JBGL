@@ -17,7 +17,7 @@ namespace DataGarden
   class Material
   {
   public:
-    Material(Node* node, std::vector<ResourceDescriptor*> descriptors, Texture*(*f)(ResourceDescriptor* descriptor));
+    Material(Node* node, std::vector<TextureDataResourceDescriptor> textureResourceDescriptor);
     ~Material();
 
     inline void SetShininess(float shininess) { m_Shininess = shininess; };
@@ -32,8 +32,7 @@ namespace DataGarden
 
     std::map<TextureType, std::vector<Texture*>> m_Textures;
 
-    void _CreateTexture(ResourceDescriptor* descriptor, Texture*(*f)(ResourceDescriptor* descriptor));
-
+    void _CreateTextureFromData(TextureDataResourceDescriptor textureResourceDescriptor);
   };
 }
 

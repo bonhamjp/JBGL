@@ -6,15 +6,17 @@
 
 #include "core/renderer/Texture.h"
 
+#include <iostream>
+
 namespace DataGarden
 {
-  Material::Material(Node* node, std::vector<ResourceDescriptor*> descriptors, Texture*(*f)(ResourceDescriptor* descriptor))
+  Material::Material(Node* node, std::vector<TextureDataResourceDescriptor> textureDescriptors)
   {
     m_Shininess = 32.0f;
 
-    for (auto it = descriptors.begin(); it != descriptors.end(); it++)
+    for (auto it = textureDescriptors.begin(); it != textureDescriptors.end(); it++)
     {
-      _CreateTexture(*it, f);
+      _CreateTextureFromData(*it);
     }
   }
 
@@ -39,18 +41,15 @@ namespace DataGarden
 
     return false;
   }
-  
-  void Material::_CreateTexture(ResourceDescriptor * descriptor, Texture*(*f)(ResourceDescriptor * descriptor))
+
+  void Material::_CreateTextureFromData(TextureDataResourceDescriptor textureResourceDescriptor)
   {
-    Texture* texture = Engine::Get().GetTextureManager().AddResource(descriptor, f);
+    Texture* texture = Engine::Get().GetTextureManager().AddResource((ResourceDescriptor*) &textureResourceDescriptor, CreateTextureFromData);
+
+    TextureType textureType = textureResourceDescriptor.Type;
 
     // Add list for texture type, if not created yet
     std::vector<Texture*> textures;
-
-    // TODO: Cast this differently depending on if for file or data
-    // TextureType textureType = ((TextureFileResourceDescriptor*)descriptor)->Type;
-    TextureType textureType = ((TextureDataResourceDescriptor*)descriptor)->Type;
-
     if (m_Textures.count(textureType) > 0)
     {
       textures = m_Textures[textureType];
@@ -58,7 +57,6 @@ namespace DataGarden
 
     textures.push_back(texture);
 
-    // TODO: Change this to something that probably is more efficient?
     m_Textures[textureType] = textures;
   }
 }

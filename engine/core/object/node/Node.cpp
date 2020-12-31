@@ -42,10 +42,10 @@ namespace DataGarden
 
     m_ChildCount = 0;
   }
-  
+
   Node::~Node()
   {}
-  
+
   void Node::Update(glm::mat4 space)
   {
     // sets model space for frame
@@ -153,7 +153,28 @@ namespace DataGarden
 
     // TODO: Move Material unfiform setting to Material
 		renderer.SetUniform1f(programID, "u_Material.Shininess", m_Material->GetShininess());
-    renderer.SetUniform4fv(programID, "u_Material.Color", glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
+
+    // TODO: Support multiple textures of each type
+    auto ambientTextures = m_Material->GetTextures(TextureType::Ambient);
+    renderer.SetUniform1i(programID, "u_AmbientTextures", ambientTextures.size());
+    if (ambientTextures.size() > 0)
+    {
+      ambientTextures[0]->Bind();
+    }
+
+    auto diffuseTextures = m_Material->GetTextures(TextureType::Diffuse);
+    renderer.SetUniform1i(programID, "u_DiffuseTextures", diffuseTextures.size());
+    if (diffuseTextures.size() > 0)
+    {
+      diffuseTextures[0]->Bind();
+    }
+
+    auto specularTextures = m_Material->GetTextures(TextureType::Specular);
+    renderer.SetUniform1i(programID, "u_SpecularTextures", specularTextures.size());
+    if (specularTextures.size() > 0)
+    {
+      specularTextures[0]->Bind();
+    }
   }
 
   void Node::_DrawIndexed()

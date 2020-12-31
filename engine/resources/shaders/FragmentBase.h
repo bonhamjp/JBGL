@@ -17,11 +17,17 @@ out vec4 o_Color;
 struct Material
 {
   float Shininess;
-  vec4 Color;
 };
 uniform Material u_Material;
 
-#define NUMBER_OF_POINT_LIGHTS 32 
+uniform int u_AmbientTextures;
+uniform sampler2D u_AmbientTexture;
+uniform int u_DiffuseTextures;
+uniform sampler2D u_DiffuseTexture;
+uniform int u_SpecularTextures;
+uniform sampler2D u_SpecularTexture;
+
+#define NUMBER_OF_POINT_LIGHTS 32
 uniform int u_PointLightCount;
 struct PointLight
 {
@@ -51,7 +57,7 @@ struct DirectionalLight
 };
 uniform DirectionalLight u_DirectionalLights[NUMBER_OF_DIRECTIONAL_LIGHTS];
 
-#define NUMBER_OF_Spot_LIGHTS 32 
+#define NUMBER_OF_Spot_LIGHTS 32
 uniform int u_SpotLightCount;
 struct SpotLight
 {
@@ -151,8 +157,11 @@ void main() {
 
   o_Color = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 
-  vec4 ambientColor = u_Material.Color; // texture(u_AmbientTexture, f_TextureCoordinates);
-  vec4 diffuseColor = u_Material.Color; // texture(u_DiffuseTexture, f_TextureCoordinates);// vec4(1.0f, 0.0f, 0.0f, 1.0f);
+  // // FIX: Specular color does not work correctly
+  // vec4 specularColor = vec4(0.0f, 0.0f, 0.0f, 1.0f); //texture(u_SpecularTexture, f_TextureCoordinates);
+
+  vec4 ambientColor = texture(u_AmbientTexture, f_TextureCoordinates);
+  vec4 diffuseColor = texture(u_DiffuseTexture, f_TextureCoordinates);
 
   // FIX: Specular color does not work correctly
   vec4 specularColor = vec4(0.0f, 0.0f, 0.0f, 1.0f); //texture(u_SpecularTexture, f_TextureCoordinates);

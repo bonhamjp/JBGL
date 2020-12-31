@@ -7,10 +7,10 @@
 
 EM_JS(unsigned int, webGLInterfaceCreateVertexShader, (), {
   const shaderID = document.webGLModule.shaderCount;
-  
+
   document.webGLModule.shaders.push(document.webGLModule.context.createShader(document.webGLModule.context.VERTEX_SHADER));
   document.webGLModule.shaderCount++;
-  
+
   console.log("VERTEX SHADER");
   console.log("-------------------");
 
@@ -19,10 +19,10 @@ EM_JS(unsigned int, webGLInterfaceCreateVertexShader, (), {
 
 EM_JS(unsigned int, webGLInterfaceCreateFragmentShader, (), {
   const shaderID = document.webGLModule.shaderCount;
-  
+
   document.webGLModule.shaders.push(document.webGLModule.context.createShader(document.webGLModule.context.FRAGMENT_SHADER));
   document.webGLModule.shaderCount++;
-  
+
   console.log("FRAGMENT SHADER");
   console.log("-------------------");
 
@@ -31,7 +31,7 @@ EM_JS(unsigned int, webGLInterfaceCreateFragmentShader, (), {
 
 EM_JS(unsigned int, webGLInterfaceShaderSource, (unsigned int shaderID, char* shaderSource, unsigned int shaderSourceLength), {
   var shader = document.webGLModule.shaders[shaderID];
-  var source = webGLInterfaceGetCharData(shaderSource, shaderSourceLength);
+  var source = webGLInterfaceGetString(shaderSource, shaderSourceLength);
   document.webGLModule.context.shaderSource(shader, source);
 
   // console.log("Shder Source: \n" + source);
