@@ -31,6 +31,18 @@ namespace DataGarden
     m_Model = glm::mat4(1.0f);
   }
 
+  Transform::Transform(glm::vec3 position, glm::vec3 scale)
+  {
+    m_Position = position;
+    m_Scale = scale;
+
+    m_Yaw = 0.0;
+    m_Pitch = 0.0;
+    m_Roll = 0.0;
+
+    m_Model = glm::mat4(1.0f);
+  }
+
   Transform::Transform(glm::vec3 position, glm::vec3 scale, float yaw, float pitch, float roll)
   {
     m_Position = position;

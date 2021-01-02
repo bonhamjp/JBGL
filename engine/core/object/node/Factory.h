@@ -11,7 +11,7 @@ namespace DataGarden
 {
   enum class FactoryType
   {
-    None = 0, Cube
+    Cube = 0, Plane, Sphere
   };
 
   class Factory

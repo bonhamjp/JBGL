@@ -17,7 +17,7 @@ namespace DataGarden
 
     _Initialize();
 	}
-	
+
 	CubeGeometry::~CubeGeometry()
 	{
 		_DestroyBufferObject();
@@ -25,10 +25,10 @@ namespace DataGarden
 
   std::string& CubeGeometry::GetName()
   {
-    std::string name = std::string("Cube"); 
+    std::string name = std::string("Cube");
     return name;
   }
-	
+
 	BufferLayout CubeGeometry::GetLayout()
 	{
 		return BufferLayout({
@@ -76,7 +76,7 @@ namespace DataGarden
        0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f, 0.0f, 0.0f, // 20
        0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f, 0.0f, 0.0f, // 21
       -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f, 1.0f, 0.0f, // 22
-      -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f, 1.0f, 0.0f  // 23 
+      -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f, 1.0f, 0.0f  // 23
     };
 
 		m_GeometryBuffer.Vertices = new float[(long long)m_VertexStride * (long long)m_VertexCount];

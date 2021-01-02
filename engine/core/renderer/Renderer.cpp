@@ -12,6 +12,8 @@
 #include "VertexArray.h"
 #include "IndexBuffer.h"
 
+#include "utility/ColorTools.h"
+
 #include "core/Engine.h"
 #include "core/canvas/Canvas.h"
 
@@ -302,6 +304,7 @@ namespace DataGarden
   void Renderer::DrawIndexed(unsigned int count)
   {
     webGLInterfaceDrawIndexed(count);
+    // webGLInterfaceDrawIndexedLineStrip(count);
   }
 
   void Renderer::_Setup()
@@ -318,10 +321,13 @@ namespace DataGarden
     webGLInterfaceSetupContext();
 
     webGLInterfaceEnableDepthTest();
-    // webGLInterfaceEnableSampleCoverage();
-    // webGLInterfaceSetSampleCoverage(4.5f);
+    // webGLInterfaceDisableDepthMask();
+    webGLInterfaceEnableSampleCoverage();
+    webGLInterfaceSetSampleCoverage(4.5f);
 
-    webGLInterfaceSetBufferColor(1.0f, 1.0f, 1.0f, 1.0f);
+    // webGLInterfaceSetBufferColor(1.0f, 1.0f, 1.0f, 1.0f);
+    glm::vec4 backgroundColor = ColorFromHex(0x78586F);
+    webGLInterfaceSetBufferColor(backgroundColor.x, backgroundColor.y, backgroundColor.z, 1.0f);
     webGLInterfaceClearBuffer();
   }
 

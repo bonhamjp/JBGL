@@ -5,12 +5,16 @@
 
 #include "WebGLInterfaceUtility.h"
 
-EM_JS(void, webGLInterfaceEnableSampleCoverage, (), {
-  document.webGLModule.context.enable(document.webGLModule.context.SAMPLE_COVERAGE);
-});
-
 EM_JS(void, webGLInterfaceEnableDepthTest, (), {
   document.webGLModule.context.enable(document.webGLModule.context.DEPTH_TEST);
+});
+
+EM_JS(void, webGLInterfaceDisableDepthMask, (), {
+  document.webGLModule.context.depthMask(false);
+});
+
+EM_JS(void, webGLInterfaceEnableSampleCoverage, (), {
+  document.webGLModule.context.enable(document.webGLModule.context.SAMPLE_COVERAGE);
 });
 
 EM_JS(void, webGLInterfaceSetSampleCoverage, (float sampleCoverage), {
@@ -31,6 +35,10 @@ EM_JS(void, webGLInterfaceSetViewport, (unsigned int x, int y, unsigned int widt
 
 EM_JS(void, webGLInterfaceDrawIndexed, (unsigned int count), {
   document.webGLModule.context.drawElements(document.webGLModule.context.TRIANGLES, count, document.webGLModule.context.UNSIGNED_INT, 0);
+});
+
+EM_JS(void, webGLInterfaceDrawIndexedLineStrip, (unsigned int count), {
+  document.webGLModule.context.drawElements(document.webGLModule.context.LINE_STRIP, count, document.webGLModule.context.UNSIGNED_INT, 0);
 });
 
 #endif

@@ -33,6 +33,11 @@ EM_JS(void, webGLInterfaceSetupContext, (), {
     Module._onMouseMove(e.screenX, e.screenY);
   });
 
+  // TODO: Set this up somewhere else, this function should only setup WebGL stuff
+  window.addEventListener("resize", function(e) {
+    Module._onCanvasDimensionChange(e.target.innerWidth, e.target.innerHeight);
+  });
+
   // WebGL setup, and global state store
   var webGLContext = canvasElement.getContext("webgl2");
 
@@ -50,6 +55,9 @@ EM_JS(void, webGLInterfaceSetupContext, (), {
   webGLModule["textureCount"] = 0;
 
   document.webGLModule = webGLModule;
+
+  // Must have WebGL Context setup before this can be called
+  Module._onCanvasDimensionChange(window.innerWidth, window.innerHeight);
 });
 
 // TODO: Bind listeners to WebGL context
@@ -61,6 +69,5 @@ EM_JS(void, webGLInterfaceTeardownContext, (), {
 });
 
 // TODO: Unbind listeners to WebGL context
-
 
 #endif

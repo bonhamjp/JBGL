@@ -21,11 +21,11 @@ namespace DataGarden
 	public:
     inline static Engine& Get() { return *s_Instance; }
 
-		Engine();
-		~Engine();
-		
+    Engine();
+    ~Engine();
+
     void LoadScene(Scene* scene);
-    
+
     void Start();
     void Stop();
 
@@ -42,7 +42,7 @@ namespace DataGarden
 
   private:
     static Engine* s_Instance;
-		
+
     bool m_Running;
 
     Canvas* m_Canvas;

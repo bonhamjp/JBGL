@@ -56,16 +56,16 @@ namespace DataGarden
     Node* cube = Factory::Create(
       FactoryType::Cube,
       glm::vec3(-1.0f, 2.0f, 3.0f),
-      glm::vec3(1.0f),
-      ColorFromHex(0xFF4365)
+      glm::vec3(1.5f),
+      ColorFromHex(0xE6C79C)
     );
     m_NodeGraph->PushNode(cube);
 
     Node* cube2 = Factory::Create(
       FactoryType::Cube,
       glm::vec3(0.0f, -3.0f, 2.0f),
-      glm::vec3(2.0f),
-      ColorFromHex(0x00D9C0)
+      glm::vec3(3.0f),
+      ColorFromHex(0xCDDFA0)
     );
     m_NodeGraph->PushNode(cube2);
 
@@ -73,9 +73,25 @@ namespace DataGarden
       FactoryType::Cube,
       glm::vec3(3.0f, -1.0f, 0.0f),
       glm::vec3(1.0f),
-      ColorFromHex(0xB7AD99)
+      ColorFromHex(0x6FD08C)
     );
     m_NodeGraph->PushNode(cube3);
+
+    Node* sphere1 = Factory::Create(
+      FactoryType::Sphere,
+      glm::vec3(-2.0f, 1.0f, 1.0f),
+      glm::vec3(1.0f),
+      ColorFromHex(0x7B9EA8)
+    );
+    m_NodeGraph->PushNode(sphere1);
+
+    Node* plane = Factory::Create(
+      FactoryType::Plane,
+      glm::vec3(0.0f, -7.0f, 0.0f),
+      glm::vec3(100.0f),
+      ColorFromHex(0x7B9EA8)
+    );
+    m_NodeGraph->PushNode(plane);
   }
 
   TestScene::~TestScene()

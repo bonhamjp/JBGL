@@ -9,6 +9,8 @@
 #include "core/renderer/Texture.h"
 
 #include "library/geometries/CubeGeometry.h"
+#include "library/geometries/PlaneGeometry.h"
+#include "library/geometries/SphereGeometry.h"
 
 #include <iostream>
 
@@ -128,6 +130,16 @@ namespace DataGarden
     return new CubeGeometry();
   }
 
+  Geometry* CreatePlaneGeometry(ResourceDescriptor* descriptor)
+  {
+    return new PlaneGeometry();
+  }
+
+  Geometry* CreateSphereGeometry(ResourceDescriptor* descriptor)
+  {
+    return new SphereGeometry(3);
+  }
+
   FactoryBuilder CreateFactoryBuilderForType(FactoryType factoryType)
   {
     FactoryBuilder factoryBuilder;
@@ -136,6 +148,16 @@ namespace DataGarden
       case FactoryType::Cube:
         factoryBuilder.descriptor = { std::string("Cube") };
         factoryBuilder.f = CreateCubeGeometry;
+        break;
+
+      case FactoryType::Plane:
+        factoryBuilder.descriptor = { std::string("Plane") };
+        factoryBuilder.f = CreatePlaneGeometry;
+        break;
+
+      case FactoryType::Sphere:
+        factoryBuilder.descriptor = { std::string("Sphere") };
+        factoryBuilder.f = CreateSphereGeometry;
         break;
     }
 
@@ -147,7 +169,8 @@ namespace DataGarden
     Node* node = new Node();
 
     // TODO: Use scale
-    node->SetTransform(position);
+    Transform transform = Transform(position, scale);
+    node->SetTransform(transform);
 
     FactoryBuilder factoryBuilder = CreateFactoryBuilderForType(factoryType);
     node->SetMesh(new Mesh(node, &factoryBuilder.descriptor, factoryBuilder.f));

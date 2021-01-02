@@ -12,6 +12,7 @@ namespace DataGarden
   public:
     Transform();
     Transform(glm::vec3 position);
+    Transform(glm::vec3 position, glm::vec3 scale);
     Transform(glm::vec3 position, glm::vec3 scale, float yaw, float pitch, float roll);
     ~Transform();
 
@@ -41,7 +42,7 @@ namespace DataGarden
   private:
     glm::vec3 m_Position;
     glm::vec3 m_Scale;
-    
+
     float m_Yaw;
     float m_Pitch;
     float m_Roll;

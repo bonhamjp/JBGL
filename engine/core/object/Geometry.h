@@ -24,6 +24,8 @@ namespace DataGarden
     Geometry();
 		virtual ~Geometry();
 
+    // TODO: Add base Vertex stride/Vertex Attrib definition, since it should be the same for all Geometry
+
     virtual std::string& GetName() = 0;
 
     inline float* GetVertices() { return m_GeometryBuffer.Vertices; };
@@ -51,6 +53,8 @@ namespace DataGarden
     VertexArray* m_VertexArray;
     VertexBuffer* m_VertexBuffer;
     IndexBuffer* m_IndexBuffer;
+
+    // TODO: Add virtual create and delete Buffer Object methods
 
     void _Initialize();
     void _TearDown();
