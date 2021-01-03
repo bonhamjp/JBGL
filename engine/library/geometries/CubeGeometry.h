@@ -13,9 +13,7 @@ namespace DataGarden
 		CubeGeometry();
 		virtual ~CubeGeometry();
 
-    virtual std::string& GetName() override;
-
-		virtual BufferLayout GetLayout() override;
+    virtual BufferLayout GetLayout() override;
 
 	private:
 		void _CreateBufferObject();

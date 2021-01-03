@@ -254,6 +254,9 @@ namespace DataGarden
       case TextureType::Specular:
         indexMultiplier = 2;
         break;
+
+      default:
+        std::cout << "Texture type not supported..." << std::endl;
     }
 
     unsigned int textureIndex = (indicesPerType * indexMultiplier) + index;
@@ -326,7 +329,7 @@ namespace DataGarden
     webGLInterfaceSetSampleCoverage(4.5f);
 
     // webGLInterfaceSetBufferColor(1.0f, 1.0f, 1.0f, 1.0f);
-    glm::vec4 backgroundColor = ColorFromHex(0x78586F);
+    glm::vec4 backgroundColor = ColorFromHex(0xDAE4E7);
     webGLInterfaceSetBufferColor(backgroundColor.x, backgroundColor.y, backgroundColor.z, 1.0f);
     webGLInterfaceClearBuffer();
   }

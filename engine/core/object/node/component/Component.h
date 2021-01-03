@@ -14,6 +14,10 @@ namespace DataGarden
     Component(Node* node);
     ~Component();
 
+    void AttachNode(Node* node) { m_Node = node; };
+
+    virtual void Setup() = 0;
+
     virtual void Update() = 0;
 
   protected:

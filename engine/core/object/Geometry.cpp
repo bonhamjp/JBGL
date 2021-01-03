@@ -15,12 +15,6 @@ namespace DataGarden
   Geometry::~Geometry()
   {}
 
-  std::string& Geometry::GetName()
-  {
-    std::string name = std::string("Base Geometry"); 
-    return name;
-  }
-
   VertexArray& Geometry::GetVertexArray()
   {
     return *m_VertexArray;

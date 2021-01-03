@@ -17,9 +17,7 @@ namespace DataGarden
 		SphereGeometry(unsigned int subdivisions);
 		virtual ~SphereGeometry();
 
-    virtual std::string& GetName() override;
-
-		virtual BufferLayout GetLayout() override;
+    virtual BufferLayout GetLayout() override;
 
 	private:
     const unsigned int m_BaseVertexCount = 12;

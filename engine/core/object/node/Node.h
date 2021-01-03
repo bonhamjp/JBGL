@@ -35,15 +35,13 @@ namespace DataGarden
     inline bool CanRender() { return m_Mesh != nullptr && m_Material != nullptr; };
 
     template<typename T, typename... TArgs>
-    T* AddComponent(TArgs&&... args) // TODO: Stop returning raw pointer
+    void AddComponent(TArgs&&... args) // TODO: Stop returning raw pointer
     {
       T* newComponent = new T(std::forward<TArgs>(args)...);
 
-      m_Components[ClassID<T>()] = std::unique_ptr<Component>((Component*) newComponent);
-
-      return newComponent;
+      m_Components[ClassID<T>()] = (Component*) newComponent;
     }
-    
+
     template<typename T>
     bool HasComponent()
     {
@@ -61,7 +59,7 @@ namespace DataGarden
 
     inline bool ShouldRemove() { return !m_Active; };
     void Destroy();
-    
+
   protected:
     bool m_Active;
     bool m_CanRender;

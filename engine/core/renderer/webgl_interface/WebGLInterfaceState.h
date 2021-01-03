@@ -10,7 +10,7 @@ EM_JS(void, webGLInterfaceEnableDepthTest, (), {
 });
 
 EM_JS(void, webGLInterfaceDisableDepthMask, (), {
-  document.webGLModule.context.depthMask(false);
+  document.webGLModule.context.depthMask(true);
 });
 
 EM_JS(void, webGLInterfaceEnableSampleCoverage, (), {

@@ -11,7 +11,7 @@ namespace DataGarden
 {
   enum class TextureType
   {
-    None = 0, Unknown, Ambient, Diffuse, Displacement, Emissive, Height, LightMap, Normals, Opacity, Reflection, Shinines, Specular
+    Unknown = 0, Ambient, Diffuse, Displacement, Emissive, Height, LightMap, Normals, Opacity, Reflection, Shinines, Specular
   };
 
   struct TextureResourceDescriptor : ResourceDescriptor

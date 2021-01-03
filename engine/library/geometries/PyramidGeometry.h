@@ -1,5 +1,5 @@
-#ifndef DATA_GARDEN_PLANE_GEOMETRY
-#define DATA_GARDEN_PLANE_GEOMETRY
+#ifndef DATA_GARDEN_PYRAMID_GEOMETRY
+#define DATA_GARDEN_PYRAMID_GEOMETRY
 
 #include "DataGarden.h"
 
@@ -7,11 +7,11 @@
 
 namespace DataGarden
 {
-	class PlaneGeometry : public Geometry
+	class PyramidGeometry : public Geometry
 	{
 	public:
-		PlaneGeometry();
-		virtual ~PlaneGeometry();
+		PyramidGeometry();
+		virtual ~PyramidGeometry();
 
     virtual BufferLayout GetLayout() override;
 

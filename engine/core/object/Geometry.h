@@ -26,8 +26,6 @@ namespace DataGarden
 
     // TODO: Add base Vertex stride/Vertex Attrib definition, since it should be the same for all Geometry
 
-    virtual std::string& GetName() = 0;
-
     inline float* GetVertices() { return m_GeometryBuffer.Vertices; };
     inline unsigned int* GetIndices() { return m_GeometryBuffer.Indices; };
 

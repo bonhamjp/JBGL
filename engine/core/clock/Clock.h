@@ -13,8 +13,8 @@ namespace DataGarden
 
 		void Update();
 
-    inline double GetPreviousTime() const { return m_CurrentTime; };
-    inline double GetCurrentTime() const { return m_PreviousTime; };
+    inline double GetCurrentTime() const { return m_CurrentTime; };
+    inline double GetPreviousTime() const { return m_PreviousTime; };
     inline double GetDeltaTime() const { return m_DeltaTime; };
 
     void Reset();

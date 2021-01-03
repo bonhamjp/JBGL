@@ -11,6 +11,8 @@
 #include "library/geometries/CubeGeometry.h"
 #include "library/geometries/PlaneGeometry.h"
 #include "library/geometries/SphereGeometry.h"
+#include "library/geometries/PyramidGeometry.h"
+#include "library/geometries/CylinderGeometry.h"
 
 #include <iostream>
 
@@ -140,6 +142,16 @@ namespace DataGarden
     return new SphereGeometry(3);
   }
 
+  Geometry* CreatePyramidGeometry(ResourceDescriptor* descriptor)
+  {
+    return new PyramidGeometry();
+  }
+
+  Geometry* CreateCylinderGeometry(ResourceDescriptor* descriptor)
+  {
+    return new CylinderGeometry(40);
+  }
+
   FactoryBuilder CreateFactoryBuilderForType(FactoryType factoryType)
   {
     FactoryBuilder factoryBuilder;
@@ -158,6 +170,16 @@ namespace DataGarden
       case FactoryType::Sphere:
         factoryBuilder.descriptor = { std::string("Sphere") };
         factoryBuilder.f = CreateSphereGeometry;
+        break;
+
+      case FactoryType::Pyramid:
+        factoryBuilder.descriptor = { std::string("Pyramid") };
+        factoryBuilder.f = CreatePyramidGeometry;
+        break;
+
+      case FactoryType::Cylinder:
+        factoryBuilder.descriptor = { std::string("Cylinder") };
+        factoryBuilder.f = CreateCylinderGeometry;
         break;
     }
 

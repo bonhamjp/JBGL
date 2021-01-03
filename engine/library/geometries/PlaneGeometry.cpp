@@ -23,13 +23,7 @@ namespace DataGarden
 		_DestroyBufferObject();
 	}
 
-  std::string& PlaneGeometry::GetName()
-  {
-    std::string name = std::string("Cube");
-    return name;
-  }
-
-	BufferLayout PlaneGeometry::GetLayout()
+  BufferLayout PlaneGeometry::GetLayout()
 	{
 		return BufferLayout({
 			{ BufferDataType::Float3, "v_Position" },
