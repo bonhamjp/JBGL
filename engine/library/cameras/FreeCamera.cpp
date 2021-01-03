@@ -20,7 +20,7 @@ namespace DataGarden
   {}
 
   void FreeCamera::Update()
-  {    
+  {
     Engine& engine = Engine::Get();
 
 		InputManager& inputManager = engine.GetInputManager();
@@ -31,16 +31,17 @@ namespace DataGarden
 		// Why is Y delta different than the GLFW version? Is it actually?
 		float mouseDeltaX = inputManager.GetDeltaMouseX();
 		float mouseDeltaY = -(inputManager.GetDeltaMouseY());
-		
+
 		m_Transform.SetYaw(m_Transform.GetYaw() + (mouseDeltaX * m_LookSensitivity));
 		m_Transform.SetPitch(m_Transform.GetPitch() + (mouseDeltaY * m_LookSensitivity));
 
 		// restrict pitch to prevent looking around x axis
-		if (m_Transform.GetPitch() > 60.0f)
+		// TODO: Make restrictions customizable
+    if (m_Transform.GetPitch() > 80.0f)
 		{
 			m_Transform.SetPitch(60.0f);
 		}
-		else if (m_Transform.GetPitch() < -60.0f)
+		else if (m_Transform.GetPitch() < -80.0f)
 		{
 			m_Transform.SetPitch(-60.0f);
 		}
@@ -50,9 +51,7 @@ namespace DataGarden
 
 		float moveSpeed = m_MovementSensitivity * deltaTime;
 
-		// TODO:
-		// Make setting transform easier
-		if (inputManager.IsKeyPressed(KEY_UP_CODE))
+    if (inputManager.IsKeyPressed(KEY_UP_CODE))
 		{
 			m_Transform.SetPosition(m_Transform.GetPosition() + (front * moveSpeed));
 		}
@@ -69,16 +68,14 @@ namespace DataGarden
 			m_Transform.SetPosition(m_Transform.GetPosition() + (glm::normalize(glm::cross(front, up)) * moveSpeed));
 		}
 
-
-
-		// if (inputManager.IsKeyPressed(GARDEN_KEY_Q))
-		// {
-		// 	m_Transform.SetPosition(m_Transform.GetPosition() - (up * moveSpeed));
-		// }
-		// if (inputManager.IsKeyPressed(GARDEN_KEY_E))
-		// {
-		// 	m_Transform.SetPosition(m_Transform.GetPosition() + (up * moveSpeed));
-		// }
+		if (inputManager.IsKeyPressed(KEY_Q_CODE))
+		{
+			m_Transform.SetPosition(m_Transform.GetPosition() - (up * moveSpeed));
+		}
+		if (inputManager.IsKeyPressed(KEY_E_CODE))
+		{
+			m_Transform.SetPosition(m_Transform.GetPosition() + (up * moveSpeed));
+		}
   }
 }
 

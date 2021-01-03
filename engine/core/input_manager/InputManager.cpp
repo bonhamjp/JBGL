@@ -71,7 +71,7 @@ namespace DataGarden
   {
     return { GetDeltaMouseX(), GetDeltaMouseY() };
   }
-  
+
   void InputManager::MousePressed(int clickType)
   {
     // TODO: Make enums for clickType
@@ -115,7 +115,7 @@ namespace DataGarden
     // float r = ((float) (rand() % 255)) / 255.0f;
     // float g = ((float) (rand() % 255)) / 255.0f;
     // float b = ((float) (rand() % 255)) / 255.0f;
-    
+
     // renderer.SetBufferColor(r, g, b, 1);
     // renderer.ClearBuffer();
 
@@ -138,6 +138,14 @@ namespace DataGarden
 
       case KEY_SPACE_BAR_CODE:
         m_CurrentFrame.spaceBarPressed = true;
+        break;
+
+      case KEY_Q_CODE:
+        m_CurrentFrame.qPressed = true;
+        break;
+
+      case KEY_E_CODE:
+        m_CurrentFrame.ePressed = true;
         break;
     }
   }
@@ -163,6 +171,14 @@ namespace DataGarden
 
       case KEY_SPACE_BAR_CODE:
         m_CurrentFrame.spaceBarPressed = false;
+        break;
+
+      case KEY_Q_CODE:
+        m_CurrentFrame.qPressed = false;
+        break;
+
+      case KEY_E_CODE:
+        m_CurrentFrame.ePressed = false;
         break;
     }
   }
@@ -193,6 +209,14 @@ namespace DataGarden
 
       case KEY_SPACE_BAR_CODE:
         return m_CurrentFrame.spaceBarPressed;
+        break;
+
+      case KEY_Q_CODE:
+        return m_CurrentFrame.qPressed;
+        break;
+
+      case KEY_E_CODE:
+        return m_CurrentFrame.ePressed;
         break;
     }
 

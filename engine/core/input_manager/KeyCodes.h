@@ -7,5 +7,7 @@ const int KEY_DOWN_CODE = 115;
 const int KEY_LEFT_CODE = 97;
 const int KEY_RIGHT_CODE = 100;
 const int KEY_SPACE_BAR_CODE = 32;
+const int KEY_Q_CODE = 81;
+const int KEY_E_CODE = 69;
 
 #endif

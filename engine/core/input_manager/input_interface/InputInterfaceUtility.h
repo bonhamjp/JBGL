@@ -10,7 +10,7 @@ EM_JS(void, inputInterfaceKeyCodeConvert, (int keyCode), {
   if (keyCode === 87) // up
   {
     convertedKeyCode = 119;
-  } 
+  }
   else if (keyCode === 83) // down
   {
     convertedKeyCode = 115;
@@ -22,10 +22,6 @@ EM_JS(void, inputInterfaceKeyCodeConvert, (int keyCode), {
   else if (keyCode === 68) // right
   {
     convertedKeyCode = 100;
-  }
-  else if (keyCode === 32) // space
-  {
-    convertedKeyCode = 32;
   }
 
   return convertedKeyCode;

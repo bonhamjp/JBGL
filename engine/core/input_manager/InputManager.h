@@ -17,6 +17,8 @@ namespace DataGarden
     bool leftPressed;
     bool rightPressed;
     bool spaceBarPressed;
+    bool qPressed;
+    bool ePressed;
   };
 
 	class InputManager
