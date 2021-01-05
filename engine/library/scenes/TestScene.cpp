@@ -9,7 +9,8 @@
 #include "core/object/node/Node.h"
 #include "core/object/node/Factory.h"
 
-#include "library/cameras/FreeCamera.h"
+#include "library/cameras/3d/FreeCamera.h"
+#include "library/cameras/2d/Camera2D.h"
 
 #include "library/lights/PointLight.h"
 #include "library/lights/DirectionalLight.h"
@@ -27,7 +28,10 @@ namespace DataGarden
       Transform(glm::vec3(-6.0f, 0.0f, 3.0f),
       glm::vec3(1.0f, 1.0f, 1.0f), 0.0f, 0.0f, 0.0f)
     );
-    SetCamera(freeCamera);
+    Set3DCamera(freeCamera);
+
+    Camera2D* camera2D = new Camera2D(0.0f, 0.0f, 0.0f);
+    Set2DCamera(camera2D);
 
     glm::vec4 whiteLight = glm::vec4(0.2f, 0.2f, 0.2f, 1.0f);
 

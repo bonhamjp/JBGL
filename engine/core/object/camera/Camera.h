@@ -14,7 +14,7 @@ namespace DataGarden
   public:
     Camera(float viewAngle, float nearClipping, float farClipping);
     ~Camera();
-    
+
     inline float GetViewAngle() { return m_ViewAngle; };
     void SetViewAngle(float viewAngle);
 
@@ -24,14 +24,14 @@ namespace DataGarden
     inline float GetFarClipping() { return m_FarClipping; };
     void SetFarClipping(float farClipping);
 
-    void RefreshForDimensionChange();
+    virtual void SetupProjection();
 
     virtual void Update();
 
     // inline glm::mat4 GetViewProjection() { return m_Projection; };
     glm::mat4 GetViewProjection();
 
-    void SetCameraUniforms();
+    virtual void SetCameraUniforms();
 
   protected:
     float m_ViewAngle;
@@ -39,8 +39,6 @@ namespace DataGarden
     float m_FarClipping;
 
     glm::mat4 m_Projection;
-
-    void _SetupProjection();
   };
 }
 

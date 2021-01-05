@@ -10,6 +10,7 @@
 #include "core/renderer/Renderer.h"
 
 #include "core/scene/Scene.h"
+
 #include "core/object/camera/Camera.h"
 
 #include <iostream>
@@ -27,8 +28,14 @@ extern "C"
     width = canvas2.GetWidth();
     height = canvas2.GetHeight();
 
-    DataGarden::Camera& camera = DataGarden::Engine::Get().GetScene().GetCamera();
-    camera.RefreshForDimensionChange();
+    if (DataGarden::Engine::Get().GetScene().Get3DCamera() != nullptr)
+    {
+      DataGarden::Engine::Get().GetScene().Get3DCamera()->SetupProjection();
+    }
+    if (DataGarden::Engine::Get().GetScene().Get2DCamera() != nullptr)
+    {
+      DataGarden::Engine::Get().GetScene().Get2DCamera()->SetupProjection();
+    }
 
     DataGarden::Renderer& renderer = DataGarden::Engine::Get().GetRenderer();
     renderer.SetViewport();

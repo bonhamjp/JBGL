@@ -1,22 +1,22 @@
-#include <iostream>
-
-#include <glm/ext.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtx/string_cast.hpp>
-
 #include "FreeCamera.h"
 
 #include "core/Engine.h"
 
 #include "core/input_manager/InputManager.h"
 #include "core/input_manager/KeyCodes.h"
+
 #include "core/clock/Clock.h"
+
 #include "core/canvas/Canvas.h"
+
+#include <glm/ext.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/string_cast.hpp>
 
 namespace DataGarden
 {
   FreeCamera::FreeCamera(float viewAngle, float nearClipping, float farClipping) :
-  Camera(viewAngle, nearClipping, farClipping)
+  Camera3D(viewAngle, nearClipping, farClipping)
   {}
 
   void FreeCamera::Update()
@@ -78,4 +78,3 @@ namespace DataGarden
 		}
   }
 }
-
