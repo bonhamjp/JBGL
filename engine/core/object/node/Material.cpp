@@ -2,8 +2,6 @@
 
 #include "core/Engine.h"
 
-#include "core/scene/Scene.h"
-
 #include "core/object/node/Node.h"
 
 #include "core/renderer/Texture.h"
@@ -46,7 +44,7 @@ namespace DataGarden
 
   void Material::SetMaterialUniforms()
   {
-    Visualization3DShader* visualization3DShader = Engine::Get().GetScene().GetShaderManager()->GetVisualization3DShader();
+    Visualization3DShader* visualization3DShader = Engine::Get().GetShaderManager().GetVisualization3DShader();
 
     visualization3DShader->SetMaterialShininessUniform(m_Shininess);
 

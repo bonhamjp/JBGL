@@ -3,8 +3,6 @@
 
 #include "DataGarden.h"
 
-#include "core/shader_manager/ShaderManager.h"
-
 #include "core/ui/UI.h"
 
 #include "core/object/light/LightList.h"
@@ -29,8 +27,6 @@ namespace DataGarden
     void Render();
     virtual void PostRender() = 0;
 
-    ShaderManager* GetShaderManager() { return m_ShaderManager; };
-
     void PushUi(UI *ui);
 
     inline Camera *Get3DCamera() { return m_3DCamera; };
@@ -40,8 +36,6 @@ namespace DataGarden
     void Set2DCamera(Camera *camera);
 
   protected:
-    ShaderManager* m_ShaderManager;
-
     // TODO: Extract UI management into class
     unsigned int m_UI_Count;
     UI *m_UIS[MAX_UI_COUNT];

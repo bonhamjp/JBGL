@@ -18,26 +18,26 @@
 namespace DataGarden
 {
   Engine* Engine::s_Instance = nullptr;
-	
+
 	Engine* CreateEngine()
 	{
     return new Engine();
 	}
-	
+
 	void DeleteEngine()
 	{
     delete &Engine::Get();
 	}
-	
+
 	Engine::Engine()
 	{
 		s_Instance = this;
-    
+
     m_Running = false;
 
     _SetupSystems();
   }
-  
+
   Engine::~Engine()
   {
     _TeardownSystems();
@@ -68,7 +68,7 @@ namespace DataGarden
     m_Clock->Update();
 
     m_Renderer->PreRender();
-    
+
     m_Scene->PreUpdate();
     m_Scene->Update();
     m_Scene->PostUpdate();
@@ -92,6 +92,8 @@ namespace DataGarden
 
     m_Renderer = new Renderer();
 
+    m_ShaderManager = new ShaderManager();
+
     m_TextureManager = new ResourceManager<Texture>();
     m_GeometryManager = new ResourceManager<Geometry>();
   }
@@ -102,6 +104,8 @@ namespace DataGarden
     delete m_Clock;
     delete m_InputManager;
     delete m_Renderer;
+
+    delete m_ShaderManager;
 
     delete m_TextureManager;
     delete m_GeometryManager;

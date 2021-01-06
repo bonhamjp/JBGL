@@ -144,7 +144,7 @@ namespace DataGarden
   {
     m_Mesh->PrepareForRender();
 
-    Visualization3DShader *visualization3DShader = Engine::Get().GetScene().GetShaderManager()->GetVisualization3DShader();
+    Visualization3DShader *visualization3DShader = Engine::Get().GetShaderManager().GetVisualization3DShader();
     visualization3DShader->SetModelUniform(m_Transform.GetModel());
 
     m_Material->SetMaterialUniforms();

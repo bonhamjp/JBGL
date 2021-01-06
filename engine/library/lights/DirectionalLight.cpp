@@ -38,7 +38,7 @@ namespace DataGarden
 
   void UpdateDirectionalLightUniforms(LightListOfType directionalLightList)
   {
-    Visualization3DShader *m_Visualization3DShader = Engine::Get().GetScene().GetShaderManager()->GetVisualization3DShader();
+    Visualization3DShader *m_Visualization3DShader = Engine::Get().GetShaderManager().GetVisualization3DShader();
 
     m_Visualization3DShader->SetDirectionalLightUniforms(directionalLightList);
   }

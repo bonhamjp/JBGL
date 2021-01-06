@@ -3,6 +3,8 @@
 
 #include "DataGarden.h"
 
+#include "core/shader_manager/ShaderManager.h"
+
 #include "core/resource_manager/ResourceManager.h"
 
 namespace DataGarden
@@ -37,6 +39,8 @@ namespace DataGarden
     inline InputManager& GetInputManager() { return *m_InputManager; };
     inline Renderer& GetRenderer() { return *m_Renderer; };
 
+    inline ShaderManager& GetShaderManager() { return *m_ShaderManager; };
+
     inline ResourceManager<Texture>& GetTextureManager() { return *m_TextureManager; };
     inline ResourceManager<Geometry>& GetGeometryManager() { return *m_GeometryManager; };
 
@@ -50,6 +54,8 @@ namespace DataGarden
     Clock* m_Clock;
     InputManager* m_InputManager;
     Renderer* m_Renderer;
+
+    ShaderManager* m_ShaderManager;
 
     ResourceManager<Texture>* m_TextureManager;
     ResourceManager<Geometry>* m_GeometryManager;

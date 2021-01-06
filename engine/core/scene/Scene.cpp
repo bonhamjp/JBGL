@@ -49,7 +49,7 @@ namespace DataGarden
 
   void Scene::_Update3DScene()
   {
-    Visualization3DShader* visualization3DShader = m_ShaderManager->GetVisualization3DShader();
+    Visualization3DShader* visualization3DShader = Engine::Get().GetShaderManager().GetVisualization3DShader();
 
     visualization3DShader->Bind();
     m_3DCamera->Update();
@@ -95,14 +95,12 @@ namespace DataGarden
 
   void Scene::_DeleteCameras()
   {
-    delete m_ShaderManager;
     delete m_3DCamera;
     delete m_2DCamera;
   }
 
   void Scene::_SetupScene()
   {
-    m_ShaderManager = new ShaderManager();
     m_NodeGraph = new NodeGraph();
     m_LightList = new LightList();
   }

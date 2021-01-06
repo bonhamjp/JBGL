@@ -45,7 +45,7 @@ namespace DataGarden
 
   void Camera3D::SetCameraUniforms()
   {
-    Visualization3DShader *visualization3DShader = Engine::Get().GetScene().GetShaderManager()->GetVisualization3DShader();
+    Visualization3DShader *visualization3DShader = Engine::Get().GetShaderManager().GetVisualization3DShader();
 
     visualization3DShader->SetViewProjectionUniform(GetViewProjection());
     visualization3DShader->SetViewPositionUniform(m_Transform.GetPosition());
