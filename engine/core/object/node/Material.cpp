@@ -2,6 +2,8 @@
 
 #include "core/Engine.h"
 
+#include "core/scene/Scene.h"
+
 #include "core/object/node/Node.h"
 
 #include "core/renderer/Texture.h"
@@ -40,6 +42,35 @@ namespace DataGarden
     }
 
     return false;
+  }
+
+  void Material::SetMaterialUniforms()
+  {
+    Visualization3DShader* visualization3DShader = Engine::Get().GetScene().GetShaderManager()->GetVisualization3DShader();
+
+    visualization3DShader->SetMaterialShininessUniform(m_Shininess);
+
+    // TODO: Support multiple textures of each type
+    auto ambientTextures = GetTextures(TextureType::Ambient);
+    visualization3DShader->SetAmbientTexturesUniform(ambientTextures.size());
+    if (ambientTextures.size() > 0)
+    {
+      ambientTextures[0]->Bind();
+    }
+
+    auto diffuseTextures = GetTextures(TextureType::Diffuse);
+    visualization3DShader->SetDiffuseTexturesUniform(diffuseTextures.size());
+    if (diffuseTextures.size() > 0)
+    {
+      diffuseTextures[0]->Bind();
+    }
+
+    auto specularTextures = GetTextures(TextureType::Specular);
+    visualization3DShader->SetSpecularTexturesUniform(specularTextures.size());
+    if (specularTextures.size() > 0)
+    {
+      specularTextures[0]->Bind();
+    }
   }
 
   void Material::_CreateTextureFromData(TextureDataResourceDescriptor textureResourceDescriptor)

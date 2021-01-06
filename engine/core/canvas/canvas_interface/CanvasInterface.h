@@ -28,6 +28,7 @@ extern "C"
     width = canvas2.GetWidth();
     height = canvas2.GetHeight();
 
+    // TODO: Figure out a way to only call this after a Scene has been lazy loaded
     if (DataGarden::Engine::Get().GetScene().Get3DCamera() != nullptr)
     {
       DataGarden::Engine::Get().GetScene().Get3DCamera()->SetupProjection();

@@ -76,18 +76,12 @@ namespace DataGarden
 
     void DrawIndexed(unsigned int count);
 
-    inline unsigned int GetMainProgramID() { return m_Shader->GetProgramID(); };
-
   private:
 		// Scope<RenderCommandQueue> m_CommandQueue
-
-    // TODO: Allow custom shaders
-    Shader* m_Shader;
 
     void _Setup();
 
     void _SetGlobalGraphicsState();
-    void _SetupShaderUniforms();
 
     void _Teardown();
   };

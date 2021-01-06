@@ -51,8 +51,6 @@ namespace DataGarden
   void Renderer::PreRender()
   {
     ClearBuffer();
-
-    m_Shader->Bind();
   }
 
   void Renderer::PostRender()
@@ -313,10 +311,6 @@ namespace DataGarden
   void Renderer::_Setup()
   {
     _SetGlobalGraphicsState();
-
-    m_Shader = new Shader(ShaderVertexSource::BASE, ShaderFragmentSource::BASE);
-
-    _SetupShaderUniforms();
   }
 
   void Renderer::_SetGlobalGraphicsState()
@@ -334,19 +328,8 @@ namespace DataGarden
     webGLInterfaceClearBuffer();
   }
 
-  void Renderer::_SetupShaderUniforms()
-  {
-    // TODO: Support more texture types
-    // TODO: Move this setup to main 3D shader
-    SetUniform1i(GetMainProgramID(), "u_AmbientTexture", 0);
-    SetUniform1i(GetMainProgramID(), "u_DiffuseTexture", 3);
-    SetUniform1i(GetMainProgramID(), "u_SpecularTexture", 6);
-  }
-
   void Renderer::_Teardown()
   {
-    delete m_Shader;
-
     webGLInterfaceTeardownContext();
   }
 }

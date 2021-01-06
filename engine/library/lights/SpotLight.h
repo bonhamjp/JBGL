@@ -29,21 +29,21 @@ namespace DataGarden
 
     inline float GetInnerCutoff() { return m_InnerCutoff; };
     inline float GetOuterCutoff() { return m_OuterCutoff; };
-    
+
   private:
     glm::vec4 m_Position;
-		glm::vec4 m_Direction;
+    glm::vec4 m_Direction;
 
-		float m_Constant;
-		float m_Linear;
-		float m_Quadratic;
+    float m_Constant;
+    float m_Linear;
+    float m_Quadratic;
 
-		float m_InnerCutoff;
-		float m_OuterCutoff;
+    float m_InnerCutoff;
+    float m_OuterCutoff;
   };
 
   // TODO: Implement as a class method
   void UpdateSpotLightUniforms(LightListOfType spotLightList);
-}
+} // namespace DataGarden
 
 #endif

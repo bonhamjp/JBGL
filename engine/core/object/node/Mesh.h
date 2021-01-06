@@ -19,6 +19,8 @@ namespace DataGarden
 
     inline Geometry* GetGeometry() { return m_Geometry; };
 
+    void PrepareForRender();
+
   private:
     Node* m_Node;
     Geometry* m_Geometry;

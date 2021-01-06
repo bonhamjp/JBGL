@@ -3,12 +3,12 @@
 
 #include "DataGarden.h"
 
+#include "core/shader_manager/ShaderManager.h"
+
 #include "core/ui/UI.h"
 
 #include "core/object/light/LightList.h"
-
 #include "core/object/node/NodeGraph.h"
-
 #include "core/object/camera/Camera.h"
 
 #define MAX_UI_COUNT 8
@@ -16,10 +16,10 @@
 namespace DataGarden
 {
   class Scene
-	{
-	public:
+  {
+  public:
     Scene();
-		virtual ~Scene();
+    virtual ~Scene();
 
     virtual void PreUpdate() = 0;
     void Update();
@@ -29,31 +29,44 @@ namespace DataGarden
     void Render();
     virtual void PostRender() = 0;
 
-    void PushUi(UI* ui);
+    ShaderManager* GetShaderManager() { return m_ShaderManager; };
 
-    inline Camera* Get3DCamera() { return m_3DCamera; };
-    void Set3DCamera(Camera* camera);
+    void PushUi(UI *ui);
 
-    inline Camera* Get2DCamera() { return m_2DCamera; };
-    void Set2DCamera(Camera* camera);
+    inline Camera *Get3DCamera() { return m_3DCamera; };
+    void Set3DCamera(Camera *camera);
+
+    inline Camera *Get2DCamera() { return m_2DCamera; };
+    void Set2DCamera(Camera *camera);
 
   protected:
+    ShaderManager* m_ShaderManager;
+
+    // TODO: Extract UI management into class
     unsigned int m_UI_Count;
-    UI* m_UIS[MAX_UI_COUNT];
+    UI *m_UIS[MAX_UI_COUNT];
 
-    LightList* m_LightList;
-    NodeGraph* m_NodeGraph;
-    Camera* m_3DCamera;
-    Camera* m_2DCamera;
+    LightList *m_LightList;
 
-    // TODO: Maybe store references to shaders here, one for each shader
+    NodeGraph *m_NodeGraph;
+
+    Camera *m_3DCamera;
+    Camera *m_2DCamera;
 
   private:
+    void _Update3DScene();
+    void _Update2DScene();
+    void _UpdateUIs();
+
+    void _Render3DScene();
+    void _Render2DScene();
+    void _RenderUIs();
+
     void _DeleteCameras();
 
     void _SetupScene();
     void _TeardownScene();
   };
-}
+} // namespace DataGarden
 
 #endif

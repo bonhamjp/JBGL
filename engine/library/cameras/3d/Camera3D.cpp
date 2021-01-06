@@ -4,21 +4,25 @@
 
 #include "core/renderer/Renderer.h"
 
+#include "core/scene/Scene.h"
+
 #include "core/canvas/Canvas.h"
+
+#include "library/shaders/Visualization3DShader.h"
 
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
 
 namespace DataGarden
 {
-  Camera3D::Camera3D(float viewAngle, float nearClipping, float farClipping) :
-  Camera(viewAngle, nearClipping, farClipping)
+  Camera3D::Camera3D(float viewAngle, float nearClipping, float farClipping) : Camera(viewAngle, nearClipping, farClipping)
   {
     SetupProjection();
   }
 
   Camera3D::~Camera3D()
-  {}
+  {
+  }
 
   void Camera3D::SetupProjection()
   {
@@ -36,14 +40,14 @@ namespace DataGarden
   }
 
   void Camera3D::Update()
-  {}
+  {
+  }
 
   void Camera3D::SetCameraUniforms()
   {
-    Renderer& renderer = Engine::Get().GetRenderer();
-    unsigned int programID = renderer.GetMainProgramID();
+    Visualization3DShader *visualization3DShader = Engine::Get().GetScene().GetShaderManager()->GetVisualization3DShader();
 
-    renderer.SetUniformMatrix4fv(programID, "u_ViewProjection", GetViewProjection());
-    renderer.SetUniform3fv(programID, "u_ViewPosition", m_Transform.GetPosition());
+    visualization3DShader->SetViewProjectionUniform(GetViewProjection());
+    visualization3DShader->SetViewPositionUniform(m_Transform.GetPosition());
   }
-}
+} // namespace DataGarden

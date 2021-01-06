@@ -20,18 +20,57 @@ namespace DataGarden
 
   void Scene::Update()
   {
-    m_3DCamera->Update();
-    m_2DCamera->Update();
-
-    m_NodeGraph->Update();
-
-    // for (int i = 0; i < m_UI_Count; i++)
-    // {
-    //   m_UIs[i]->Update();
-    // }
+    _Update3DScene();
+    _Update2DScene();
+    _UpdateUIs();
   }
 
   void Scene::Render()
+  {
+    _Render3DScene();
+    _Render2DScene();
+    _RenderUIs();
+  }
+
+  void Scene::PushUi(UI *ui)
+  {
+    m_UIS[m_UI_Count++] = ui;
+  }
+
+  void Scene::Set3DCamera(Camera *camera)
+  {
+    m_3DCamera = camera;
+  }
+
+  void Scene::Set2DCamera(Camera *camera)
+  {
+    m_2DCamera = camera;
+  }
+
+  void Scene::_Update3DScene()
+  {
+    Visualization3DShader* visualization3DShader = m_ShaderManager->GetVisualization3DShader();
+
+    visualization3DShader->Bind();
+    m_3DCamera->Update();
+    m_NodeGraph->Update();
+    visualization3DShader->Unbind();
+  }
+
+  void Scene::_Update2DScene()
+  {
+    m_2DCamera->Update();
+  }
+
+  void Scene::_UpdateUIs()
+  {
+    for (int i = 0; i < m_UI_Count; i++)
+    {
+      m_UIS[i]->Update();
+    }
+  }
+
+  void Scene::_Render3DScene()
   {
     m_LightList->UpdateRendererLightUniforms();
 
@@ -40,37 +79,30 @@ namespace DataGarden
     m_3DCamera->SetCameraUniforms();
 
     m_NodeGraph->Render();
-
-    // render uis
-    // for (int i = 0; i < m_UI_Count; i++)
-    // {
-    //   m_UIs[i]->Render();
-    // }
   }
 
-  void Scene::PushUi(UI* ui)
+  void Scene::_Render2DScene()
   {
-    // m_UIs[m_UI_Count++] = std::unique_ptr<Ui>(ui);
   }
 
-  void Scene::Set3DCamera(Camera* camera)
+  void Scene::_RenderUIs()
   {
-    m_3DCamera = camera;
-  }
-
-  void Scene::Set2DCamera(Camera* camera)
-  {
-    m_2DCamera = camera;
+    for (int i = 0; i < m_UI_Count; i++)
+    {
+      m_UIS[i]->Render();
+    }
   }
 
   void Scene::_DeleteCameras()
   {
+    delete m_ShaderManager;
     delete m_3DCamera;
     delete m_2DCamera;
   }
 
   void Scene::_SetupScene()
   {
+    m_ShaderManager = new ShaderManager();
     m_NodeGraph = new NodeGraph();
     m_LightList = new LightList();
   }
@@ -82,4 +114,4 @@ namespace DataGarden
 
     _DeleteCameras();
   }
-}
+} // namespace DataGarden

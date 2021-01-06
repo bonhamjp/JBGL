@@ -4,11 +4,13 @@
 
 #include "core/Engine.h"
 
+#include "core/scene/Scene.h"
+
 #include "core/renderer/Renderer.h"
-#include "core/renderer/VertexArray.h"
-#include "core/renderer/IndexBuffer.h"
 
 #include "core/object/Geometry.h"
+
+#include "library/shaders/Visualization3DShader.h"
 
 #include "Mesh.h"
 #include "Material.h"
@@ -17,8 +19,7 @@
 
 namespace DataGarden
 {
-  Node::Node() :
-  Object()
+  Node::Node() : Object()
   {
     m_Active = true;
     m_CanRender = false;
@@ -29,8 +30,7 @@ namespace DataGarden
     m_ChildCount = 0;
   }
 
-  Node::Node(Node* parentNode) :
-  Object()
+  Node::Node(Node *parentNode) : Object()
   {
     m_Parent = parentNode;
 
@@ -44,7 +44,8 @@ namespace DataGarden
   }
 
   Node::~Node()
-  {}
+  {
+  }
 
   void Node::Update(glm::mat4 space)
   {
@@ -87,21 +88,21 @@ namespace DataGarden
     }
   }
 
-  void Node::SetMesh(Mesh* mesh)
+  void Node::SetMesh(Mesh *mesh)
   {
     m_Mesh = mesh;
 
     _UpdateCanRender();
   }
 
-  void Node::SetMaterial(Material* material)
+  void Node::SetMaterial(Material *material)
   {
     m_Material = material;
 
     _UpdateCanRender();
   }
 
-  void Node::PushChild(Node* childNode)
+  void Node::PushChild(Node *childNode)
   {
     m_Children[m_ChildCount++] = childNode;
   }
@@ -141,47 +142,18 @@ namespace DataGarden
 
   void Node::_SetNodeUniforms()
   {
-    Renderer& renderer = Engine::Get().GetRenderer();
-    unsigned int programID = renderer.GetMainProgramID();
+    m_Mesh->PrepareForRender();
 
-    Geometry* geometry = m_Mesh->GetGeometry();
+    Visualization3DShader *visualization3DShader = Engine::Get().GetScene().GetShaderManager()->GetVisualization3DShader();
+    visualization3DShader->SetModelUniform(m_Transform.GetModel());
 
-    geometry->GetVertexArray().Bind();
-    geometry->GetIndexBuffer().Bind();
-
-    renderer.SetUniformMatrix4fv(programID, "u_Vertex.Model", m_Transform.GetModel());
-
-    // TODO: Move Material unfiform setting to Material
-		renderer.SetUniform1f(programID, "u_Material.Shininess", m_Material->GetShininess());
-
-    // TODO: Support multiple textures of each type
-    auto ambientTextures = m_Material->GetTextures(TextureType::Ambient);
-    renderer.SetUniform1i(programID, "u_AmbientTextures", ambientTextures.size());
-    if (ambientTextures.size() > 0)
-    {
-      ambientTextures[0]->Bind();
-    }
-
-    auto diffuseTextures = m_Material->GetTextures(TextureType::Diffuse);
-    renderer.SetUniform1i(programID, "u_DiffuseTextures", diffuseTextures.size());
-    if (diffuseTextures.size() > 0)
-    {
-      diffuseTextures[0]->Bind();
-    }
-
-    auto specularTextures = m_Material->GetTextures(TextureType::Specular);
-    renderer.SetUniform1i(programID, "u_SpecularTextures", specularTextures.size());
-    if (specularTextures.size() > 0)
-    {
-      specularTextures[0]->Bind();
-    }
+    m_Material->SetMaterialUniforms();
   }
 
   void Node::_DrawIndexed()
   {
-    Renderer& renderer = Engine::Get().GetRenderer();
-    Geometry* geometry = m_Mesh->GetGeometry();
+    Renderer &renderer = Engine::Get().GetRenderer();
 
-    renderer.DrawIndexed(geometry->GetIndexCount());
+    renderer.DrawIndexed(m_Mesh->GetGeometry()->GetIndexCount());
   }
-}
+} // namespace DataGarden

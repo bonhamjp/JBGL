@@ -27,6 +27,8 @@ namespace DataGarden
 
     inline std::vector<Texture*>& GetTextures(TextureType textureType) { return m_Textures[textureType]; };
 
+    void SetMaterialUniforms();
+
   private:
 		float m_Shininess;
 
