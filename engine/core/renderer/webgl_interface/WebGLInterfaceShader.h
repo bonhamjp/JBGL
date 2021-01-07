@@ -23,7 +23,7 @@ EM_JS(unsigned int, webGLInterfaceCreateFragmentShader, (), {
   return shaderID;
 });
 
-EM_JS(unsigned int, webGLInterfaceShaderSource, (unsigned int shaderID, char* shaderSource, unsigned int shaderSourceLength), {
+EM_JS(unsigned int, webGLInterfaceShaderSource, (unsigned int shaderID, char *shaderSource, unsigned int shaderSourceLength), {
   var shader = document.webGLModule.shaders[shaderID];
   var source = webGLInterfaceGetString(shaderSource, shaderSourceLength);
   document.webGLModule.context.shaderSource(shader, source);

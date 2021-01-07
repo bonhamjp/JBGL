@@ -9,21 +9,23 @@
 #include "InputInterfaceEventHandlers.h"
 
 EM_JS(void, inputInterfaceSetup, (), {
-  document.addEventListener("keyup", function(e) {
-    var convertedKeyCode = inputInterfaceKeyCodeConvert(e.keyCode);
-    Module._onKeyUp(convertedKeyCode);
-  });
+  document.addEventListener(
+      "keyup", function(e) {
+        var convertedKeyCode = inputInterfaceKeyCodeConvert(e.keyCode);
+        Module._onKeyUp(convertedKeyCode);
+      });
 
-  document.addEventListener("keydown", function(e) {
-    var convertedKeyCode = inputInterfaceKeyCodeConvert(e.keyCode);
-    Module._onKeyDown(convertedKeyCode);
-  });
+  document.addEventListener(
+      "keydown", function(e) {
+        var convertedKeyCode = inputInterfaceKeyCodeConvert(e.keyCode);
+        Module._onKeyDown(convertedKeyCode);
+      });
 });
 
 // TODO: Bind listeners to WebGL context
 
 EM_JS(void, inputInterfaceTeardown, (), {
-  // TODO: Any input teardown
-});
+                                            // TODO: Any input teardown
+                                        });
 
 #endif

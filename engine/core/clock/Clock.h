@@ -5,13 +5,13 @@
 
 namespace DataGarden
 {
-	class Clock
-	{
-	public:
+  class Clock
+  {
+  public:
     Clock();
-		~Clock();
+    ~Clock();
 
-		void Update();
+    void Update();
 
     inline double GetCurrentTime() const { return m_CurrentTime; };
     inline double GetPreviousTime() const { return m_PreviousTime; };
@@ -26,6 +26,6 @@ namespace DataGarden
 
     void _Start();
   };
-}
+} // namespace DataGarden
 
 #endif

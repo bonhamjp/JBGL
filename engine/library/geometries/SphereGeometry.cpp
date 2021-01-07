@@ -20,29 +20,26 @@ namespace DataGarden
     _Initialize();
   }
 
-	SphereGeometry::~SphereGeometry()
-	{
-		_DestroyBufferObject();
-	}
+  SphereGeometry::~SphereGeometry()
+  {
+    _DestroyBufferObject();
+  }
 
   BufferLayout SphereGeometry::GetLayout()
-	{
-		return BufferLayout({
-			{ BufferDataType::Float3, "v_Position" },
-			{ BufferDataType::Float3, "v_Normal"},
-      { BufferDataType::Float2, "v_TextureCoordinates" }
-		});
-	}
+  {
+    return BufferLayout({{BufferDataType::Float3, "v_Position"},
+                         {BufferDataType::Float3, "v_Normal"},
+                         {BufferDataType::Float2, "v_TextureCoordinates"}});
+  }
 
   glm::vec3 SphereGeometry::_GetVectorAtIndex(unsigned int vertexIndex)
   {
     // must account for vertex stride of input buffer
     unsigned int vertexOffset = vertexIndex * m_VertexStride;
     return glm::vec3(
-      m_GeometryBuffer.Vertices[vertexOffset],
-      m_GeometryBuffer.Vertices[vertexOffset + 1],
-      m_GeometryBuffer.Vertices[vertexOffset + 2]
-    );
+        m_GeometryBuffer.Vertices[vertexOffset],
+        m_GeometryBuffer.Vertices[vertexOffset + 1],
+        m_GeometryBuffer.Vertices[vertexOffset + 2]);
   }
 
   unsigned int SphereGeometry::_GetHalfPointIndex(unsigned int vectorAIndex, unsigned int vectorBIndex)
@@ -113,7 +110,7 @@ namespace DataGarden
     {
       unsigned int vertexOffset = i * m_VertexStride;
 
-      float* rVert = &m_GeometryBuffer.Vertices[vertexOffset];
+      float *rVert = &m_GeometryBuffer.Vertices[vertexOffset];
 
       glm::vec3 pointInCircle = glm::vec3(rVert[0], rVert[1], rVert[2]);
       glm::vec3 pointNormal = glm::normalize(glm::vec3(0.0f) - pointInCircle); // This shouldn't need to be normalized, since from unit circle
@@ -125,8 +122,8 @@ namespace DataGarden
     }
   }
 
-	void SphereGeometry::_CreateBufferObject()
-	{
+  void SphereGeometry::_CreateBufferObject()
+  {
     float t = (1.0f + sqrt(5.0f)) / 2.0f;
 
     // xy plane
@@ -149,23 +146,23 @@ namespace DataGarden
 
     // counter clockwise winding
     float defaultIcosphere[] = {
-      // xy plane
-      vectorXYA.x, vectorXYA.y, vectorXYA.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,  // 0
-      vectorXYB.x, vectorXYB.y, vectorXYB.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,  // 1
-      vectorXYC.x, vectorXYC.y, vectorXYC.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,  // 2
-      vectorXYD.x, vectorXYD.y, vectorXYD.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,  // 3
+        // xy plane
+        vectorXYA.x, vectorXYA.y, vectorXYA.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, // 0
+        vectorXYB.x, vectorXYB.y, vectorXYB.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, // 1
+        vectorXYC.x, vectorXYC.y, vectorXYC.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, // 2
+        vectorXYD.x, vectorXYD.y, vectorXYD.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, // 3
 
-      // yz plane
-      vectorYZA.x, vectorYZA.y, vectorYZA.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,  // 4
-      vectorYZB.x, vectorYZB.y, vectorYZB.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,  // 5
-      vectorYZC.x, vectorYZC.y, vectorYZC.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,  // 6
-      vectorYZD.x, vectorYZD.y, vectorYZD.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,  // 7
+        // yz plane
+        vectorYZA.x, vectorYZA.y, vectorYZA.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, // 4
+        vectorYZB.x, vectorYZB.y, vectorYZB.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, // 5
+        vectorYZC.x, vectorYZC.y, vectorYZC.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, // 6
+        vectorYZD.x, vectorYZD.y, vectorYZD.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, // 7
 
-       // xz plane
-       vectorXZA.x, vectorXZA.y, vectorXZA.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, // 8
-       vectorXZB.x, vectorXZB.y, vectorXZB.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, // 9
-       vectorXZC.x, vectorXZC.y, vectorXZC.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, // 10
-       vectorXZD.x, vectorXZD.y, vectorXZD.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f  // 11
+        // xz plane
+        vectorXZA.x, vectorXZA.y, vectorXZA.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, // 8
+        vectorXZB.x, vectorXZB.y, vectorXZB.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, // 9
+        vectorXZC.x, vectorXZC.y, vectorXZC.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, // 10
+        vectorXZD.x, vectorXZD.y, vectorXZD.z, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f  // 11
     };
 
     m_GeometryBuffer.Vertices = new float[m_VertexStride * m_VertexCount];
@@ -176,27 +173,26 @@ namespace DataGarden
     }
 
     unsigned int defaultIndices[] = {
-      0, 11, 5,
-      0, 5, 1,
-      0, 1, 7,
-      0, 7, 10,
-      0, 10, 11,
-      1, 5, 9,
-      5, 11, 4,
-      11, 10, 2,
-      10, 7, 6,
-      7, 1, 8,
-      3, 9, 4,
-      3, 4, 2,
-      3, 2, 6,
-      3, 6, 8,
-      3, 8, 9,
-      4, 9, 5,
-      2, 4, 11,
-      6, 2, 10,
-      8, 6, 7,
-      9, 8, 1
-    };
+        0, 11, 5,
+        0, 5, 1,
+        0, 1, 7,
+        0, 7, 10,
+        0, 10, 11,
+        1, 5, 9,
+        5, 11, 4,
+        11, 10, 2,
+        10, 7, 6,
+        7, 1, 8,
+        3, 9, 4,
+        3, 4, 2,
+        3, 2, 6,
+        3, 6, 8,
+        3, 8, 9,
+        4, 9, 5,
+        2, 4, 11,
+        6, 2, 10,
+        8, 6, 7,
+        9, 8, 1};
 
     m_CurrentIndex = 12;
 
@@ -204,12 +200,12 @@ namespace DataGarden
 
     // I could use the m_GeometryBuffer.Indices as second swap buffer to prevent allocating two additional array
     // but they are only used in construction, and they make things more clear
-    unsigned int* indexSwapBufferA = new unsigned int[m_IndexCount];
-    unsigned int* indexSwapBufferB = new unsigned int[m_IndexCount];
+    unsigned int *indexSwapBufferA = new unsigned int[m_IndexCount];
+    unsigned int *indexSwapBufferB = new unsigned int[m_IndexCount];
 
     // for keeping track of which buffer is being read to/from
-    unsigned int* indexInBuffer;
-    unsigned int* indexOutBuffer;
+    unsigned int *indexInBuffer;
+    unsigned int *indexOutBuffer;
 
     for (int i = 0; i < m_BaseIndexCount; i++)
     {
@@ -272,7 +268,7 @@ namespace DataGarden
 
     // determine which index buffer holds final indices,
     // based on how many iterations there were
-    unsigned int* outputIndexBuffer;
+    unsigned int *outputIndexBuffer;
     if (m_Subdivisions % 2 == 0)
     {
       outputIndexBuffer = indexSwapBufferA;
@@ -292,11 +288,11 @@ namespace DataGarden
     delete[] indexSwapBufferB;
 
     _NormalizeVertices();
-	}
+  }
 
-	void SphereGeometry::_DestroyBufferObject()
-	{
-		delete[] m_GeometryBuffer.Vertices;
-		delete[] m_GeometryBuffer.Indices;
-	}
-}
+  void SphereGeometry::_DestroyBufferObject()
+  {
+    delete[] m_GeometryBuffer.Vertices;
+    delete[] m_GeometryBuffer.Indices;
+  }
+} // namespace DataGarden

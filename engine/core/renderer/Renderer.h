@@ -10,13 +10,13 @@
 
 namespace DataGarden
 {
-	class Renderer
-	{
-	public:
+  class Renderer
+  {
+  public:
     Renderer();
-		~Renderer();
+    ~Renderer();
 
-		void PreRender();
+    void PreRender();
     void PostRender();
 
     void SetBufferColor(float r, float g, float b, float a);
@@ -41,11 +41,11 @@ namespace DataGarden
     void DeleteBuffer(unsigned int bufferID);
 
     void BindVertexBuffer(unsigned int bufferID);
-    void VertexBufferData(float* vertexData, unsigned int vertexLength);
+    void VertexBufferData(float *vertexData, unsigned int vertexLength);
     void UnbindVertexBuffer();
 
     void BindIndexBuffer(unsigned int bufferID);
-    void IndexBufferData(unsigned int* indexData, unsigned int indexLength);
+    void IndexBufferData(unsigned int *indexData, unsigned int indexLength);
     void UnbindIndexBuffer();
 
     unsigned int CreateVertexArray();
@@ -62,22 +62,22 @@ namespace DataGarden
     void TextureParameterITextureWrapSClampToEdge();
     void TextureParameterITextureWrapTClampToEdge();
     void BindTexture(unsigned int textureID);
-    void TexImage2D(unsigned char* textureData, unsigned int textureDataLength);
+    void TexImage2D(unsigned char *textureData, unsigned int textureDataLength);
     void activeTexture(TextureType textureType, unsigned int index);
     void UnbindTexture();
     void GenerateMipmap();
     void DeleteTexture(unsigned int textureID);
 
-    void SetUniformMatrix4fv(unsigned int programID, const char* uniformName, glm::mat4 uniformMatrix);
-		void SetUniform4fv(unsigned int programID, const char* uniformName, glm::vec4 uniformVector);
-		void SetUniform3fv(unsigned int programID, const char* uniformName, glm::vec3 uniformVector);
-		void SetUniform1f(unsigned int programID, const char* uniformName, float uniformFloat);
-		void SetUniform1i(unsigned int programID, const char* uniformName, int uniformInteger);
+    void SetUniformMatrix4fv(unsigned int programID, const char *uniformName, glm::mat4 uniformMatrix);
+    void SetUniform4fv(unsigned int programID, const char *uniformName, glm::vec4 uniformVector);
+    void SetUniform3fv(unsigned int programID, const char *uniformName, glm::vec3 uniformVector);
+    void SetUniform1f(unsigned int programID, const char *uniformName, float uniformFloat);
+    void SetUniform1i(unsigned int programID, const char *uniformName, int uniformInteger);
 
     void DrawIndexed(unsigned int count);
 
   private:
-		// Scope<RenderCommandQueue> m_CommandQueue
+    // Scope<RenderCommandQueue> m_CommandQueue
 
     void _Setup();
 
@@ -85,6 +85,6 @@ namespace DataGarden
 
     void _Teardown();
   };
-}
+} // namespace DataGarden
 
 #endif

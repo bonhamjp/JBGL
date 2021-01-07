@@ -7,15 +7,15 @@
 
 namespace DataGarden
 {
-	class UIShader : Shader
-	{
-	public:
-		UIShader(ShaderType shaderType);
-		~UIShader();
+  class UIShader : Shader
+  {
+  public:
+    UIShader(ShaderType shaderType);
+    ~UIShader();
 
   private:
     void _Setup();
-	};
-}
+  };
+} // namespace DataGarden
 
 #endif

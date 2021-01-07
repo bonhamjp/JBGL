@@ -14,6 +14,6 @@ namespace DataGarden
 
   protected:
   };
-}
+} // namespace DataGarden
 
 #endif

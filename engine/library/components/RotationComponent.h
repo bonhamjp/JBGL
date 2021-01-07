@@ -13,7 +13,7 @@ namespace DataGarden
   class RotationComponent : Component
   {
   public:
-    RotationComponent(Node* node, float yawMultiplier);
+    RotationComponent(Node *node, float yawMultiplier);
     ~RotationComponent();
 
     virtual void Setup() override;
@@ -23,6 +23,6 @@ namespace DataGarden
   private:
     float m_YawMultiplier;
   };
-}
+} // namespace DataGarden
 
 #endif

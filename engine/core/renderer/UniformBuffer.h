@@ -5,21 +5,21 @@
 
 namespace DataGarden
 {
-	class UniformBuffer
-	{
-	public:
-		// static UniformBuffer* Create(float* vertices, uint32_t size);
-		UniformBuffer(float* vertices, uint32_t size);
-		~UniformBuffer();
+  class UniformBuffer
+  {
+  public:
+    // static UniformBuffer* Create(float* vertices, uint32_t size);
+    UniformBuffer(float *vertices, uint32_t size);
+    ~UniformBuffer();
 
-		inline unsigned int GetID() const { return m_ID; };
+    inline unsigned int GetID() const { return m_ID; };
 
-		void Bind();
-		void Unbind();
+    void Bind();
+    void Unbind();
 
-	private:
-		unsigned int m_ID;
-	};
-}
+  private:
+    unsigned int m_ID;
+  };
+} // namespace DataGarden
 
 #endif

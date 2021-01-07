@@ -7,19 +7,19 @@
 
 EM_JS(void, inputInterfaceKeyCodeConvert, (int keyCode), {
   var convertedKeyCode = keyCode;
-  if (keyCode === 87) // up
+  if (keyCode == 87) // up
   {
     convertedKeyCode = 119;
   }
-  else if (keyCode === 83) // down
+  else if (keyCode == 83) // down
   {
     convertedKeyCode = 115;
   }
-  else if (keyCode === 65) // left
+  else if (keyCode == 65) // left
   {
     convertedKeyCode = 97;
   }
-  else if (keyCode === 68) // right
+  else if (keyCode == 68) // right
   {
     convertedKeyCode = 100;
   }

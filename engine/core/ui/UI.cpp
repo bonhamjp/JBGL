@@ -3,8 +3,10 @@
 namespace DataGarden
 {
   UI::UI()
-  {}
+  {
+  }
 
   UI::~UI()
-  {}
-}
+  {
+  }
+} // namespace DataGarden

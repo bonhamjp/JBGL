@@ -13,7 +13,7 @@
 
 namespace DataGarden
 {
-  Mesh::Mesh(Node* node, ResourceDescriptor* geometryDescriptor, Geometry*(*f)(ResourceDescriptor* descriptor))
+  Mesh::Mesh(Node *node, ResourceDescriptor *geometryDescriptor, Geometry *(*f)(ResourceDescriptor *descriptor))
   {
     m_Geometry = Engine::Get().GetGeometryManager().AddResource(geometryDescriptor, f);
 
@@ -21,11 +21,12 @@ namespace DataGarden
   }
 
   Mesh::~Mesh()
-  {}
+  {
+  }
 
   void Mesh::PrepareForRender()
   {
     m_Geometry->GetVertexArray().Bind();
     m_Geometry->GetIndexBuffer().Bind();
   }
-}
+} // namespace DataGarden

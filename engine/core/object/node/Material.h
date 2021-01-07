@@ -17,25 +17,25 @@ namespace DataGarden
   class Material
   {
   public:
-    Material(Node* node, std::vector<TextureDataResourceDescriptor> textureResourceDescriptor);
+    Material(Node *node, std::vector<TextureDataResourceDescriptor> textureResourceDescriptor);
     ~Material();
 
     inline void SetShininess(float shininess) { m_Shininess = shininess; };
-		inline float GetShininess() { return m_Shininess; };
+    inline float GetShininess() { return m_Shininess; };
 
     bool HasTexture(TextureType textureType, std::string texturePath);
 
-    inline std::vector<Texture*>& GetTextures(TextureType textureType) { return m_Textures[textureType]; };
+    inline std::vector<Texture *> &GetTextures(TextureType textureType) { return m_Textures[textureType]; };
 
     void SetMaterialUniforms();
 
   private:
-		float m_Shininess;
+    float m_Shininess;
 
-    std::map<TextureType, std::vector<Texture*>> m_Textures;
+    std::map<TextureType, std::vector<Texture *>> m_Textures;
 
     void _CreateTextureFromData(TextureDataResourceDescriptor textureResourceDescriptor);
   };
-}
+} // namespace DataGarden
 
 #endif

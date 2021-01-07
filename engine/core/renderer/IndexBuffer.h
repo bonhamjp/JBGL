@@ -5,18 +5,18 @@
 
 namespace DataGarden
 {
-	class IndexBuffer
-	{
-	public:
-		IndexBuffer(uint32_t* indices, uint32_t count);
-		~IndexBuffer();
+  class IndexBuffer
+  {
+  public:
+    IndexBuffer(uint32_t *indices, uint32_t count);
+    ~IndexBuffer();
 
-		void Bind();
-		void Unbind();
+    void Bind();
+    void Unbind();
 
   private:
-  	unsigned int m_ID;
-	};
-}
+    unsigned int m_ID;
+  };
+} // namespace DataGarden
 
 #endif

@@ -19,53 +19,53 @@ namespace DataGarden
   class Geometry;
 
   class Engine
-	{
-	public:
-    inline static Engine& Get() { return *s_Instance; }
+  {
+  public:
+    inline static Engine &Get() { return *s_Instance; }
 
     Engine();
     ~Engine();
 
-    void LoadScene(Scene* scene);
+    void LoadScene(Scene *scene);
 
     void Start();
     void Stop();
 
     void Update();
 
-    inline Canvas& GetCanvas() { return *m_Canvas; };
-    inline Scene& GetScene() { return *m_Scene; };
-    inline Clock& GetClock() { return *m_Clock; };
-    inline InputManager& GetInputManager() { return *m_InputManager; };
-    inline Renderer& GetRenderer() { return *m_Renderer; };
+    inline Canvas &GetCanvas() { return *m_Canvas; };
+    inline Scene &GetScene() { return *m_Scene; };
+    inline Clock &GetClock() { return *m_Clock; };
+    inline InputManager &GetInputManager() { return *m_InputManager; };
+    inline Renderer &GetRenderer() { return *m_Renderer; };
 
-    inline ShaderManager& GetShaderManager() { return *m_ShaderManager; };
+    inline ShaderManager &GetShaderManager() { return *m_ShaderManager; };
 
-    inline ResourceManager<Texture>& GetTextureManager() { return *m_TextureManager; };
-    inline ResourceManager<Geometry>& GetGeometryManager() { return *m_GeometryManager; };
+    inline ResourceManager<Texture> &GetTextureManager() { return *m_TextureManager; };
+    inline ResourceManager<Geometry> &GetGeometryManager() { return *m_GeometryManager; };
 
   private:
-    static Engine* s_Instance;
+    static Engine *s_Instance;
 
     bool m_Running;
 
-    Canvas* m_Canvas;
-    Scene* m_Scene;
-    Clock* m_Clock;
-    InputManager* m_InputManager;
-    Renderer* m_Renderer;
+    Canvas *m_Canvas;
+    Scene *m_Scene;
+    Clock *m_Clock;
+    InputManager *m_InputManager;
+    Renderer *m_Renderer;
 
-    ShaderManager* m_ShaderManager;
+    ShaderManager *m_ShaderManager;
 
-    ResourceManager<Texture>* m_TextureManager;
-    ResourceManager<Geometry>* m_GeometryManager;
+    ResourceManager<Texture> *m_TextureManager;
+    ResourceManager<Geometry> *m_GeometryManager;
 
     void _SetupSystems();
     void _TeardownSystems();
   };
 
-  Engine* CreateEngine();
-	void DeleteEngine();
-}
+  Engine *CreateEngine();
+  void DeleteEngine();
+} // namespace DataGarden
 
 #endif

@@ -17,21 +17,21 @@
 
 namespace DataGarden
 {
-  Engine* Engine::s_Instance = nullptr;
+  Engine *Engine::s_Instance = nullptr;
 
-	Engine* CreateEngine()
-	{
+  Engine *CreateEngine()
+  {
     return new Engine();
-	}
+  }
 
-	void DeleteEngine()
-	{
+  void DeleteEngine()
+  {
     delete &Engine::Get();
-	}
+  }
 
-	Engine::Engine()
-	{
-		s_Instance = this;
+  Engine::Engine()
+  {
+    s_Instance = this;
 
     m_Running = false;
 
@@ -43,7 +43,7 @@ namespace DataGarden
     _TeardownSystems();
   }
 
-  void Engine::LoadScene(Scene* scene)
+  void Engine::LoadScene(Scene *scene)
   {
     if (m_Scene != nullptr)
     {
@@ -110,4 +110,4 @@ namespace DataGarden
     delete m_TextureManager;
     delete m_GeometryManager;
   }
-}
+} // namespace DataGarden

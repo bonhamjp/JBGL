@@ -14,17 +14,17 @@ namespace DataGarden
   class Mesh
   {
   public:
-    Mesh(Node* node, ResourceDescriptor* geometryDescriptor, Geometry*(*f)(ResourceDescriptor* descriptor));
+    Mesh(Node *node, ResourceDescriptor *geometryDescriptor, Geometry *(*f)(ResourceDescriptor *descriptor));
     ~Mesh();
 
-    inline Geometry* GetGeometry() { return m_Geometry; };
+    inline Geometry *GetGeometry() { return m_Geometry; };
 
     void PrepareForRender();
 
   private:
-    Node* m_Node;
-    Geometry* m_Geometry;
+    Node *m_Node;
+    Geometry *m_Geometry;
   };
-}
+} // namespace DataGarden
 
 #endif

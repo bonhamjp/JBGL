@@ -10,22 +10,24 @@
 namespace DataGarden
 {
   Geometry::Geometry()
-  {}
+  {
+  }
 
   Geometry::~Geometry()
-  {}
+  {
+  }
 
-  VertexArray& Geometry::GetVertexArray()
+  VertexArray &Geometry::GetVertexArray()
   {
     return *m_VertexArray;
   }
 
-  VertexBuffer& Geometry::GetVertexBuffer()
+  VertexBuffer &Geometry::GetVertexBuffer()
   {
     return *m_VertexBuffer;
   }
 
-  IndexBuffer& Geometry::GetIndexBuffer()
+  IndexBuffer &Geometry::GetIndexBuffer()
   {
     return *m_IndexBuffer;
   }
@@ -47,4 +49,4 @@ namespace DataGarden
   {
     // TODO: Cleanup textures
   }
-}
+} // namespace DataGarden

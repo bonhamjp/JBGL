@@ -11,7 +11,9 @@ namespace DataGarden
 {
   enum class LightType
   {
-    Point = 0, Directional, Spot
+    Point = 0,
+    Directional,
+    Spot
   };
 
   class Light
@@ -31,7 +33,7 @@ namespace DataGarden
     inline glm::vec4 GetAmbientColor() { return m_Color; };
     inline glm::vec4 GetDiffuseColor() { return m_Color; };
     inline glm::vec4 GetSpecularColor() { return m_Color; };
-    
+
   private:
     bool m_Active;
 
@@ -41,12 +43,12 @@ namespace DataGarden
     float m_DiffuseStrength;
     float m_SpecularStrength;
 
-		glm::vec4 m_AmbientColor;
-		glm::vec4 m_DiffuseColor;
-		glm::vec4 m_SpecularColor;
+    glm::vec4 m_AmbientColor;
+    glm::vec4 m_DiffuseColor;
+    glm::vec4 m_SpecularColor;
 
     void _CalculateValues();
   };
-}
+} // namespace DataGarden
 
 #endif

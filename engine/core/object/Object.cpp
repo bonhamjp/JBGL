@@ -5,8 +5,10 @@
 namespace DataGarden
 {
   Object::Object()
-  {}
+  {
+  }
 
   Object::~Object()
-  {}
-}
+  {
+  }
+} // namespace DataGarden

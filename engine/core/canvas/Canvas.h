@@ -5,16 +5,16 @@
 
 namespace DataGarden
 {
-	class Canvas
-	{
-	public:
+  class Canvas
+  {
+  public:
     Canvas();
-		~Canvas();
+    ~Canvas();
 
     inline float GetWidth() { return m_Width; };
     inline float GetHeight() { return m_Height; };
     inline float GetAspectRatio() { return m_AspectRatio; };
-    
+
     void SetDimensions(float width, float height);
 
   private:
@@ -25,6 +25,6 @@ namespace DataGarden
     void _SetAspectRatio();
   };
 
-}
+} // namespace DataGarden
 
 #endif

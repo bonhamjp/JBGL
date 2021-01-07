@@ -25,12 +25,12 @@ namespace DataGarden
   const std::string CUBE_DESCRIPTOR_NAME = "cube";
 
   struct FactoryBuilder
-	{
+  {
     ResourceDescriptor descriptor;
-    Geometry*(*f)(ResourceDescriptor* descriptor);
+    Geometry *(*f)(ResourceDescriptor *descriptor);
   };
 
-  TextureDataResourceDescriptor CreateTextureResourceDescriptor(std::string& textureName, TextureType textureType, glm::vec4 color)
+  TextureDataResourceDescriptor CreateTextureResourceDescriptor(std::string &textureName, TextureType textureType, glm::vec4 color)
   {
     TextureDataResourceDescriptor textureResourceDescriptor;
     textureResourceDescriptor.Name = textureName;
@@ -43,7 +43,7 @@ namespace DataGarden
     return textureResourceDescriptor;
   }
 
-  TextureDataResourceDescriptor CreateTextureResourceDescriptor(std::string& textureName, TextureType textureType, glm::vec4 colorOne, glm::vec4 colorTwo)
+  TextureDataResourceDescriptor CreateTextureResourceDescriptor(std::string &textureName, TextureType textureType, glm::vec4 colorOne, glm::vec4 colorTwo)
   {
     TextureDataResourceDescriptor textureResourceDescriptor;
     textureResourceDescriptor.Name = textureName;
@@ -56,7 +56,7 @@ namespace DataGarden
     return textureResourceDescriptor;
   }
 
-  TextureDataResourceDescriptor CreateTextureResourceDescriptor(std::string& textureName, TextureType textureType, glm::vec4 colorOne, glm::vec4 colorTwo, glm::vec4 colorThree, glm::vec4 colorFour)
+  TextureDataResourceDescriptor CreateTextureResourceDescriptor(std::string &textureName, TextureType textureType, glm::vec4 colorOne, glm::vec4 colorTwo, glm::vec4 colorThree, glm::vec4 colorFour)
   {
     TextureDataResourceDescriptor textureResourceDescriptor;
     textureResourceDescriptor.Name = textureName;
@@ -127,27 +127,27 @@ namespace DataGarden
     return textureDescriptors;
   }
 
-  Geometry* CreateCubeGeometry(ResourceDescriptor* descriptor)
+  Geometry *CreateCubeGeometry(ResourceDescriptor *descriptor)
   {
     return new CubeGeometry();
   }
 
-  Geometry* CreatePlaneGeometry(ResourceDescriptor* descriptor)
+  Geometry *CreatePlaneGeometry(ResourceDescriptor *descriptor)
   {
     return new PlaneGeometry();
   }
 
-  Geometry* CreateSphereGeometry(ResourceDescriptor* descriptor)
+  Geometry *CreateSphereGeometry(ResourceDescriptor *descriptor)
   {
     return new SphereGeometry(3);
   }
 
-  Geometry* CreatePyramidGeometry(ResourceDescriptor* descriptor)
+  Geometry *CreatePyramidGeometry(ResourceDescriptor *descriptor)
   {
     return new PyramidGeometry();
   }
 
-  Geometry* CreateCylinderGeometry(ResourceDescriptor* descriptor)
+  Geometry *CreateCylinderGeometry(ResourceDescriptor *descriptor)
   {
     return new CylinderGeometry(40);
   }
@@ -156,39 +156,40 @@ namespace DataGarden
   {
     FactoryBuilder factoryBuilder;
 
-    switch(factoryType) {
-      case FactoryType::Cube:
-        factoryBuilder.descriptor = { std::string("Cube") };
-        factoryBuilder.f = CreateCubeGeometry;
-        break;
+    switch (factoryType)
+    {
+    case FactoryType::Cube:
+      factoryBuilder.descriptor = {std::string("Cube")};
+      factoryBuilder.f = CreateCubeGeometry;
+      break;
 
-      case FactoryType::Plane:
-        factoryBuilder.descriptor = { std::string("Plane") };
-        factoryBuilder.f = CreatePlaneGeometry;
-        break;
+    case FactoryType::Plane:
+      factoryBuilder.descriptor = {std::string("Plane")};
+      factoryBuilder.f = CreatePlaneGeometry;
+      break;
 
-      case FactoryType::Sphere:
-        factoryBuilder.descriptor = { std::string("Sphere") };
-        factoryBuilder.f = CreateSphereGeometry;
-        break;
+    case FactoryType::Sphere:
+      factoryBuilder.descriptor = {std::string("Sphere")};
+      factoryBuilder.f = CreateSphereGeometry;
+      break;
 
-      case FactoryType::Pyramid:
-        factoryBuilder.descriptor = { std::string("Pyramid") };
-        factoryBuilder.f = CreatePyramidGeometry;
-        break;
+    case FactoryType::Pyramid:
+      factoryBuilder.descriptor = {std::string("Pyramid")};
+      factoryBuilder.f = CreatePyramidGeometry;
+      break;
 
-      case FactoryType::Cylinder:
-        factoryBuilder.descriptor = { std::string("Cylinder") };
-        factoryBuilder.f = CreateCylinderGeometry;
-        break;
+    case FactoryType::Cylinder:
+      factoryBuilder.descriptor = {std::string("Cylinder")};
+      factoryBuilder.f = CreateCylinderGeometry;
+      break;
     }
 
     return factoryBuilder;
   }
 
-	Node* Factory::Create(FactoryType factoryType, glm::vec3 position, glm::vec3 scale, glm::vec4 color)
-	{
-    Node* node = new Node();
+  Node *Factory::Create(FactoryType factoryType, glm::vec3 position, glm::vec3 scale, glm::vec4 color)
+  {
+    Node *node = new Node();
 
     // TODO: Use scale
     Transform transform = Transform(position, scale);
@@ -200,12 +201,12 @@ namespace DataGarden
     node->SetMaterial(new Material(node, TexturesForColor(color)));
 
     return node;
-	}
+  }
 
-  Node* Factory::Create(FactoryType factoryType, glm::vec3 position, glm::vec3 scale, glm::vec4 colorOne, glm::vec4 colorTwo)
+  Node *Factory::Create(FactoryType factoryType, glm::vec3 position, glm::vec3 scale, glm::vec4 colorOne, glm::vec4 colorTwo)
   {
-    Node* node = new Node();
+    Node *node = new Node();
 
     return node;
   }
-}
+} // namespace DataGarden

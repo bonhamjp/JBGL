@@ -56,7 +56,8 @@ namespace DataGarden
   }
 
   Transform::~Transform()
-  {}
+  {
+  }
 
   void Transform::UpdateModel(glm::mat4 translationMatrix)
   {
@@ -94,4 +95,4 @@ namespace DataGarden
 
     return glm::lookAt(m_Position, m_Position + front, up);
   }
-}
+} // namespace DataGarden

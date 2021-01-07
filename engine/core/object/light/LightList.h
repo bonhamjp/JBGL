@@ -12,7 +12,7 @@ namespace DataGarden
   struct LightListOfType
   {
     unsigned int LightCount;
-    Light** Lights;
+    Light **Lights;
   };
 
   class LightList
@@ -21,7 +21,7 @@ namespace DataGarden
     LightList();
     virtual ~LightList();
 
-    void PushLightOfType(LightType lightType, Light* light);
+    void PushLightOfType(LightType lightType, Light *light);
     void PopLightOfType(LightType lightType);
 
     void ClearLights();
@@ -31,19 +31,19 @@ namespace DataGarden
     LightListOfType GetLightListOfType(LightType lightType);
 
     void UpdateRendererLightUniforms();
-    
+
   private:
     unsigned int m_PointLightCount = 0;
     bool m_PointLightDirty;
-    Light* m_PointLights[MAX_LIGHT_COUNT];
+    Light *m_PointLights[MAX_LIGHT_COUNT];
 
     unsigned int m_DirectionalLightCount = 0;
     bool m_DirectionalLightDirty;
-    Light* m_DirectionalLights[MAX_LIGHT_COUNT];
+    Light *m_DirectionalLights[MAX_LIGHT_COUNT];
 
     unsigned int m_SpotLightCount = 0;
     bool m_SpotLightDirty;
-    Light* m_SpotLights[MAX_LIGHT_COUNT];
+    Light *m_SpotLights[MAX_LIGHT_COUNT];
 
     void _UpdateRendererPointLightUniforms();
     void _UpdateRendererDirectionalLightUniforms();
@@ -58,6 +58,6 @@ namespace DataGarden
     void _Setup();
     void _Teardown();
   };
-}
+} // namespace DataGarden
 
 #endif

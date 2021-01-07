@@ -7,15 +7,15 @@
 
 namespace DataGarden
 {
-	class Overlay3DShader : Shader
-	{
-	public:
-		Overlay3DShader(ShaderType shaderType);
-		~Overlay3DShader();
+  class Overlay3DShader : Shader
+  {
+  public:
+    Overlay3DShader(ShaderType shaderType);
+    ~Overlay3DShader();
 
   private:
     void _Setup();
-	};
-}
+  };
+} // namespace DataGarden
 
 #endif

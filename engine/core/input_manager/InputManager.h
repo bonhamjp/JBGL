@@ -5,7 +5,8 @@
 
 namespace DataGarden
 {
-  struct InputFrame {
+  struct InputFrame
+  {
     int mouseX;
     int mouseY;
     bool mouseLeftPressed;
@@ -21,11 +22,11 @@ namespace DataGarden
     bool ePressed;
   };
 
-	class InputManager
-	{
-	public:
+  class InputManager
+  {
+  public:
     InputManager();
-		~InputManager();
+    ~InputManager();
 
     void MouseMoved(int mouseX, int mouseY);
     int GetDeltaMouseX();
@@ -39,7 +40,7 @@ namespace DataGarden
 
     void Clear();
 
-		bool IsKeyPressed(int keyCode);
+    bool IsKeyPressed(int keyCode);
     bool IsMouseButtonPressed(int button);
     // std::pair<float, float> GetMousePosition();
     // float GetMouseX();
@@ -47,7 +48,7 @@ namespace DataGarden
     // float GetMouseY();
     // float GetMouseDeltaY();
 
-    inline InputFrame& GerInputFrame() { return m_CurrentFrame; }
+    inline InputFrame &GerInputFrame() { return m_CurrentFrame; }
 
   private:
     InputFrame m_PreviousFrame;
@@ -55,8 +56,7 @@ namespace DataGarden
 
     void _Setup();
     void _Teardown();
-
   };
-}
+} // namespace DataGarden
 
 #endif

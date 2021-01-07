@@ -25,7 +25,7 @@
 namespace DataGarden
 {
   Renderer::Renderer()
-	{
+  {
     // float* testVertices = new float[6];
     // testVertices[0] = 4.2f;
     // testVertices[1] = 4.3f;
@@ -44,7 +44,7 @@ namespace DataGarden
   }
 
   Renderer::~Renderer()
-	{
+  {
     _Teardown();
   }
 
@@ -54,7 +54,8 @@ namespace DataGarden
   }
 
   void Renderer::PostRender()
-  {}
+  {
+  }
 
   void Renderer::SetBufferColor(float r, float g, float b, float a)
   {
@@ -68,7 +69,7 @@ namespace DataGarden
 
   void Renderer::SetViewport()
   {
-    Canvas& canvas = Engine::Get().GetCanvas();
+    Canvas &canvas = Engine::Get().GetCanvas();
 
     webGLInterfaceSetViewport(0, 0, canvas.GetWidth(), canvas.GetHeight());
   }
@@ -115,7 +116,7 @@ namespace DataGarden
 
   void Renderer::ShaderSource(unsigned int programID, std::string shaderSourceString)
   {
-    char* shaderSource = (char*) shaderSourceString.c_str();
+    char *shaderSource = (char *)shaderSourceString.c_str();
     webGLInterfaceShaderSource(programID, shaderSource, strlen(shaderSource));
   }
 
@@ -144,7 +145,7 @@ namespace DataGarden
     webGLInterfaceBindVertexBuffer(bufferID);
   }
 
-  void Renderer::VertexBufferData(float* vertexData, unsigned int vertexLength)
+  void Renderer::VertexBufferData(float *vertexData, unsigned int vertexLength)
   {
     webGLInterfaceVertexBufferData(vertexData, vertexLength);
   }
@@ -159,7 +160,7 @@ namespace DataGarden
     webGLInterfaceBindIndexBuffer(bufferID);
   }
 
-  void Renderer::IndexBufferData(unsigned int* indexData, unsigned int indexLength)
+  void Renderer::IndexBufferData(unsigned int *indexData, unsigned int indexLength)
   {
     webGLInterfaceIndexBufferData(indexData, indexLength);
   }
@@ -229,7 +230,7 @@ namespace DataGarden
     webGLInterfaceBindTexture(textureID);
   }
 
-  void Renderer::TexImage2D(unsigned char* textureData, unsigned int textureDataLength)
+  void Renderer::TexImage2D(unsigned char *textureData, unsigned int textureDataLength)
   {
     webGLInterfaceTexImage2D(textureData, textureDataLength);
   }
@@ -240,21 +241,22 @@ namespace DataGarden
     unsigned int indicesPerType = 3;
     unsigned int indexMultiplier;
 
-    switch(textureType) {
-      case TextureType::Ambient:
-        indexMultiplier = 0;
-        break;
+    switch (textureType)
+    {
+    case TextureType::Ambient:
+      indexMultiplier = 0;
+      break;
 
-      case TextureType::Diffuse:
-        indexMultiplier = 1;
-        break;
+    case TextureType::Diffuse:
+      indexMultiplier = 1;
+      break;
 
-      case TextureType::Specular:
-        indexMultiplier = 2;
-        break;
+    case TextureType::Specular:
+      indexMultiplier = 2;
+      break;
 
-      default:
-        std::cout << "Texture type not supported..." << std::endl;
+    default:
+      std::cout << "Texture type not supported..." << std::endl;
     }
 
     unsigned int textureIndex = (indicesPerType * indexMultiplier) + index;
@@ -277,27 +279,27 @@ namespace DataGarden
     webGLInterfaceDeleteTexture(textureID);
   }
 
-  void Renderer::SetUniformMatrix4fv(unsigned int shaderID, const char* uniformName, glm::mat4 uniformMatrix)
+  void Renderer::SetUniformMatrix4fv(unsigned int shaderID, const char *uniformName, glm::mat4 uniformMatrix)
   {
     webGLInterfaceSetUniformMatrix4fv(shaderID, uniformName, strlen(uniformName), glm::value_ptr(uniformMatrix));
   }
 
-  void Renderer::SetUniform4fv(unsigned int shaderID, const char* uniformName, glm::vec4 uniformVector)
+  void Renderer::SetUniform4fv(unsigned int shaderID, const char *uniformName, glm::vec4 uniformVector)
   {
     webGLInterfaceSetUniform4fv(shaderID, uniformName, strlen(uniformName), glm::value_ptr(uniformVector));
   }
 
-  void Renderer::SetUniform3fv(unsigned int shaderID, const char* uniformName, glm::vec3 uniformVector)
+  void Renderer::SetUniform3fv(unsigned int shaderID, const char *uniformName, glm::vec3 uniformVector)
   {
     webGLInterfaceSetUniform3fv(shaderID, uniformName, strlen(uniformName), glm::value_ptr(uniformVector));
   }
 
-  void Renderer::SetUniform1f(unsigned int shaderID, const char* uniformName, float uniformFloat)
+  void Renderer::SetUniform1f(unsigned int shaderID, const char *uniformName, float uniformFloat)
   {
     webGLInterfaceSetUniform1f(shaderID, uniformName, strlen(uniformName), uniformFloat);
   }
 
-  void Renderer::SetUniform1i(unsigned int shaderID, const char* uniformName, int uniformInteger)
+  void Renderer::SetUniform1i(unsigned int shaderID, const char *uniformName, int uniformInteger)
   {
     webGLInterfaceSetUniform1i(shaderID, uniformName, strlen(uniformName), uniformInteger);
   }
@@ -332,4 +334,4 @@ namespace DataGarden
   {
     webGLInterfaceTeardownContext();
   }
-}
+} // namespace DataGarden

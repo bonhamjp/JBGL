@@ -8,8 +8,7 @@
 
 namespace DataGarden
 {
-  Camera::Camera(float viewAngle, float nearClipping, float farClipping) :
-  Object()
+  Camera::Camera(float viewAngle, float nearClipping, float farClipping) : Object()
   {
     m_ViewAngle = viewAngle;
     m_NearClipping = nearClipping;
@@ -17,7 +16,8 @@ namespace DataGarden
   }
 
   Camera::~Camera()
-  {}
+  {
+  }
 
   void Camera::SetViewAngle(float viewAngle)
   {
@@ -41,10 +41,12 @@ namespace DataGarden
   }
 
   void Camera::SetupProjection()
-  {}
+  {
+  }
 
   void Camera::Update()
-  {}
+  {
+  }
 
   glm::mat4 Camera::GetViewProjection()
   {
@@ -52,5 +54,6 @@ namespace DataGarden
   }
 
   void Camera::SetCameraUniforms()
-  {}
-}
+  {
+  }
+} // namespace DataGarden

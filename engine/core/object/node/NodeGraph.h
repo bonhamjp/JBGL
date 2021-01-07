@@ -22,14 +22,14 @@ namespace DataGarden
     inline bool UpdatedInFrame() { return m_UpdatedInFrame; };
 
     // TODO: Add a way to lookup specific entities
-    inline Node& GetRootNode() { return *m_RootNode; };
-    void PushNode(Node* newNode); // takes ownership
+    inline Node &GetRootNode() { return *m_RootNode; };
+    void PushNode(Node *newNode); // takes ownership
 
   private:
     bool m_UpdatedInFrame;
 
-    Node* m_RootNode;              
+    Node *m_RootNode;
   };
-}
+} // namespace DataGarden
 
 #endif

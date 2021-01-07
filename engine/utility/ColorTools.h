@@ -7,7 +7,7 @@
 
 namespace DataGarden
 {
-	glm::vec4 ColorFromHex(int hexValue);
+  glm::vec4 ColorFromHex(int hexValue);
 }
 
 #endif

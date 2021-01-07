@@ -49,7 +49,7 @@ namespace DataGarden
 
   void Scene::_Update3DScene()
   {
-    Visualization3DShader* visualization3DShader = Engine::Get().GetShaderManager().GetVisualization3DShader();
+    Visualization3DShader *visualization3DShader = Engine::Get().GetShaderManager().GetVisualization3DShader();
 
     visualization3DShader->Bind();
     m_3DCamera->Update();

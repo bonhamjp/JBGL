@@ -48,8 +48,7 @@ namespace DataGarden
     float m_Roll;
 
     glm::mat4 m_Model;
-
   };
-}
+} // namespace DataGarden
 
 #endif

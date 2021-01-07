@@ -20,10 +20,10 @@ extern "C"
 {
   void onCanvasDimensionChange(float width, float height)
   {
-    DataGarden::Canvas& canvas = DataGarden::Engine::Get().GetCanvas();
+    DataGarden::Canvas &canvas = DataGarden::Engine::Get().GetCanvas();
     canvas.SetDimensions(width, height);
 
-    DataGarden::Canvas& canvas2 = DataGarden::Engine::Get().GetCanvas();
+    DataGarden::Canvas &canvas2 = DataGarden::Engine::Get().GetCanvas();
 
     width = canvas2.GetWidth();
     height = canvas2.GetHeight();
@@ -38,7 +38,7 @@ extern "C"
       DataGarden::Engine::Get().GetScene().Get2DCamera()->SetupProjection();
     }
 
-    DataGarden::Renderer& renderer = DataGarden::Engine::Get().GetRenderer();
+    DataGarden::Renderer &renderer = DataGarden::Engine::Get().GetRenderer();
     renderer.SetViewport();
   }
 }

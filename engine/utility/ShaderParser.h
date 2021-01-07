@@ -7,11 +7,11 @@
 
 namespace DataGarden
 {
-	enum class ShaderSourceType
-	{
-		VERTEX = 0,
-		FRAGMENT = 1
-	};
+  enum class ShaderSourceType
+  {
+    VERTEX = 0,
+    FRAGMENT = 1
+  };
 
   enum class ShaderType
   {
@@ -22,21 +22,21 @@ namespace DataGarden
     UI
   };
 
-	struct ShaderSource
-	{
-		std::string vertexSource;
-		std::string fragmentSource;
-	};
+  struct ShaderSource
+  {
+    std::string vertexSource;
+    std::string fragmentSource;
+  };
 
-	class ShaderParser
-	{
-	public:
-		static ShaderSource RetrieveShaders(ShaderType shaderType);
+  class ShaderParser
+  {
+  public:
+    static ShaderSource RetrieveShaders(ShaderType shaderType);
 
   private:
     static std::string _RetrieveVertexShader(ShaderType shaderType);
     static std::string _RetrieveFragmentShader(ShaderType shaderType);
-	};
-}
+  };
+} // namespace DataGarden
 
 #endif

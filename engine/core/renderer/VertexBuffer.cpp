@@ -7,21 +7,21 @@
 
 namespace DataGarden
 {
-  VertexBuffer::VertexBuffer(float* vertices, uint32_t size)
+  VertexBuffer::VertexBuffer(float *vertices, uint32_t size)
   {
-		Renderer& renderer = Engine::Get().GetRenderer();
+    Renderer &renderer = Engine::Get().GetRenderer();
 
-		m_ID = renderer.CreateBuffer();
+    m_ID = renderer.CreateBuffer();
 
-		renderer.BindVertexBuffer(m_ID);
-		renderer.VertexBufferData(vertices, size);
-		renderer.UnbindVertexBuffer();
+    renderer.BindVertexBuffer(m_ID);
+    renderer.VertexBufferData(vertices, size);
+    renderer.UnbindVertexBuffer();
   }
 
-	VertexBuffer::~VertexBuffer()
-	{
-		Engine::Get().GetRenderer().DeleteBuffer(m_ID);
-	}
+  VertexBuffer::~VertexBuffer()
+  {
+    Engine::Get().GetRenderer().DeleteBuffer(m_ID);
+  }
 
   void VertexBuffer::SetLayout(BufferLayout layout)
   {
@@ -33,13 +33,13 @@ namespace DataGarden
     return m_Layout;
   }
 
-	void VertexBuffer::Bind()
-	{
-		Engine::Get().GetRenderer().BindVertexBuffer(m_ID);
-	}
+  void VertexBuffer::Bind()
+  {
+    Engine::Get().GetRenderer().BindVertexBuffer(m_ID);
+  }
 
-	void VertexBuffer::Unbind()
-	{
-		Engine::Get().GetRenderer().UnbindVertexBuffer();
-	}
-}
+  void VertexBuffer::Unbind()
+  {
+    Engine::Get().GetRenderer().UnbindVertexBuffer();
+  }
+} // namespace DataGarden

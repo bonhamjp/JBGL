@@ -10,19 +10,19 @@
 
 #include "library/scenes/TestScene.h"
 
-DataGarden::Engine* engine;
+DataGarden::Engine *engine;
 
 void mainLoop()
 {
-  engine->Update();  
+  engine->Update();
 }
 
-int main(int argc, char** argv) 
+int main(int argc, char **argv)
 {
   DataGarden::CreateEngine();
   engine = &DataGarden::Engine::Get();
 
-  DataGarden::TestScene* testScene = new DataGarden::TestScene();
+  DataGarden::TestScene *testScene = new DataGarden::TestScene();
   engine->LoadScene(testScene);
 
   engine->Start();

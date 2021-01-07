@@ -14,17 +14,19 @@ namespace DataGarden
     std::string Name;
   };
 
-  template<typename T>
+  template <typename T>
   class ResourceManager
   {
   public:
     ResourceManager()
-    {}
+    {
+    }
 
     ~ResourceManager()
-    {}
+    {
+    }
 
-    bool HasResource(std::string& resourceName)
+    bool HasResource(std::string &resourceName)
     {
       if (m_Resources.find(resourceName) != m_Resources.end())
       {
@@ -36,12 +38,12 @@ namespace DataGarden
       }
     }
 
-    int ResourceCount(std::string& resourceName)
+    int ResourceCount(std::string &resourceName)
     {
       return m_Resources.find(resourceName)->second.Count;
     }
 
-    T* AddResource(ResourceDescriptor* descriptor, T*(*f)(ResourceDescriptor* descriptor))
+    T *AddResource(ResourceDescriptor *descriptor, T *(*f)(ResourceDescriptor *descriptor))
     {
       if (m_Resources.find(descriptor->Name) != m_Resources.end())
       {
@@ -49,7 +51,7 @@ namespace DataGarden
       }
       else
       {
-        T* newResource = (*f)(descriptor);
+        T *newResource = (*f)(descriptor);
 
         m_Resources[descriptor->Name] = newResource;
 
@@ -58,8 +60,8 @@ namespace DataGarden
     }
 
   private:
-    std::map<std::string, T*> m_Resources;
+    std::map<std::string, T *> m_Resources;
   };
-}
+} // namespace DataGarden
 
 #endif

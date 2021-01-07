@@ -7,15 +7,15 @@
 
 namespace DataGarden
 {
-	class CylinderGeometry : public Geometry
-	{
-	public:
-		CylinderGeometry(unsigned int subdivisions);
-		virtual ~CylinderGeometry();
+  class CylinderGeometry : public Geometry
+  {
+  public:
+    CylinderGeometry(unsigned int subdivisions);
+    virtual ~CylinderGeometry();
 
     virtual BufferLayout GetLayout() override;
 
-	private:
+  private:
     const unsigned int m_BaseVertexCount = 12;
     const unsigned int m_VertexSubdivisionMultiplier = 4;
 
@@ -24,9 +24,9 @@ namespace DataGarden
 
     unsigned int m_Subdivisions;
 
-		void _CreateBufferObject();
-		void _DestroyBufferObject();
-	};
-}
+    void _CreateBufferObject();
+    void _DestroyBufferObject();
+  };
+} // namespace DataGarden
 
 #endif

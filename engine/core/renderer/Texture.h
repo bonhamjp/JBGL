@@ -11,7 +11,18 @@ namespace DataGarden
 {
   enum class TextureType
   {
-    Unknown = 0, Ambient, Diffuse, Displacement, Emissive, Height, LightMap, Normals, Opacity, Reflection, Shinines, Specular
+    Unknown = 0,
+    Ambient,
+    Diffuse,
+    Displacement,
+    Emissive,
+    Height,
+    LightMap,
+    Normals,
+    Opacity,
+    Reflection,
+    Shinines,
+    Specular
   };
 
   struct TextureResourceDescriptor : ResourceDescriptor
@@ -37,7 +48,7 @@ namespace DataGarden
   class Texture
   {
   public:
-    Texture(TextureDataResourceDescriptor* textureDataResourceDescriptor);
+    Texture(TextureDataResourceDescriptor *textureDataResourceDescriptor);
     ~Texture();
 
     void Bind();
@@ -51,10 +62,10 @@ namespace DataGarden
     TextureType m_Type;
     std::string m_FilePath;
 
-    void _GenerateTextureData(TextureDataResourceDescriptor* textureDataResourceDescriptor);
+    void _GenerateTextureData(TextureDataResourceDescriptor *textureDataResourceDescriptor);
   };
 
-  Texture* CreateTextureFromData(ResourceDescriptor* descriptor);
-}
+  Texture *CreateTextureFromData(ResourceDescriptor *descriptor);
+} // namespace DataGarden
 
 #endif

@@ -40,6 +40,6 @@ namespace DataGarden
 
     glm::mat4 m_Projection;
   };
-}
+} // namespace DataGarden
 
 #endif

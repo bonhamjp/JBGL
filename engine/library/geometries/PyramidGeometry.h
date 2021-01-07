@@ -7,19 +7,18 @@
 
 namespace DataGarden
 {
-	class PyramidGeometry : public Geometry
-	{
-	public:
-		PyramidGeometry();
-		virtual ~PyramidGeometry();
+  class PyramidGeometry : public Geometry
+  {
+  public:
+    PyramidGeometry();
+    virtual ~PyramidGeometry();
 
     virtual BufferLayout GetLayout() override;
 
-	private:
-		void _CreateBufferObject();
-		void _DestroyBufferObject();
-
-	};
-}
+  private:
+    void _CreateBufferObject();
+    void _DestroyBufferObject();
+  };
+} // namespace DataGarden
 
 #endif

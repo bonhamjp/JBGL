@@ -36,12 +36,13 @@ namespace DataGarden
     m_DiffuseStrength = diffuseStrength;
     m_SpecularStrength = specularStrength;
   }
-  
+
   Light::~Light()
-  {}
+  {
+  }
 
   void Light::Destroy()
   {
     m_Active = false;
   }
-}
+} // namespace DataGarden

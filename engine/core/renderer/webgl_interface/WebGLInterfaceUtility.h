@@ -4,7 +4,7 @@
 #include <emscripten.h>
 
 // TODO: Make this more efficient
-EM_JS(float*, webGLInterfaceGetFloatData, (float* floatData, unsigned int floatLength), {
+EM_JS(float *, webGLInterfaceGetFloatData, (float *floatData, unsigned int floatLength), {
   const bytesPerFloat = Float32Array.BYTES_PER_ELEMENT;
   const rawData = new Float32Array(Module.HEAPU8.buffer, floatData, floatLength);
 
@@ -12,7 +12,7 @@ EM_JS(float*, webGLInterfaceGetFloatData, (float* floatData, unsigned int floatL
 });
 
 // TODO: Make this more efficient
-EM_JS(float*, webGLInterfaceGetUnsignedIntData, (unsigned int* unsignedIntData, unsigned int unsignedIntLength), {
+EM_JS(float *, webGLInterfaceGetUnsignedIntData, (unsigned int *unsignedIntData, unsigned int unsignedIntLength), {
   const bytesPerUnsignedInt = Uint16Array.BYTES_PER_ELEMENT;
   const rawData = new Uint32Array(Module.HEAPU8.buffer, unsignedIntData, unsignedIntLength);
 
@@ -20,7 +20,7 @@ EM_JS(float*, webGLInterfaceGetUnsignedIntData, (unsigned int* unsignedIntData, 
 });
 
 // TODO: Make this more efficient
-EM_JS(float*, webGLInterfaceGetCharData, (const char* charData, unsigned int charLength), {
+EM_JS(float *, webGLInterfaceGetCharData, (const char *charData, unsigned int charLength), {
   const bytesPerUnsignedInt = Uint8Array.BYTES_PER_ELEMENT;
   const rawData = new Uint8Array(Module.HEAPU8.buffer, charData, charLength);
 
@@ -28,12 +28,13 @@ EM_JS(float*, webGLInterfaceGetCharData, (const char* charData, unsigned int cha
 });
 
 // TODO: Make this more efficient
-EM_JS(char*, webGLInterfaceGetString, (const char* charData, unsigned int charLength), {
+EM_JS(char *, webGLInterfaceGetString, (const char *charData, unsigned int charLength), {
   const bytesPerChar = Uint8Array.BYTES_PER_ELEMENT;
   const rawData = new Uint8Array(Module.HEAPU8.buffer, charData, charLength);
 
   var outputString = "";
-  for (i = 0; i < charLength; i++) {
+  for (i = 0; i < charLength; i++)
+  {
     outputString += String.fromCharCode(rawData[i]);
   }
 

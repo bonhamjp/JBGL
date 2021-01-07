@@ -10,7 +10,7 @@
 
 namespace DataGarden
 {
-  void copyInputFrame(InputFrame& inputFrameA, InputFrame& inputFrameB)
+  void copyInputFrame(InputFrame &inputFrameA, InputFrame &inputFrameB)
   {
     inputFrameA.mouseX = inputFrameB.mouseX;
     inputFrameA.mouseY = inputFrameB.mouseY;
@@ -24,7 +24,7 @@ namespace DataGarden
     inputFrameA.spaceBarPressed = inputFrameB.spaceBarPressed;
   }
 
-  void clearInputFrame(InputFrame& inputFrame)
+  void clearInputFrame(InputFrame &inputFrame)
   {
     inputFrame.mouseX = 0;
     inputFrame.mouseY = 0;
@@ -39,7 +39,7 @@ namespace DataGarden
   }
 
   InputManager::InputManager()
-	{
+  {
     _Setup();
 
     clearInputFrame(m_PreviousFrame);
@@ -69,48 +69,50 @@ namespace DataGarden
 
   std::pair<int, int> InputManager::GetDeltaMouseCoords()
   {
-    return { GetDeltaMouseX(), GetDeltaMouseY() };
+    return {GetDeltaMouseX(), GetDeltaMouseY()};
   }
 
   void InputManager::MousePressed(int clickType)
   {
     // TODO: Make enums for clickType
-    switch(clickType) {
-      case 1:
-        m_CurrentFrame.mouseLeftPressed = true;
-        break;
+    switch (clickType)
+    {
+    case 1:
+      m_CurrentFrame.mouseLeftPressed = true;
+      break;
 
-      case 2:
-        m_CurrentFrame.mouseRightPressed = true;
-        break;
+    case 2:
+      m_CurrentFrame.mouseRightPressed = true;
+      break;
 
-      case 3:
-        m_CurrentFrame.mouseMiddlePressed = true;
-        break;
+    case 3:
+      m_CurrentFrame.mouseMiddlePressed = true;
+      break;
     }
   }
 
   void InputManager::MouseUp(int clickType)
   {
     // TODO: Make enums for clickType
-    switch(clickType) {
-      case 1:
-        m_CurrentFrame.mouseLeftPressed = false;
-        break;
+    switch (clickType)
+    {
+    case 1:
+      m_CurrentFrame.mouseLeftPressed = false;
+      break;
 
-      case 2:
-        m_CurrentFrame.mouseRightPressed = false;
-        break;
+    case 2:
+      m_CurrentFrame.mouseRightPressed = false;
+      break;
 
-      case 3:
-        m_CurrentFrame.mouseMiddlePressed = false;
-        break;
+    case 3:
+      m_CurrentFrame.mouseMiddlePressed = false;
+      break;
     }
   }
 
   void InputManager::KeyDown(int keyCode)
   {
-    Renderer& renderer = Engine::Get().GetRenderer();
+    Renderer &renderer = Engine::Get().GetRenderer();
 
     // float r = ((float) (rand() % 255)) / 255.0f;
     // float g = ((float) (rand() % 255)) / 255.0f;
@@ -119,67 +121,69 @@ namespace DataGarden
     // renderer.SetBufferColor(r, g, b, 1);
     // renderer.ClearBuffer();
 
-    switch(keyCode) {
-      case KEY_UP_CODE:
-        m_CurrentFrame.upPressed = true;
-        break;
+    switch (keyCode)
+    {
+    case KEY_UP_CODE:
+      m_CurrentFrame.upPressed = true;
+      break;
 
-      case KEY_DOWN_CODE:
-        m_CurrentFrame.downPressed = true;
-        break;
+    case KEY_DOWN_CODE:
+      m_CurrentFrame.downPressed = true;
+      break;
 
-      case KEY_LEFT_CODE:
-        m_CurrentFrame.leftPressed = true;
-        break;
+    case KEY_LEFT_CODE:
+      m_CurrentFrame.leftPressed = true;
+      break;
 
-      case KEY_RIGHT_CODE:
-        m_CurrentFrame.rightPressed = true;
-        break;
+    case KEY_RIGHT_CODE:
+      m_CurrentFrame.rightPressed = true;
+      break;
 
-      case KEY_SPACE_BAR_CODE:
-        m_CurrentFrame.spaceBarPressed = true;
-        break;
+    case KEY_SPACE_BAR_CODE:
+      m_CurrentFrame.spaceBarPressed = true;
+      break;
 
-      case KEY_Q_CODE:
-        m_CurrentFrame.qPressed = true;
-        break;
+    case KEY_Q_CODE:
+      m_CurrentFrame.qPressed = true;
+      break;
 
-      case KEY_E_CODE:
-        m_CurrentFrame.ePressed = true;
-        break;
+    case KEY_E_CODE:
+      m_CurrentFrame.ePressed = true;
+      break;
     }
   }
 
   void InputManager::KeyUp(int keyCode)
   {
-    switch(keyCode) {
-      case KEY_UP_CODE:
-        m_CurrentFrame.upPressed = false;
-        break;
+    switch (keyCode)
+    {
+    case KEY_UP_CODE:
+      m_CurrentFrame.upPressed = false;
+      break;
 
-      case KEY_DOWN_CODE:
-        m_CurrentFrame.downPressed = false;
-        break;
+    case KEY_DOWN_CODE:
+      m_CurrentFrame.downPressed = false;
+      break;
 
-      case KEY_LEFT_CODE:
-        m_CurrentFrame.leftPressed = false;
-        break;
+    case KEY_LEFT_CODE:
+      m_CurrentFrame.leftPressed = false;
+      break;
 
-      case KEY_RIGHT_CODE:
-        m_CurrentFrame.rightPressed = false;
-        break;
+    case KEY_RIGHT_CODE:
+      m_CurrentFrame.rightPressed = false;
+      break;
 
-      case KEY_SPACE_BAR_CODE:
-        m_CurrentFrame.spaceBarPressed = false;
-        break;
+    case KEY_SPACE_BAR_CODE:
+      m_CurrentFrame.spaceBarPressed = false;
+      break;
 
-      case KEY_Q_CODE:
-        m_CurrentFrame.qPressed = false;
-        break;
+    case KEY_Q_CODE:
+      m_CurrentFrame.qPressed = false;
+      break;
 
-      case KEY_E_CODE:
-        m_CurrentFrame.ePressed = false;
-        break;
+    case KEY_E_CODE:
+      m_CurrentFrame.ePressed = false;
+      break;
     }
   }
 
@@ -190,34 +194,35 @@ namespace DataGarden
 
   bool InputManager::IsKeyPressed(int keyCode)
   {
-    switch(keyCode) {
-      case KEY_UP_CODE:
-        return m_CurrentFrame.upPressed;
-        break;
+    switch (keyCode)
+    {
+    case KEY_UP_CODE:
+      return m_CurrentFrame.upPressed;
+      break;
 
-      case KEY_DOWN_CODE:
-        return m_CurrentFrame.downPressed;
-        break;
+    case KEY_DOWN_CODE:
+      return m_CurrentFrame.downPressed;
+      break;
 
-      case KEY_LEFT_CODE:
-        return m_CurrentFrame.leftPressed;
-        break;
+    case KEY_LEFT_CODE:
+      return m_CurrentFrame.leftPressed;
+      break;
 
-      case KEY_RIGHT_CODE:
-        return m_CurrentFrame.rightPressed;
-        break;
+    case KEY_RIGHT_CODE:
+      return m_CurrentFrame.rightPressed;
+      break;
 
-      case KEY_SPACE_BAR_CODE:
-        return m_CurrentFrame.spaceBarPressed;
-        break;
+    case KEY_SPACE_BAR_CODE:
+      return m_CurrentFrame.spaceBarPressed;
+      break;
 
-      case KEY_Q_CODE:
-        return m_CurrentFrame.qPressed;
-        break;
+    case KEY_Q_CODE:
+      return m_CurrentFrame.qPressed;
+      break;
 
-      case KEY_E_CODE:
-        return m_CurrentFrame.ePressed;
-        break;
+    case KEY_E_CODE:
+      return m_CurrentFrame.ePressed;
+      break;
     }
 
     return false;
@@ -237,4 +242,4 @@ namespace DataGarden
   {
     inputInterfaceTeardown();
   }
-}
+} // namespace DataGarden

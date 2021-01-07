@@ -10,7 +10,7 @@
 
 namespace DataGarden
 {
-  Material::Material(Node* node, std::vector<TextureDataResourceDescriptor> textureDescriptors)
+  Material::Material(Node *node, std::vector<TextureDataResourceDescriptor> textureDescriptors)
   {
     m_Shininess = 32.0f;
 
@@ -21,7 +21,8 @@ namespace DataGarden
   }
 
   Material::~Material()
-  {}
+  {
+  }
 
   bool Material::HasTexture(TextureType textureType, std::string texturePath)
   {
@@ -30,9 +31,10 @@ namespace DataGarden
       return false;
     }
 
-    std::vector<Texture*> texturesOfType = m_Textures.find(textureType)->second;
+    std::vector<Texture *> texturesOfType = m_Textures.find(textureType)->second;
 
-    for (auto& texture : texturesOfType) {
+    for (auto &texture : texturesOfType)
+    {
       if (texture->GetPath().compare(texturePath) == 0)
       {
         return true;
@@ -44,7 +46,7 @@ namespace DataGarden
 
   void Material::SetMaterialUniforms()
   {
-    Visualization3DShader* visualization3DShader = Engine::Get().GetShaderManager().GetVisualization3DShader();
+    Visualization3DShader *visualization3DShader = Engine::Get().GetShaderManager().GetVisualization3DShader();
 
     visualization3DShader->SetMaterialShininessUniform(m_Shininess);
 
@@ -73,12 +75,12 @@ namespace DataGarden
 
   void Material::_CreateTextureFromData(TextureDataResourceDescriptor textureResourceDescriptor)
   {
-    Texture* texture = Engine::Get().GetTextureManager().AddResource((ResourceDescriptor*) &textureResourceDescriptor, CreateTextureFromData);
+    Texture *texture = Engine::Get().GetTextureManager().AddResource((ResourceDescriptor *)&textureResourceDescriptor, CreateTextureFromData);
 
     TextureType textureType = textureResourceDescriptor.Type;
 
     // Add list for texture type, if not created yet
-    std::vector<Texture*> textures;
+    std::vector<Texture *> textures;
     if (m_Textures.count(textureType) > 0)
     {
       textures = m_Textures[textureType];
@@ -88,4 +90,4 @@ namespace DataGarden
 
     m_Textures[textureType] = textures;
   }
-}
+} // namespace DataGarden

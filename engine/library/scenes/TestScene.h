@@ -7,8 +7,8 @@
 
 namespace DataGarden
 {
-class TestScene : public Scene
-{
+  class TestScene : public Scene
+  {
   public:
     TestScene();
     virtual ~TestScene();
@@ -20,8 +20,7 @@ class TestScene : public Scene
     virtual void PostRender() override;
 
   protected:
-
   };
-}
+} // namespace DataGarden
 
 #endif

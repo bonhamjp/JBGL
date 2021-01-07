@@ -7,10 +7,10 @@
 
 EM_JS(unsigned int, webGLInterfaceCreateProgram, (), {
   const programID = document.webGLModule.programCount;
-  
+
   document.webGLModule.programs.push(document.webGLModule.context.createProgram());
   document.webGLModule.programCount++;
-  
+
   return programID;
 });
 

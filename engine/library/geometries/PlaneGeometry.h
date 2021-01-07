@@ -7,19 +7,18 @@
 
 namespace DataGarden
 {
-	class PlaneGeometry : public Geometry
-	{
-	public:
-		PlaneGeometry();
-		virtual ~PlaneGeometry();
+  class PlaneGeometry : public Geometry
+  {
+  public:
+    PlaneGeometry();
+    virtual ~PlaneGeometry();
 
     virtual BufferLayout GetLayout() override;
 
-	private:
-		void _CreateBufferObject();
-		void _DestroyBufferObject();
-
-	};
-}
+  private:
+    void _CreateBufferObject();
+    void _DestroyBufferObject();
+  };
+} // namespace DataGarden
 
 #endif

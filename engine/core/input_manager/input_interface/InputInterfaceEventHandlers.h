@@ -31,10 +31,12 @@ extern "C"
   }
 
   void onMouseEnter()
-  {}
+  {
+  }
 
   void onMouseLeave()
-  {}
+  {
+  }
 
   void onMouseMove(int mouseX, int mouseY)
   {

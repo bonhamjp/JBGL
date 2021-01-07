@@ -6,29 +6,29 @@
 
 namespace DataGarden
 {
-  IndexBuffer::IndexBuffer(uint32_t* indices, uint32_t size)
+  IndexBuffer::IndexBuffer(uint32_t *indices, uint32_t size)
   {
-    Renderer& renderer = Engine::Get().GetRenderer();
+    Renderer &renderer = Engine::Get().GetRenderer();
 
-		m_ID = renderer.CreateBuffer();
+    m_ID = renderer.CreateBuffer();
 
-		renderer.BindIndexBuffer(m_ID);
-		renderer.IndexBufferData(indices, size);
-		renderer.UnbindIndexBuffer();
+    renderer.BindIndexBuffer(m_ID);
+    renderer.IndexBufferData(indices, size);
+    renderer.UnbindIndexBuffer();
   }
 
-	IndexBuffer::~IndexBuffer()
-	{
-		Engine::Get().GetRenderer().DeleteBuffer(m_ID);
-	}
+  IndexBuffer::~IndexBuffer()
+  {
+    Engine::Get().GetRenderer().DeleteBuffer(m_ID);
+  }
 
-	void IndexBuffer::Bind()
-	{
-		Engine::Get().GetRenderer().BindIndexBuffer(m_ID);
-	}
+  void IndexBuffer::Bind()
+  {
+    Engine::Get().GetRenderer().BindIndexBuffer(m_ID);
+  }
 
-	void IndexBuffer::Unbind()
-	{
-		Engine::Get().GetRenderer().UnbindVertexBuffer();
-	}
-}
+  void IndexBuffer::Unbind()
+  {
+    Engine::Get().GetRenderer().UnbindVertexBuffer();
+  }
+} // namespace DataGarden

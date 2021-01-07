@@ -10,8 +10,9 @@ namespace DataGarden
   }
 
   NodeGraph::~NodeGraph()
-  {}
-  
+  {
+  }
+
   void NodeGraph::Update()
   {
     m_UpdatedInFrame = true;
@@ -19,7 +20,7 @@ namespace DataGarden
     // root node at origin
     m_RootNode->Update(glm::mat4(1.0f));
   }
-  
+
   void NodeGraph::Render()
   {
     m_RootNode->Render();
@@ -30,8 +31,8 @@ namespace DataGarden
     m_UpdatedInFrame = false;
   }
 
-  void NodeGraph::PushNode(Node* newNode)
+  void NodeGraph::PushNode(Node *newNode)
   {
     m_RootNode->PushChild(newNode);
   }
-}
+} // namespace DataGarden

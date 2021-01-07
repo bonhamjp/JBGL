@@ -7,8 +7,8 @@
 
 namespace DataGarden
 {
-	CylinderGeometry::CylinderGeometry(unsigned int subdivisions)
-	{
+  CylinderGeometry::CylinderGeometry(unsigned int subdivisions)
+  {
     m_Subdivisions = subdivisions;
 
     m_VertexCount = (m_Subdivisions + 1) * 2;
@@ -21,30 +21,28 @@ namespace DataGarden
     _CreateBufferObject();
 
     _Initialize();
-	}
+  }
 
-	CylinderGeometry::~CylinderGeometry()
-	{
-		_DestroyBufferObject();
-	}
+  CylinderGeometry::~CylinderGeometry()
+  {
+    _DestroyBufferObject();
+  }
 
   BufferLayout CylinderGeometry::GetLayout()
-	{
-		return BufferLayout({
-			{ BufferDataType::Float3, "v_Position" },
-			{ BufferDataType::Float3, "v_Normal"},
-      { BufferDataType::Float2, "v_TextureCoordinates" }
-		});
-	}
+  {
+    return BufferLayout({{BufferDataType::Float3, "v_Position"},
+                         {BufferDataType::Float3, "v_Normal"},
+                         {BufferDataType::Float2, "v_TextureCoordinates"}});
+  }
 
-	void CylinderGeometry::_CreateBufferObject()
-	{
+  void CylinderGeometry::_CreateBufferObject()
+  {
     // TODO: Use triangle fans, for single primitive caps
 
     glm::vec3 topCenter = glm::vec3(0.0f, 0.5f, 0.0f);
 
     // top and bottom caps, without y set
-    float* capOuterPoints = new float[3 * m_Subdivisions];
+    float *capOuterPoints = new float[3 * m_Subdivisions];
 
     // start on positive x axis
     glm::vec3 currentPosition = glm::vec3(0.5f, 0.0f, 0.0f);
@@ -153,11 +151,11 @@ namespace DataGarden
         m_GeometryBuffer.Indices[currentIndexBottom++] = i + offsetFromTop + 1;
       }
     }
-	}
+  }
 
-	void CylinderGeometry::_DestroyBufferObject()
-	{
-		delete[] m_GeometryBuffer.Vertices;
-		delete[] m_GeometryBuffer.Indices;
-	}
-}
+  void CylinderGeometry::_DestroyBufferObject()
+  {
+    delete[] m_GeometryBuffer.Vertices;
+    delete[] m_GeometryBuffer.Indices;
+  }
+} // namespace DataGarden

@@ -11,22 +11,22 @@ namespace DataGarden
 {
   static unsigned int u_ID = 0;
 
-  template<typename T>
+  template <typename T>
   using Scope = std::unique_ptr<T>;
 
-  template<typename T>
+  template <typename T>
   using Ref = std::shared_ptr<T>;
 
-  template<typename T>
+  template <typename T>
   using Weak = std::weak_ptr<T>;
 
-  template<typename T>
+  template <typename T>
   unsigned int ClassID()
   {
     static unsigned int classID = u_ID++;
 
     return classID;
   }
-}
+} // namespace DataGarden
 
 #endif

@@ -1,15 +1,15 @@
 #include "Component.h"
 
-#include "core/object/node/Node.h" 
+#include "core/object/node/Node.h"
 
 namespace DataGarden
 {
-  Component::Component(Node* node)
+  Component::Component(Node *node)
   {
     m_Node = node;
   }
 
   Component::~Component()
-  {}
-}
-
+  {
+  }
+} // namespace DataGarden

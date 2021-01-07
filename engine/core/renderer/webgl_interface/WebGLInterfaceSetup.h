@@ -13,30 +13,34 @@ EM_JS(void, webGLInterfaceSetupContext, (), {
   canvasElement = document.getElementById("visualization-canvas");
 
   // Event listeners
-  canvasElement.addEventListener("mouseenter", function(e) {
-    // Module._onMouseEnter();
-  });
+  canvasElement.addEventListener("mouseenter", function(e){
+                                                   // Module._onMouseEnter();
+                                               });
 
-  canvasElement.addEventListener("mouseleave", function(e) {
-    // Module._onMouseLeave();
-  });
+  canvasElement.addEventListener("mouseleave", function(e){
+                                                   // Module._onMouseLeave();
+                                               });
 
-  canvasElement.addEventListener("mouseup", function(e) {
-    Module._onMouseUp(1);
-  });
+  canvasElement.addEventListener(
+      "mouseup", function(e) {
+        Module._onMouseUp(1);
+      });
 
-  canvasElement.addEventListener("mousedown", function(e) {
-    Module._onMouseDown(1);
-  });
+  canvasElement.addEventListener(
+      "mousedown", function(e) {
+        Module._onMouseDown(1);
+      });
 
-  canvasElement.addEventListener("mousemove", function(e) {
-    Module._onMouseMove(e.screenX, e.screenY);
-  });
+  canvasElement.addEventListener(
+      "mousemove", function(e) {
+        Module._onMouseMove(e.screenX, e.screenY);
+      });
 
   // TODO: Set this up somewhere else, this function should only setup WebGL stuff
-  window.addEventListener("resize", function(e) {
-    Module._onCanvasDimensionChange(e.target.innerWidth, e.target.innerHeight);
-  });
+  window.addEventListener(
+      "resize", function(e) {
+        Module._onCanvasDimensionChange(e.target.innerWidth, e.target.innerHeight);
+      });
 
   // WebGL setup, and global state store
   var webGLContext = canvasElement.getContext("webgl2");

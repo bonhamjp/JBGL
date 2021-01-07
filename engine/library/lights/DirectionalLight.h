@@ -9,7 +9,7 @@ namespace DataGarden
 {
   // forward declarations
   class LightListOfType;
-  
+
   class DirectionalLight : public Light
   {
   public:
@@ -20,13 +20,13 @@ namespace DataGarden
     ~DirectionalLight();
 
     inline glm::vec4 GetDirection() { return m_Direction; };
-    
+
   private:
     glm::vec4 m_Direction;
   };
 
   // TODO: Implement as a class method
   void UpdateDirectionalLightUniforms(LightListOfType directionalLightList);
-}
+} // namespace DataGarden
 
 #endif

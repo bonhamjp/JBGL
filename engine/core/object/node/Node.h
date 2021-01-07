@@ -20,41 +20,41 @@ namespace DataGarden
   {
   public:
     Node();
-    Node(Node* parentNode);
+    Node(Node *parentNode);
     ~Node();
 
     void Update(glm::mat4 space);
     void Render();
 
-		void SetMesh(Mesh* mesh);
-		inline Mesh* GetMesh() { return m_Mesh; };
+    void SetMesh(Mesh *mesh);
+    inline Mesh *GetMesh() { return m_Mesh; };
 
-    void SetMaterial(Material* material);
-		inline Material* GetMaterial() { return m_Material; };
+    void SetMaterial(Material *material);
+    inline Material *GetMaterial() { return m_Material; };
 
     inline bool CanRender() { return m_Mesh != nullptr && m_Material != nullptr; };
 
-    template<typename T, typename... TArgs>
-    void AddComponent(TArgs&&... args) // TODO: Stop returning raw pointer
+    template <typename T, typename... TArgs>
+    void AddComponent(TArgs &&... args) // TODO: Stop returning raw pointer
     {
-      T* newComponent = new T(std::forward<TArgs>(args)...);
+      T *newComponent = new T(std::forward<TArgs>(args)...);
 
-      m_Components[ClassID<T>()] = (Component*) newComponent;
+      m_Components[ClassID<T>()] = (Component *)newComponent;
     }
 
-    template<typename T>
+    template <typename T>
     bool HasComponent()
     {
       return m_Components.count(ClassID<T>()) != 0;
     }
 
-    template<typename T>
-    T* GetComponent()
+    template <typename T>
+    T *GetComponent()
     {
-      return (T*) m_Components.at(ClassID<T>()).get();
+      return (T *)m_Components.at(ClassID<T>()).get();
     }
 
-    void PushChild(Node* childNode);
+    void PushChild(Node *childNode);
     void ClearChildren();
 
     inline bool ShouldRemove() { return !m_Active; };
@@ -64,15 +64,15 @@ namespace DataGarden
     bool m_Active;
     bool m_CanRender;
 
-    Mesh* m_Mesh;
-    Material* m_Material;
+    Mesh *m_Mesh;
+    Material *m_Material;
 
-    std::map<unsigned int, Component*> m_Components;
+    std::map<unsigned int, Component *> m_Components;
 
-    Node* m_Parent;
+    Node *m_Parent;
 
     unsigned int m_ChildCount;
-    Node* m_Children[MAX_CHILD_COUNT];
+    Node *m_Children[MAX_CHILD_COUNT];
 
   private:
     void _ClearChildAtIndex(unsigned int childIndex);
@@ -82,6 +82,6 @@ namespace DataGarden
     void _SetNodeUniforms();
     void _DrawIndexed();
   };
-}
+} // namespace DataGarden
 
 #endif

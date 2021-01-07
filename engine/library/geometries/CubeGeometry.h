@@ -7,19 +7,18 @@
 
 namespace DataGarden
 {
-	class CubeGeometry : public Geometry
-	{
-	public:
-		CubeGeometry();
-		virtual ~CubeGeometry();
+  class CubeGeometry : public Geometry
+  {
+  public:
+    CubeGeometry();
+    virtual ~CubeGeometry();
 
     virtual BufferLayout GetLayout() override;
 
-	private:
-		void _CreateBufferObject();
-		void _DestroyBufferObject();
-
-	};
-}
+  private:
+    void _CreateBufferObject();
+    void _DestroyBufferObject();
+  };
+} // namespace DataGarden
 
 #endif

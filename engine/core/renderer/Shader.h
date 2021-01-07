@@ -7,9 +7,9 @@
 
 namespace DataGarden
 {
-	class Shader
-	{
-	public:
+  class Shader
+  {
+  public:
     Shader(ShaderType shaderType);
     ~Shader();
 
@@ -21,9 +21,9 @@ namespace DataGarden
   protected:
     unsigned int m_ProgramID;
 
-    unsigned int _CompileVertexShader(const std::string& shaderSource);
-    unsigned int _CompileFragmentShader(const std::string& shaderSource);
-	};
-}
+    unsigned int _CompileVertexShader(const std::string &shaderSource);
+    unsigned int _CompileFragmentShader(const std::string &shaderSource);
+  };
+} // namespace DataGarden
 
 #endif

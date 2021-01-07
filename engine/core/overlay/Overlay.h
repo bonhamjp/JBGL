@@ -5,14 +5,14 @@
 
 namespace DataGarden
 {
-	class Overlay
-	{
-	public:
+  class Overlay
+  {
+  public:
     Overlay();
     Overlay(float precision);
-		~Overlay();
+    ~Overlay();
 
-		virtual void Update();
+    virtual void Update();
 
     float GetPrecision() { return m_Precision; };
     inline void SetPrecision(float precision) { m_Precision = precision; };
@@ -20,6 +20,6 @@ namespace DataGarden
   private:
     float m_Precision;
   };
-}
+} // namespace DataGarden
 
 #endif

@@ -11,15 +11,15 @@
 
 namespace DataGarden
 {
-	class SphereGeometry : public Geometry
-	{
-	public:
-		SphereGeometry(unsigned int subdivisions);
-		virtual ~SphereGeometry();
+  class SphereGeometry : public Geometry
+  {
+  public:
+    SphereGeometry(unsigned int subdivisions);
+    virtual ~SphereGeometry();
 
     virtual BufferLayout GetLayout() override;
 
-	private:
+  private:
     const unsigned int m_BaseVertexCount = 12;
     const unsigned int m_VertexSubdivisionMultiplier = 4;
 
@@ -40,10 +40,9 @@ namespace DataGarden
 
     void _NormalizeVertices();
 
-		void _CreateBufferObject();
-		void _DestroyBufferObject();
-
-	};
-}
+    void _CreateBufferObject();
+    void _DestroyBufferObject();
+  };
+} // namespace DataGarden
 
 #endif

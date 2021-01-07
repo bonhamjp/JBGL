@@ -9,23 +9,23 @@ namespace DataGarden
   class VertexBuffer;
   class IndexBuffer;
 
-	class VertexArray
-	{
-	public:
-		VertexArray();
-		~VertexArray();
+  class VertexArray
+  {
+  public:
+    VertexArray();
+    ~VertexArray();
 
-		inline unsigned int GetID() const { return m_ID; };
+    inline unsigned int GetID() const { return m_ID; };
 
-		void AddVertexLayout(VertexBuffer* vertexBuffer);
-		void AddIndexLayout(IndexBuffer* indexBuffer);
+    void AddVertexLayout(VertexBuffer *vertexBuffer);
+    void AddIndexLayout(IndexBuffer *indexBuffer);
 
-		void Bind();
-		void Unbind();
+    void Bind();
+    void Unbind();
 
-	private:
-		unsigned int m_ID;
-	};
-}
+  private:
+    unsigned int m_ID;
+  };
+} // namespace DataGarden
 
 #endif

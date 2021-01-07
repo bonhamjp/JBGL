@@ -15,7 +15,7 @@
 // Executed from JavaScript
 extern "C"
 {
-  void importModel(float* vertexData, unsigned int vertexLength, unsigned int* indexData, unsigned int indexLength, unsigned int* textureCoordinateData, unsigned int textureCoordinateLength)
+  void importModel(float *vertexData, unsigned int vertexLength, unsigned int *indexData, unsigned int indexLength, unsigned int *textureCoordinateData, unsigned int textureCoordinateLength)
   {
     std::cout << "Vertex Length: " << vertexLength << std::endl;
     for (unsigned int i = 0; i < vertexLength; i++)
