@@ -10,7 +10,7 @@ namespace DataGarden
   class Visualization2DShader : Shader
   {
   public:
-    Visualization2DShader(const ShaderVertexSource vertexSource, const ShaderFragmentSource fragmentSource);
+    Visualization2DShader(ShaderType shaderType);
     ~Visualization2DShader();
 
   private:

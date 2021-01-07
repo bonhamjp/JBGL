@@ -1,9 +1,9 @@
-#ifndef DATA_GARDEN_FRAGMENT_BASE
-#define DATA_GARDEN_FRAGMENT_BASE
+#ifndef DATA_GARDEN_VISUALIZATION_3D_FRAGMENT_SHADER_SOURCE
+#define DATA_GARDEN_VISUALIZATION_3D_FRAGMENT_SHADER_SOURCE
 
 #include <string>
 
-const std::string BASE_FRAGMENT_SHADER_SOURCE = R"(#version 300 es
+const std::string VISUALIZATION_3D_FRAGMENT_SHADER_SOURCE = R"(#version 300 es
 
 precision highp float;
 
@@ -151,7 +151,8 @@ vec4 CalculateSpotLight(SpotLight light, vec3 normal, vec3 fragPosition, vec3 vi
   return ambient + diffuse + specular;
 }
 
-void main() {
+void main()
+{
   vec3 normal = normalize(vec3(f_Normal));
   vec3 viewDirection = normalize(vec3(f_Position) - vec3(f_FragPosition));
 

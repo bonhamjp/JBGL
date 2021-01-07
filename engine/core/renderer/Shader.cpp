@@ -7,11 +7,11 @@
 
 namespace DataGarden
 {
-  Shader::Shader(const ShaderVertexSource vertexSource, const ShaderFragmentSource fragmentSource)
+  Shader::Shader(ShaderType shaderType)
   {
     Renderer &renderer = Engine::Get().GetRenderer();
 
-    ShaderSource shaderSource = ShaderParser::RetrieveShaders(vertexSource, fragmentSource);
+    ShaderSource shaderSource = ShaderParser::RetrieveShaders(shaderType);
 
     unsigned int vertexShaderID = _CompileVertexShader(shaderSource.vertexSource);
     unsigned int fragmentShaderID = _CompileFragmentShader(shaderSource.fragmentSource);

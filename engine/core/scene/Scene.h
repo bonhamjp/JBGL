@@ -44,6 +44,8 @@ namespace DataGarden
 
     NodeGraph *m_NodeGraph;
 
+
+
     Camera *m_3DCamera;
     Camera *m_2DCamera;
 

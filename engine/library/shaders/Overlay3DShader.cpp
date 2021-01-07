@@ -6,7 +6,7 @@
 
 namespace DataGarden
 {
-  Overlay3DShader::Overlay3DShader(const ShaderVertexSource vertexSource, const ShaderFragmentSource fragmentSource) : Shader(vertexSource, fragmentSource)
+  Overlay3DShader::Overlay3DShader(ShaderType shaderType) : Shader(shaderType)
   {
     _Setup();
   }

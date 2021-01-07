@@ -14,7 +14,7 @@ namespace DataGarden
   class Visualization3DShader : public Shader
   {
   public:
-    Visualization3DShader(const ShaderVertexSource vertexSource, const ShaderFragmentSource fragmentSource);
+    Visualization3DShader(ShaderType shaderType);
     ~Visualization3DShader();
 
     void SetViewProjectionUniform(glm::mat4 viewProjection);

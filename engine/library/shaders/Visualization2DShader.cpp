@@ -6,7 +6,7 @@
 
 namespace DataGarden
 {
-  Visualization2DShader::Visualization2DShader(const ShaderVertexSource vertexSource, const ShaderFragmentSource fragmentSource) : Shader(vertexSource, fragmentSource)
+  Visualization2DShader::Visualization2DShader(ShaderType shaderType) : Shader(shaderType)
   {
     _Setup();
   }

@@ -10,7 +10,7 @@
 
 namespace DataGarden
 {
-  Visualization3DShader::Visualization3DShader(const ShaderVertexSource vertexSource, const ShaderFragmentSource fragmentSource) : Shader(vertexSource, fragmentSource)
+  Visualization3DShader::Visualization3DShader(ShaderType shaderType) : Shader(shaderType)
   {
     _Setup();
   }

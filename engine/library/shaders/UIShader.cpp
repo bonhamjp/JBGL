@@ -6,7 +6,7 @@
 
 namespace DataGarden
 {
-  UIShader::UIShader(const ShaderVertexSource vertexSource, const ShaderFragmentSource fragmentSource) : Shader(vertexSource, fragmentSource)
+  UIShader::UIShader(ShaderType shaderType) : Shader(shaderType)
   {
     _Setup();
   }

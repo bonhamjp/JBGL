@@ -19,6 +19,9 @@ namespace DataGarden
 
     inline Visualization3DShader *GetVisualization3DShader() { return m_Visualization3DShader; };
     inline Overlay3DShader *GetOverlay3DShader() { return m_Overlay3DShader; };
+    inline Visualization2DShader *GetVisualization2DShader() { return m_Visualization2DShader; };
+    inline Overlay2DShader *GetOverlay2DShader() { return m_Overlay2DShader; };
+    inline UIShader *GetUIShader() { return m_UIShader; };
 
   private:
     Visualization3DShader *m_Visualization3DShader;

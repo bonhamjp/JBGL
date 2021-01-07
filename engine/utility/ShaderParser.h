@@ -13,30 +13,29 @@ namespace DataGarden
 		FRAGMENT = 1
 	};
 
-  enum class ShaderVertexSource
+  enum class ShaderType
   {
-    BASE = 0
+    VISUALIZATION_3D = 0,
+    OVERLAY_3D,
+    VISUALIZATION_2D,
+    OVERLAY_2D,
+    UI
   };
 
-  enum class ShaderFragmentSource
-  {
-    BASE = 0
-  };
-	
 	struct ShaderSource
 	{
 		std::string vertexSource;
 		std::string fragmentSource;
 	};
-	
+
 	class ShaderParser
 	{
 	public:
-		static ShaderSource RetrieveShaders(const ShaderVertexSource vertexSource, const ShaderFragmentSource fragmentSource);
+		static ShaderSource RetrieveShaders(ShaderType shaderType);
 
   private:
-    static std::string _RetrieveVertexShader(const ShaderVertexSource vertexSource);
-    static std::string _RetrieveFragmentShader(const ShaderFragmentSource fragmentSource);
+    static std::string _RetrieveVertexShader(ShaderType shaderType);
+    static std::string _RetrieveFragmentShader(ShaderType shaderType);
 	};
 }
 

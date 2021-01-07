@@ -10,7 +10,7 @@ namespace DataGarden
 	class UIShader : Shader
 	{
 	public:
-		UIShader(const ShaderVertexSource vertexSource, const ShaderFragmentSource fragmentSource);
+		UIShader(ShaderType shaderType);
 		~UIShader();
 
   private:

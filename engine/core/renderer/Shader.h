@@ -10,7 +10,7 @@ namespace DataGarden
 	class Shader
 	{
 	public:
-    Shader(const ShaderVertexSource vertexSource, const ShaderFragmentSource fragmentSource);
+    Shader(ShaderType shaderType);
     ~Shader();
 
     void Bind();

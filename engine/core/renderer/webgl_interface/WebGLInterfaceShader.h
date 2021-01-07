@@ -11,9 +11,6 @@ EM_JS(unsigned int, webGLInterfaceCreateVertexShader, (), {
   document.webGLModule.shaders.push(document.webGLModule.context.createShader(document.webGLModule.context.VERTEX_SHADER));
   document.webGLModule.shaderCount++;
 
-  console.log("VERTEX SHADER");
-  console.log("-------------------");
-
   return shaderID;
 });
 
@@ -22,9 +19,6 @@ EM_JS(unsigned int, webGLInterfaceCreateFragmentShader, (), {
 
   document.webGLModule.shaders.push(document.webGLModule.context.createShader(document.webGLModule.context.FRAGMENT_SHADER));
   document.webGLModule.shaderCount++;
-
-  console.log("FRAGMENT SHADER");
-  console.log("-------------------");
 
   return shaderID;
 });

@@ -10,7 +10,7 @@ namespace DataGarden
 	class Overlay2DShader : Shader
 	{
 	public:
-		Overlay2DShader(const ShaderVertexSource vertexSource, const ShaderFragmentSource fragmentSource);
+		Overlay2DShader(ShaderType shaderType);
 		~Overlay2DShader();
 
   private:

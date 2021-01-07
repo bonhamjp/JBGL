@@ -1,12 +1,12 @@
-#ifndef DATA_GARDEN_VERTEX_BASE
-#define DATA_GARDEN_VERTEX_BASE
+#ifndef DATA_GARDEN_VISUALIZATION_3D_VERTEX_SHADER_SOURCE
+#define DATA_GARDEN_VISUALIZATION_3D_VERTEX_SHADER_SOURCE
 
 #include <string>
 
-const std::string BASE_VERTEX_SHADER_SOURCE = R"(#version 300 es
+const std::string VISUALIZATION_3D_VERTEX_SHADER_SOURCE = R"(#version 300 es
 
 precision highp float;
- 
+
 layout(location = 0) in vec3 v_Position;
 layout(location = 1) in vec3 v_Normal;
 layout(location = 2) in vec2 v_TextureCoordinates;
