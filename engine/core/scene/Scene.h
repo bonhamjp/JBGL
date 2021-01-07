@@ -36,7 +36,7 @@ namespace DataGarden
     void Set2DCamera(Camera *camera);
 
   protected:
-    // TODO: Extract UI management into class
+    // TODO: Move UI management to a specific place
     unsigned int m_UI_Count;
     UI *m_UIS[MAX_UI_COUNT];
 
@@ -44,8 +44,9 @@ namespace DataGarden
 
     NodeGraph *m_NodeGraph;
 
+    // TODO: Move Overlay management to a specific place
 
-
+    // TODO: Move camera management to a specific place
     Camera *m_3DCamera;
     Camera *m_2DCamera;
 
