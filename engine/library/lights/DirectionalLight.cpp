@@ -8,7 +8,7 @@
 
 #include "core/object/light/LightList.h"
 
-#include "library/shaders/Visualization3DShader.h"
+#include "library/shaders/VisualizationShader.h"
 
 namespace DataGarden
 {
@@ -38,8 +38,8 @@ namespace DataGarden
 
   void UpdateDirectionalLightUniforms(LightListOfType directionalLightList)
   {
-    Visualization3DShader *m_Visualization3DShader = Engine::Get().GetShaderManager().GetVisualization3DShader();
+    VisualizationShader *visualizationShader = Engine::Get().GetShaderManager().GetVisualizationShader();
 
-    m_Visualization3DShader->SetDirectionalLightUniforms(directionalLightList);
+    visualizationShader->SetDirectionalLightUniforms(directionalLightList);
   }
 } // namespace DataGarden

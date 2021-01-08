@@ -10,7 +10,7 @@
 
 #include "core/object/Geometry.h"
 
-#include "library/shaders/Visualization3DShader.h"
+#include "library/shaders/VisualizationShader.h"
 
 #include "Mesh.h"
 #include "Material.h"
@@ -144,8 +144,8 @@ namespace DataGarden
   {
     m_Mesh->PrepareForRender();
 
-    Visualization3DShader *visualization3DShader = Engine::Get().GetShaderManager().GetVisualization3DShader();
-    visualization3DShader->SetModelUniform(m_Transform.GetModel());
+    VisualizationShader *visualizationShader = Engine::Get().GetShaderManager().GetVisualizationShader();
+    visualizationShader->SetModelUniform(m_Transform.GetModel());
 
     m_Material->SetMaterialUniforms();
   }

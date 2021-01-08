@@ -14,15 +14,15 @@ namespace DataGarden
 
   void ShaderManager::_Setup()
   {
-    m_Visualization3DShader = new Visualization3DShader(ShaderType::VISUALIZATION_3D);
-    m_Overlay3DShader = new Overlay3DShader(ShaderType::OVERLAY_3D);
-    m_Visualization2DShader = new Visualization2DShader(ShaderType::VISUALIZATION_2D);
-    m_Overlay2DShader = new Overlay2DShader(ShaderType::OVERLAY_2D);
+    m_VisualizationShader = new VisualizationShader(ShaderType::VISUALIZATION);
+    m_GridShader = new GridShader(ShaderType::GRID);
     m_UIShader = new UIShader(ShaderType::UI);
   }
 
   void ShaderManager::_Teardown()
   {
-    delete m_Visualization3DShader;
+    delete m_VisualizationShader;
+    delete m_GridShader;
+    delete m_UIShader;
   }
 } // namespace DataGarden

@@ -46,27 +46,27 @@ namespace DataGarden
 
   void Material::SetMaterialUniforms()
   {
-    Visualization3DShader *visualization3DShader = Engine::Get().GetShaderManager().GetVisualization3DShader();
+    VisualizationShader *visualizationShader = Engine::Get().GetShaderManager().GetVisualizationShader();
 
-    visualization3DShader->SetMaterialShininessUniform(m_Shininess);
+    visualizationShader->SetMaterialShininessUniform(m_Shininess);
 
     // TODO: Support multiple textures of each type
     auto ambientTextures = GetTextures(TextureType::Ambient);
-    visualization3DShader->SetAmbientTexturesUniform(ambientTextures.size());
+    visualizationShader->SetAmbientTexturesUniform(ambientTextures.size());
     if (ambientTextures.size() > 0)
     {
       ambientTextures[0]->Bind();
     }
 
     auto diffuseTextures = GetTextures(TextureType::Diffuse);
-    visualization3DShader->SetDiffuseTexturesUniform(diffuseTextures.size());
+    visualizationShader->SetDiffuseTexturesUniform(diffuseTextures.size());
     if (diffuseTextures.size() > 0)
     {
       diffuseTextures[0]->Bind();
     }
 
     auto specularTextures = GetTextures(TextureType::Specular);
-    visualization3DShader->SetSpecularTexturesUniform(specularTextures.size());
+    visualizationShader->SetSpecularTexturesUniform(specularTextures.size());
     if (specularTextures.size() > 0)
     {
       specularTextures[0]->Bind();

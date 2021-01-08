@@ -1,4 +1,4 @@
-#include "Visualization3DShader.h"
+#include "VisualizationShader.h"
 
 #include "core/Engine.h"
 
@@ -10,58 +10,58 @@
 
 namespace DataGarden
 {
-  Visualization3DShader::Visualization3DShader(ShaderType shaderType) : Shader(shaderType)
+  VisualizationShader::VisualizationShader(ShaderType shaderType) : Shader(shaderType)
   {
     _Setup();
   }
 
-  Visualization3DShader::~Visualization3DShader()
+  VisualizationShader::~VisualizationShader()
   {
   }
 
-  void Visualization3DShader::SetViewProjectionUniform(glm::mat4 viewProjection)
+  void VisualizationShader::SetViewProjectionUniform(glm::mat4 viewProjection)
   {
     Renderer &renderer = Engine::Get().GetRenderer();
     renderer.SetUniformMatrix4fv(m_ProgramID, "u_ViewProjection", viewProjection);
   }
 
-  void Visualization3DShader::SetViewPositionUniform(glm::vec3 viewPosition)
+  void VisualizationShader::SetViewPositionUniform(glm::vec3 viewPosition)
   {
     Renderer &renderer = Engine::Get().GetRenderer();
     renderer.SetUniform3fv(m_ProgramID, "u_ViewPosition", viewPosition);
   }
 
-  void Visualization3DShader::SetModelUniform(glm::mat4 model)
+  void VisualizationShader::SetModelUniform(glm::mat4 model)
   {
     Renderer &renderer = Engine::Get().GetRenderer();
     renderer.SetUniformMatrix4fv(m_ProgramID, "u_Vertex.Model", model);
   }
 
-  void Visualization3DShader::SetMaterialShininessUniform(float shininess)
+  void VisualizationShader::SetMaterialShininessUniform(float shininess)
   {
     Renderer &renderer = Engine::Get().GetRenderer();
     renderer.SetUniform1f(m_ProgramID, "u_Material.Shininess", shininess);
   }
 
-  void Visualization3DShader::SetAmbientTexturesUniform(int ambientTextures)
+  void VisualizationShader::SetAmbientTexturesUniform(int ambientTextures)
   {
     Renderer &renderer = Engine::Get().GetRenderer();
     renderer.SetUniform1i(m_ProgramID, "u_AmbientTextures", ambientTextures);
   }
 
-  void Visualization3DShader::SetDiffuseTexturesUniform(int diffuseTextures)
+  void VisualizationShader::SetDiffuseTexturesUniform(int diffuseTextures)
   {
     Renderer &renderer = Engine::Get().GetRenderer();
     renderer.SetUniform1i(m_ProgramID, "u_DiffuseTextures", diffuseTextures);
   }
 
-  void Visualization3DShader::SetSpecularTexturesUniform(int specularTextures)
+  void VisualizationShader::SetSpecularTexturesUniform(int specularTextures)
   {
     Renderer &renderer = Engine::Get().GetRenderer();
     renderer.SetUniform1i(m_ProgramID, "u_SpecularTextures", specularTextures);
   }
 
-  void Visualization3DShader::SetDirectionalLightUniforms(LightListOfType directionalLightList)
+  void VisualizationShader::SetDirectionalLightUniforms(LightListOfType directionalLightList)
   {
     Renderer &renderer = Engine::Get().GetRenderer();
     renderer.SetUniform1i(m_ProgramID, "u_DirectionalLightCount", directionalLightList.LightCount);
@@ -85,7 +85,7 @@ namespace DataGarden
     }
   }
 
-  void Visualization3DShader::SetPointLightUniforms(LightListOfType pointLightList)
+  void VisualizationShader::SetPointLightUniforms(LightListOfType pointLightList)
   {
     Renderer &renderer = Engine::Get().GetRenderer();
     renderer.SetUniform1i(m_ProgramID, "u_PointLightCount", pointLightList.LightCount);
@@ -118,7 +118,7 @@ namespace DataGarden
     }
   }
 
-  void Visualization3DShader::SetSpotLightUniforms(LightListOfType spotLightList)
+  void VisualizationShader::SetSpotLightUniforms(LightListOfType spotLightList)
   {
     Renderer &renderer = Engine::Get().GetRenderer();
     renderer.SetUniform1i(m_ProgramID, "u_SpotLightCount", spotLightList.LightCount);
@@ -160,7 +160,7 @@ namespace DataGarden
     }
   }
 
-  void Visualization3DShader::_Setup()
+  void VisualizationShader::_Setup()
   {
     Renderer &renderer = Engine::Get().GetRenderer();
     renderer.SetUniform1i(m_ProgramID, "u_AmbientTexture", 0);

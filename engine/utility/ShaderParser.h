@@ -7,18 +7,10 @@
 
 namespace DataGarden
 {
-  enum class ShaderSourceType
-  {
-    VERTEX = 0,
-    FRAGMENT = 1
-  };
-
   enum class ShaderType
   {
-    VISUALIZATION_3D = 0,
-    OVERLAY_3D,
-    VISUALIZATION_2D,
-    OVERLAY_2D,
+    VISUALIZATION = 0,
+    GRID,
     UI
   };
 

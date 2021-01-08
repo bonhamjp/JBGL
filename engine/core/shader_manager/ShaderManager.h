@@ -3,10 +3,8 @@
 
 #include "DataGarden.h"
 
-#include "library/shaders/Visualization3DShader.h"
-#include "library/shaders/Overlay3DShader.h"
-#include "library/shaders/Visualization2DShader.h"
-#include "library/shaders/Overlay2DShader.h"
+#include "library/shaders/VisualizationShader.h"
+#include "library/shaders/GridShader.h"
 #include "library/shaders/UIShader.h"
 
 namespace DataGarden
@@ -17,17 +15,13 @@ namespace DataGarden
     ShaderManager();
     ~ShaderManager();
 
-    inline Visualization3DShader *GetVisualization3DShader() { return m_Visualization3DShader; };
-    inline Overlay3DShader *GetOverlay3DShader() { return m_Overlay3DShader; };
-    inline Visualization2DShader *GetVisualization2DShader() { return m_Visualization2DShader; };
-    inline Overlay2DShader *GetOverlay2DShader() { return m_Overlay2DShader; };
+    inline VisualizationShader *GetVisualizationShader() { return m_VisualizationShader; };
+    inline GridShader *GetGridShader() { return m_GridShader; };
     inline UIShader *GetUIShader() { return m_UIShader; };
 
   private:
-    Visualization3DShader *m_Visualization3DShader;
-    Overlay3DShader *m_Overlay3DShader;
-    Visualization2DShader *m_Visualization2DShader;
-    Overlay2DShader *m_Overlay2DShader;
+    VisualizationShader *m_VisualizationShader;
+    GridShader *m_GridShader;
     UIShader *m_UIShader;
 
     void _Setup();

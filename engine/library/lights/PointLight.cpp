@@ -8,7 +8,7 @@
 
 #include "core/object/light/LightList.h"
 
-#include "library/shaders/Visualization3DShader.h"
+#include "library/shaders/VisualizationShader.h"
 
 namespace DataGarden
 {
@@ -51,8 +51,8 @@ namespace DataGarden
 
   void UpdatePointLightUniforms(LightListOfType pointLightList)
   {
-    Visualization3DShader *m_Visualization3DShader = Engine::Get().GetShaderManager().GetVisualization3DShader();
+    VisualizationShader *visualizationShader = Engine::Get().GetShaderManager().GetVisualizationShader();
 
-    m_Visualization3DShader->SetPointLightUniforms(pointLightList);
+    visualizationShader->SetPointLightUniforms(pointLightList);
   }
 } // namespace DataGarden

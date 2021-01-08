@@ -1,5 +1,5 @@
-#ifndef DATA_GARDEN_VISUALIZATION_3D_SHADER
-#define DATA_GARDEN_VISUALIZATION_3D_SHADER
+#ifndef DATA_GARDEN_VISUALIZATION_SHADER
+#define DATA_GARDEN_VISUALIZATION_SHADER
 
 #include "DataGarden.h"
 
@@ -11,11 +11,11 @@
 
 namespace DataGarden
 {
-  class Visualization3DShader : public Shader
+  class VisualizationShader : public Shader
   {
   public:
-    Visualization3DShader(ShaderType shaderType);
-    ~Visualization3DShader();
+    VisualizationShader(ShaderType shaderType);
+    ~VisualizationShader();
 
     void SetViewProjectionUniform(glm::mat4 viewProjection);
     void SetViewPositionUniform(glm::vec3 viewPosition);

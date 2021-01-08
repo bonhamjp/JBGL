@@ -8,7 +8,7 @@
 
 #include "core/canvas/Canvas.h"
 
-#include "library/shaders/Visualization3DShader.h"
+#include "library/shaders/VisualizationShader.h"
 
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
@@ -45,9 +45,9 @@ namespace DataGarden
 
   void Camera3D::SetCameraUniforms()
   {
-    Visualization3DShader *visualization3DShader = Engine::Get().GetShaderManager().GetVisualization3DShader();
+    VisualizationShader *visualizationShader = Engine::Get().GetShaderManager().GetVisualizationShader();
 
-    visualization3DShader->SetViewProjectionUniform(GetViewProjection());
-    visualization3DShader->SetViewPositionUniform(m_Transform.GetPosition());
+    visualizationShader->SetViewProjectionUniform(GetViewProjection());
+    visualizationShader->SetViewPositionUniform(m_Transform.GetPosition());
   }
 } // namespace DataGarden

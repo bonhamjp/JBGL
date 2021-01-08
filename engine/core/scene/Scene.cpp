@@ -49,12 +49,13 @@ namespace DataGarden
 
   void Scene::_Update3DScene()
   {
-    Visualization3DShader *visualization3DShader = Engine::Get().GetShaderManager().GetVisualization3DShader();
+    VisualizationShader *visualizationShader = Engine::Get().GetShaderManager().GetVisualizationShader();
+    visualizationShader->Bind();
 
-    visualization3DShader->Bind();
     m_3DCamera->Update();
     m_NodeGraph->Update();
-    visualization3DShader->Unbind();
+
+    visualizationShader->Unbind();
   }
 
   void Scene::_Update2DScene()
