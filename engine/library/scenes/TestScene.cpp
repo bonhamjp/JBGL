@@ -4,13 +4,18 @@
 
 #include "TestScene.h"
 
+#include "core/Engine.h"
+
+#include "core/input_manager/InputManager.h"
+#include "core/input_manager/KeyCodes.h"
+
 #include "utility/ColorTools.h"
 
 #include "core/object/node/Node.h"
 #include "core/object/node/Factory.h"
 
 #include "library/cameras/3d/FreeCamera.h"
-#include "library/cameras/2d/Camera2D.h"
+#include "library/cameras/2d/PanCamera.h"
 
 #include "library/lights/PointLight.h"
 #include "library/lights/DirectionalLight.h"
@@ -28,8 +33,11 @@ namespace DataGarden
                   glm::vec3(1.0f, 1.0f, 1.0f), 0.0f, 0.0f, 0.0f));
     Set3DCamera(freeCamera);
 
-    Camera2D *camera2D = new Camera2D(0.0f, 0.0f, 0.0f);
-    Set2DCamera(camera2D);
+    PanCamera *panCamera = new PanCamera(0.0f, 0.1f, 100.0f);
+    panCamera->SetTransform(
+        Transform(glm::vec3(-6.0f, 0.0f, 3.0f),
+                  glm::vec3(1.0f, 1.0f, 1.0f), 0.0f, 0.0f, 0.0f));
+    Set2DCamera(panCamera);
 
     glm::vec4 whiteLight = glm::vec4(0.2f, 0.2f, 0.2f, 1.0f);
 
@@ -112,6 +120,23 @@ namespace DataGarden
 
   void TestScene::PreUpdate()
   {
+    // std::cout << "This is in Pre Update..." << std::endl;
+    InputManager &inputManager = Engine::Get().GetInputManager();
+
+    if (inputManager.IsKeyPressed(KEY_M_CODE))
+    {
+      if (m_RenderMode == RenderMode::THREE_DIMENSIONS)
+      {
+        m_RenderMode = RenderMode::TWO_DIMENSIONS;
+        m_2DCamera->SetTransform(m_3DCamera->GetTransform());
+        m_3DCamera->GetTransform().SetPitch(0.0f);
+      }
+      else
+      {
+        m_RenderMode = RenderMode::THREE_DIMENSIONS;
+        m_3DCamera->SetTransform(m_2DCamera->GetTransform());
+      }
+    }
   }
 
   void TestScene::PostUpdate()

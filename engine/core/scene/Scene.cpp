@@ -8,6 +8,9 @@ namespace DataGarden
 {
   Scene::Scene()
   {
+    m_RenderMode = RenderMode::THREE_DIMENSIONS;
+    m_MainShader = MainShader::LIGHTING;
+
     m_UI_Count = 0;
 
     _SetupScene();
@@ -20,15 +23,13 @@ namespace DataGarden
 
   void Scene::Update()
   {
-    _Update3DScene();
-    _Update2DScene();
+    _UpdateScene();
     _UpdateUIs();
   }
 
   void Scene::Render()
   {
-    _Render3DScene();
-    _Render2DScene();
+    _RenderScene();
     _RenderUIs();
   }
 
@@ -47,20 +48,25 @@ namespace DataGarden
     m_2DCamera = camera;
   }
 
-  void Scene::_Update3DScene()
+  void Scene::_UpdateScene()
   {
     VisualizationShader *visualizationShader = Engine::Get().GetShaderManager().GetVisualizationShader();
     visualizationShader->Bind();
 
-    m_3DCamera->Update();
+    switch (m_RenderMode)
+    {
+    case RenderMode::THREE_DIMENSIONS:
+      m_3DCamera->Update();
+      break;
+
+    case RenderMode::TWO_DIMENSIONS:
+      m_2DCamera->Update();
+      break;
+    }
+
     m_NodeGraph->Update();
 
     visualizationShader->Unbind();
-  }
-
-  void Scene::_Update2DScene()
-  {
-    m_2DCamera->Update();
   }
 
   void Scene::_UpdateUIs()
@@ -71,19 +77,23 @@ namespace DataGarden
     }
   }
 
-  void Scene::_Render3DScene()
+  void Scene::_RenderScene()
   {
     m_LightList->UpdateRendererLightUniforms();
 
     // TODO: Use dirty camera variable to set view projection up only when needed... maybe
-    // TODO: Add method on Camera to do Renderer setup
-    m_3DCamera->SetCameraUniforms();
+    switch (m_RenderMode)
+    {
+    case RenderMode::THREE_DIMENSIONS:
+      m_3DCamera->SetCameraUniforms();
+      break;
+
+    case RenderMode::TWO_DIMENSIONS:
+      m_2DCamera->SetCameraUniforms();
+      break;
+    }
 
     m_NodeGraph->Render();
-  }
-
-  void Scene::_Render2DScene()
-  {
   }
 
   void Scene::_RenderUIs()

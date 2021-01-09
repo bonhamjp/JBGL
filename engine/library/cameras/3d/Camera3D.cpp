@@ -4,8 +4,6 @@
 
 #include "core/renderer/Renderer.h"
 
-#include "core/scene/Scene.h"
-
 #include "core/canvas/Canvas.h"
 
 #include "library/shaders/VisualizationShader.h"

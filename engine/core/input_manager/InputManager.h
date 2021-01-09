@@ -20,6 +20,7 @@ namespace DataGarden
     bool spaceBarPressed;
     bool qPressed;
     bool ePressed;
+    bool mPressed;
   };
 
   class InputManager
@@ -40,6 +41,7 @@ namespace DataGarden
 
     void Clear();
 
+    bool IsKeyDown(int keyCode);
     bool IsKeyPressed(int keyCode);
     bool IsMouseButtonPressed(int button);
     // std::pair<float, float> GetMousePosition();

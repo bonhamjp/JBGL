@@ -13,6 +13,18 @@
 
 namespace DataGarden
 {
+  enum class RenderMode
+  {
+    THREE_DIMENSIONS = 0,
+    TWO_DIMENSIONS
+  };
+
+  enum class MainShader
+  {
+    LIGHTING = 0,
+    FLAT
+  };
+
   class Scene
   {
   public:
@@ -27,6 +39,12 @@ namespace DataGarden
     void Render();
     virtual void PostRender() = 0;
 
+    RenderMode GetRenderMode() { return m_RenderMode; };
+    inline void SetRenderMode(RenderMode renderMode) { m_RenderMode = renderMode; };
+
+    MainShader GetMainShader() { return m_MainShader; };
+    inline void SetMainShader(MainShader mainShader) { m_MainShader = mainShader; };
+
     void PushUi(UI *ui);
 
     inline Camera *Get3DCamera() { return m_3DCamera; };
@@ -36,6 +54,9 @@ namespace DataGarden
     void Set2DCamera(Camera *camera);
 
   protected:
+    RenderMode m_RenderMode;
+    MainShader m_MainShader;
+
     // TODO: Move UI management to a specific place
     unsigned int m_UI_Count;
     UI *m_UIS[MAX_UI_COUNT];
@@ -51,12 +72,10 @@ namespace DataGarden
     Camera *m_2DCamera;
 
   private:
-    void _Update3DScene();
-    void _Update2DScene();
+    void _UpdateScene();
     void _UpdateUIs();
 
-    void _Render3DScene();
-    void _Render2DScene();
+    void _RenderScene();
     void _RenderUIs();
 
     void _DeleteCameras();

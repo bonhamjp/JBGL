@@ -1,4 +1,4 @@
-#include "FreeCamera.h"
+#include "PanCamera.h"
 
 #include "core/Engine.h"
 
@@ -15,11 +15,11 @@
 
 namespace DataGarden
 {
-  FreeCamera::FreeCamera(float viewAngle, float nearClipping, float farClipping) : Camera3D(viewAngle, nearClipping, farClipping)
+  PanCamera::PanCamera(float viewAngle, float nearClipping, float farClipping) : Camera2D(viewAngle, nearClipping, farClipping)
   {
   }
 
-  void FreeCamera::Update()
+  void PanCamera::Update()
   {
     Engine &engine = Engine::Get();
 
@@ -28,37 +28,11 @@ namespace DataGarden
 
     float deltaTime = (float)clock.GetDeltaTime();
 
-    // Why is Y delta different than the GLFW version? Is it actually?
-    float mouseDeltaX = inputManager.GetDeltaMouseX();
-    float mouseDeltaY = -(inputManager.GetDeltaMouseY());
-
-    m_Transform.SetYaw(m_Transform.GetYaw() + (mouseDeltaX * m_LookSensitivity));
-    m_Transform.SetPitch(m_Transform.GetPitch() + (mouseDeltaY * m_LookSensitivity));
-
-    // restrict pitch to prevent looking around x axis
-    // TODO: Make restrictions customizable
-    if (m_Transform.GetPitch() > 80.0f)
-    {
-      m_Transform.SetPitch(80.0f);
-    }
-    else if (m_Transform.GetPitch() < -80.0f)
-    {
-      m_Transform.SetPitch(-80.0f);
-    }
-
     glm::vec3 front = glm::normalize(m_Transform.LookVector());
     glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
 
     float moveSpeed = m_MovementSensitivity * deltaTime;
 
-    if (inputManager.IsKeyDown(KEY_UP_CODE))
-    {
-      m_Transform.SetPosition(m_Transform.GetPosition() + (front * moveSpeed));
-    }
-    if (inputManager.IsKeyDown(KEY_DOWN_CODE))
-    {
-      m_Transform.SetPosition(m_Transform.GetPosition() - (front * moveSpeed));
-    }
     if (inputManager.IsKeyDown(KEY_LEFT_CODE))
     {
       m_Transform.SetPosition(m_Transform.GetPosition() - (glm::normalize(glm::cross(front, up)) * moveSpeed));

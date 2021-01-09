@@ -12,6 +12,7 @@ namespace DataGarden
 {
   void copyInputFrame(InputFrame &inputFrameA, InputFrame &inputFrameB)
   {
+    // TODO: Copy all data at once
     inputFrameA.mouseX = inputFrameB.mouseX;
     inputFrameA.mouseY = inputFrameB.mouseY;
     inputFrameA.mouseLeftPressed = inputFrameB.mouseLeftPressed;
@@ -22,10 +23,14 @@ namespace DataGarden
     inputFrameA.leftPressed = inputFrameB.leftPressed;
     inputFrameA.rightPressed = inputFrameB.rightPressed;
     inputFrameA.spaceBarPressed = inputFrameB.spaceBarPressed;
+    inputFrameA.qPressed = inputFrameB.qPressed;
+    inputFrameA.ePressed = inputFrameB.ePressed;
+    inputFrameA.mPressed = inputFrameB.mPressed;
   }
 
   void clearInputFrame(InputFrame &inputFrame)
   {
+    // TODO: Clear all data at once
     inputFrame.mouseX = 0;
     inputFrame.mouseY = 0;
     inputFrame.mouseLeftPressed = false;
@@ -36,6 +41,9 @@ namespace DataGarden
     inputFrame.leftPressed = false;
     inputFrame.rightPressed = false;
     inputFrame.spaceBarPressed = false;
+    inputFrame.qPressed = false;
+    inputFrame.ePressed = false;
+    inputFrame.mPressed = false;
   }
 
   InputManager::InputManager()
@@ -150,6 +158,10 @@ namespace DataGarden
     case KEY_E_CODE:
       m_CurrentFrame.ePressed = true;
       break;
+
+    case KEY_M_CODE:
+      m_CurrentFrame.mPressed = true;
+      break;
     }
   }
 
@@ -184,6 +196,10 @@ namespace DataGarden
     case KEY_E_CODE:
       m_CurrentFrame.ePressed = false;
       break;
+
+    case KEY_M_CODE:
+      m_CurrentFrame.mPressed = false;
+      break;
     }
   }
 
@@ -192,7 +208,7 @@ namespace DataGarden
     copyInputFrame(m_PreviousFrame, m_CurrentFrame);
   }
 
-  bool InputManager::IsKeyPressed(int keyCode)
+  bool InputManager::IsKeyDown(int keyCode)
   {
     switch (keyCode)
     {
@@ -223,10 +239,56 @@ namespace DataGarden
     case KEY_E_CODE:
       return m_CurrentFrame.ePressed;
       break;
+
+    case KEY_M_CODE:
+      return m_CurrentFrame.mPressed;
+      break;
     }
 
     return false;
   }
+
+  bool InputManager::IsKeyPressed(int keyCode)
+  {
+    switch (keyCode)
+    {
+    case KEY_UP_CODE:
+      return m_CurrentFrame.upPressed && !m_PreviousFrame.upPressed;
+      break;
+
+    case KEY_DOWN_CODE:
+      return m_CurrentFrame.downPressed && !m_PreviousFrame.downPressed;
+      break;
+
+    case KEY_LEFT_CODE:
+      return m_CurrentFrame.leftPressed && !m_PreviousFrame.leftPressed;
+      break;
+
+    case KEY_RIGHT_CODE:
+      return m_CurrentFrame.rightPressed && !m_PreviousFrame.rightPressed;
+      break;
+
+    case KEY_SPACE_BAR_CODE:
+      return m_CurrentFrame.spaceBarPressed && !m_PreviousFrame.spaceBarPressed;
+      break;
+
+    case KEY_Q_CODE:
+      return m_CurrentFrame.qPressed && !m_PreviousFrame.qPressed;
+      break;
+
+    case KEY_E_CODE:
+      return m_CurrentFrame.ePressed && !m_PreviousFrame.ePressed;
+      break;
+
+    case KEY_M_CODE:
+      return m_CurrentFrame.mPressed && !m_PreviousFrame.mPressed;
+      break;
+    }
+
+    return false;
+  }
+
+  // TODO: IsKeyUp
 
   bool InputManager::IsMouseButtonPressed(int button)
   {
