@@ -38,7 +38,7 @@ namespace DataGarden
 
     // float aspectRatio = width / height;
     // m_Projection = glm::ortho(0.0f, (width / height) * 10.0f, 0.0f, (height / width) * 10.0f, m_NearClipping, m_FarClipping);
-    m_Projection = glm::ortho(0.0f, width / 30.0f, 0.0f, height / 3.0f, m_NearClipping, m_FarClipping);
+    m_Projection = glm::ortho(0.0f, width / 20.0f, 0.0f, height / 20.0f, m_NearClipping, m_FarClipping);
   }
 
   void Camera2D::Update()
@@ -48,8 +48,15 @@ namespace DataGarden
   void Camera2D::SetCameraUniforms()
   {
     VisualizationShader *visualizationShader = Engine::Get().GetShaderManager().GetVisualizationShader();
-
+    visualizationShader->Bind();
     visualizationShader->SetViewProjectionUniform(GetViewProjection());
     visualizationShader->SetViewPositionUniform(m_Transform.GetPosition());
+    visualizationShader->Unbind();
+
+    GridShader *gridShader = Engine::Get().GetShaderManager().GetGridShader();
+    gridShader->Bind();
+    gridShader->SetViewProjectionUniform(GetViewProjection());
+    gridShader->SetViewPositionUniform(m_Transform.GetPosition());
+    gridShader->Unbind();
   }
 } // namespace DataGarden

@@ -304,10 +304,39 @@ namespace DataGarden
     webGLInterfaceSetUniform1i(shaderID, uniformName, strlen(uniformName), uniformInteger);
   }
 
-  void Renderer::DrawIndexed(unsigned int count)
+  void Renderer::DrawIndexedTriangles(unsigned int count)
   {
-    webGLInterfaceDrawIndexed(count);
-    // webGLInterfaceDrawIndexedLineStrip(count);
+    webGLInterfaceDrawIndexedTriangles(count);
+  }
+
+  void Renderer::DrawIndexedTriangleStrip(unsigned int count)
+  {
+    webGLInterfaceDrawIndexedTriangleStrip(count);
+  }
+
+  void Renderer::DrawIndexedTriangleFan(unsigned int count)
+  {
+    webGLInterfaceDrawIndexedTriangleFan(count);
+  }
+
+  void Renderer::DrawIndexedLines(unsigned int count)
+  {
+    webGLInterfaceDrawIndexedLines(count);
+  }
+
+  void Renderer::DrawIndexedLineStrip(unsigned int count)
+  {
+    webGLInterfaceDrawIndexedLineStrip(count);
+  }
+
+  void Renderer::DrawIndexedLineLoop(unsigned int count)
+  {
+    webGLInterfaceDrawIndexedLineLoop(count);
+  }
+
+  void Renderer::DrawIndexedPoints(unsigned int count)
+  {
+    webGLInterfaceDrawIndexedPoints(count);
   }
 
   void Renderer::_Setup()

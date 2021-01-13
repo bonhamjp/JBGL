@@ -8,8 +8,7 @@
         "${workspaceFolder}/**",
         "${workspaceFolder}/engine/**",
         "/Users/johnbonham/Documents/emscripten/system/include/**",
-        "/Users/johnbonham/Documents/glm",
-        "/Users/johnbonham/Documents/emscripten/system/include"
+        "/Users/johnbonham/Documents/glm"
       ],
       "defines":
       [

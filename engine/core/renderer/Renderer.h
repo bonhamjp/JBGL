@@ -74,7 +74,13 @@ namespace DataGarden
     void SetUniform1f(unsigned int programID, const char *uniformName, float uniformFloat);
     void SetUniform1i(unsigned int programID, const char *uniformName, int uniformInteger);
 
-    void DrawIndexed(unsigned int count);
+    void DrawIndexedTriangles(unsigned int count);
+    void DrawIndexedTriangleStrip(unsigned int count);
+    void DrawIndexedTriangleFan(unsigned int count);
+    void DrawIndexedLines(unsigned int count);
+    void DrawIndexedLineStrip(unsigned int count);
+    void DrawIndexedLineLoop(unsigned int count);
+    void DrawIndexedPoints(unsigned int count);
 
   private:
     // Scope<RenderCommandQueue> m_CommandQueue

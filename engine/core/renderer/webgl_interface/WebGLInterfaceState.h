@@ -33,12 +33,32 @@ EM_JS(void, webGLInterfaceSetViewport, (unsigned int x, int y, unsigned int widt
   document.webGLModule.context.viewport(x, y, width, height);
 });
 
-EM_JS(void, webGLInterfaceDrawIndexed, (unsigned int count), {
+EM_JS(void, webGLInterfaceDrawIndexedTriangles, (unsigned int count), {
   document.webGLModule.context.drawElements(document.webGLModule.context.TRIANGLES, count, document.webGLModule.context.UNSIGNED_INT, 0);
+});
+
+EM_JS(void, webGLInterfaceDrawIndexedTriangleStrip, (unsigned int count), {
+  document.webGLModule.context.drawElements(document.webGLModule.context.TRIANGLE_STRIP, count, document.webGLModule.context.UNSIGNED_INT, 0);
+});
+
+EM_JS(void, webGLInterfaceDrawIndexedTriangleFan, (unsigned int count), {
+  document.webGLModule.context.drawElements(document.webGLModule.context.TRIANGLE_FAN, count, document.webGLModule.context.UNSIGNED_INT, 0);
+});
+
+EM_JS(void, webGLInterfaceDrawIndexedLines, (unsigned int count), {
+  document.webGLModule.context.drawElements(document.webGLModule.context.LINES, count, document.webGLModule.context.UNSIGNED_INT, 0);
 });
 
 EM_JS(void, webGLInterfaceDrawIndexedLineStrip, (unsigned int count), {
   document.webGLModule.context.drawElements(document.webGLModule.context.LINE_STRIP, count, document.webGLModule.context.UNSIGNED_INT, 0);
+});
+
+EM_JS(void, webGLInterfaceDrawIndexedLineLoop, (unsigned int count), {
+  document.webGLModule.context.drawElements(document.webGLModule.context.LINE_LOOP, count, document.webGLModule.context.UNSIGNED_INT, 0);
+});
+
+EM_JS(void, webGLInterfaceDrawIndexedPoints, (unsigned int count), {
+  document.webGLModule.context.drawElements(document.webGLModule.context.POINTS, count, document.webGLModule.context.UNSIGNED_INT, 0);
 });
 
 #endif

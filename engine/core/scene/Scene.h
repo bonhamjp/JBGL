@@ -5,6 +5,8 @@
 
 #include "core/ui/UI.h"
 
+#include "core/grid/Grid.h"
+
 #include "core/object/light/LightList.h"
 #include "core/object/node/NodeGraph.h"
 #include "core/object/camera/Camera.h"
@@ -45,6 +47,9 @@ namespace DataGarden
     MainShader GetMainShader() { return m_MainShader; };
     inline void SetMainShader(MainShader mainShader) { m_MainShader = mainShader; };
 
+    inline Grid *GetGrid() { return m_Grid; };
+    void SetGrid(Grid *grid);
+
     void PushUi(UI *ui);
 
     inline Camera *Get3DCamera() { return m_3DCamera; };
@@ -61,21 +66,22 @@ namespace DataGarden
     unsigned int m_UI_Count;
     UI *m_UIS[MAX_UI_COUNT];
 
+    Grid* m_Grid;
+
     LightList *m_LightList;
 
     NodeGraph *m_NodeGraph;
 
-    // TODO: Move Overlay management to a specific place
-
-    // TODO: Move camera management to a specific place
     Camera *m_3DCamera;
     Camera *m_2DCamera;
 
   private:
-    void _UpdateScene();
+    void _UpdateGrid();
+    void _UpdateVisualization();
     void _UpdateUIs();
 
-    void _RenderScene();
+    void _RenderGrid();
+    void _RenderVisualization();
     void _RenderUIs();
 
     void _DeleteCameras();

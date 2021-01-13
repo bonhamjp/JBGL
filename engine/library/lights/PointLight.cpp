@@ -52,7 +52,8 @@ namespace DataGarden
   void UpdatePointLightUniforms(LightListOfType pointLightList)
   {
     VisualizationShader *visualizationShader = Engine::Get().GetShaderManager().GetVisualizationShader();
-
+    visualizationShader->Bind();
     visualizationShader->SetPointLightUniforms(pointLightList);
+    visualizationShader->Unbind();
   }
 } // namespace DataGarden

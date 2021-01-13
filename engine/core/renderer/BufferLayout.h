@@ -9,6 +9,12 @@
 
 namespace DataGarden
 {
+  struct BufferObject
+  {
+    float *Vertices;
+    unsigned int *Indices;
+  };
+
   enum class BufferDataType
   {
     None = 0,

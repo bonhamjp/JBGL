@@ -17,21 +17,6 @@ namespace DataGarden
   {
   }
 
-  VertexArray &Geometry::GetVertexArray()
-  {
-    return *m_VertexArray;
-  }
-
-  VertexBuffer &Geometry::GetVertexBuffer()
-  {
-    return *m_VertexBuffer;
-  }
-
-  IndexBuffer &Geometry::GetIndexBuffer()
-  {
-    return *m_IndexBuffer;
-  }
-
   void Geometry::_Initialize()
   {
     m_VertexBuffer = new VertexBuffer(m_GeometryBuffer.Vertices, GetVertexSize());
@@ -47,6 +32,6 @@ namespace DataGarden
 
   void Geometry::_TearDown()
   {
-    // TODO: Cleanup textures
+    // TODO: Cleanup WebGL resources
   }
 } // namespace DataGarden

@@ -11,6 +11,8 @@
 
 #include "utility/ColorTools.h"
 
+#include "library/grids/VolumeGrid.h"
+
 #include "core/object/node/Node.h"
 #include "core/object/node/Factory.h"
 
@@ -60,6 +62,9 @@ namespace DataGarden
             glm::vec4(1.0f, 0.0f, 0.0f, 0.0f),
             whiteLight, 1.0f, 0.045f, 0.0075f, 12.5f, 17.5f));
 
+    VolumeGrid *volumeGrid = new VolumeGrid(100);
+    SetGrid(volumeGrid);
+
     Node *cube = Factory::Create(
         FactoryType::Cube,
         glm::vec3(-1.0f, 2.0f, 3.0f),
@@ -106,12 +111,12 @@ namespace DataGarden
         ColorFromHex(0xE6C79C));
     m_NodeGraph->PushNode(cylinder);
 
-    Node *plane = Factory::Create(
-        FactoryType::Plane,
-        glm::vec3(0.0f, -7.0f, 0.0f),
-        glm::vec3(50.0f),
-        ColorFromHex(0x7B9EA8));
-    m_NodeGraph->PushNode(plane);
+    // Node *plane = Factory::Create(
+    //     FactoryType::Plane,
+    //     glm::vec3(0.0f, -7.0f, 0.0f),
+    //     glm::vec3(50.0f),
+    //     ColorFromHex(0x7B9EA8));
+    // m_NodeGraph->PushNode(plane);
   }
 
   TestScene::~TestScene()
@@ -120,7 +125,6 @@ namespace DataGarden
 
   void TestScene::PreUpdate()
   {
-    // std::cout << "This is in Pre Update..." << std::endl;
     InputManager &inputManager = Engine::Get().GetInputManager();
 
     if (inputManager.IsKeyPressed(KEY_M_CODE))

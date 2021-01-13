@@ -47,6 +47,7 @@ namespace DataGarden
   void Material::SetMaterialUniforms()
   {
     VisualizationShader *visualizationShader = Engine::Get().GetShaderManager().GetVisualizationShader();
+    visualizationShader->Bind();
 
     visualizationShader->SetMaterialShininessUniform(m_Shininess);
 
@@ -71,6 +72,8 @@ namespace DataGarden
     {
       specularTextures[0]->Bind();
     }
+
+    visualizationShader->Unbind();
   }
 
   void Material::_CreateTextureFromData(TextureDataResourceDescriptor textureResourceDescriptor)

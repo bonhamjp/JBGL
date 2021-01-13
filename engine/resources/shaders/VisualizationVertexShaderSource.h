@@ -31,7 +31,7 @@ void main()
 
   gl_Position = u_ViewProjection * u_Vertex.Model * vec4(v_Position, 1.0f);
 
-  f_Position = u_ViewProjection * u_Vertex.Model * vec4(v_Position, 1.0f); // vec3(u_Vertex.Model * vec4(f_Position, 1.0f);
+  f_Position = u_ViewProjection * u_Vertex.Model * vec4(v_Position, 1.0f);
   f_FragPosition = u_Vertex.Model * vec4(v_Position, 1.0f);
 
   f_Normal = mat3(transpose(inverse(u_Vertex.Model))) * v_Normal;

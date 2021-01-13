@@ -44,8 +44,15 @@ namespace DataGarden
   void Camera3D::SetCameraUniforms()
   {
     VisualizationShader *visualizationShader = Engine::Get().GetShaderManager().GetVisualizationShader();
-
+    visualizationShader->Bind();
     visualizationShader->SetViewProjectionUniform(GetViewProjection());
     visualizationShader->SetViewPositionUniform(m_Transform.GetPosition());
+    visualizationShader->Unbind();
+
+    GridShader *gridShader = Engine::Get().GetShaderManager().GetGridShader();
+    gridShader->Bind();
+    gridShader->SetViewProjectionUniform(GetViewProjection());
+    gridShader->SetViewPositionUniform(m_Transform.GetPosition());
+    gridShader->Unbind();
   }
 } // namespace DataGarden

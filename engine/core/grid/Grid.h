@@ -1,9 +1,11 @@
-#ifndef DATA_GARDEN_GEOMETRY
-#define DATA_GARDEN_GEOMETRY
+#ifndef DATA_GARDEN_GRID
+#define DATA_GARDEN_GRID
 
 #include "DataGarden.h"
 
 #include "core/renderer/BufferLayout.h"
+
+#include "core/object/Transform.h"
 
 namespace DataGarden
 {
@@ -12,16 +14,22 @@ namespace DataGarden
   class VertexBuffer;
   class IndexBuffer;
 
-  class Geometry
+  class Grid
   {
   public:
-    Geometry();
-    virtual ~Geometry();
+    Grid(float precision);
+    ~Grid();
 
-    // TODO: Add base Vertex stride/Vertex Attrib definition, since it should be the same for all Geometry
+    virtual void Update();
 
-    inline float *GetVertices() { return m_GeometryBuffer.Vertices; };
-    inline unsigned int *GetIndices() { return m_GeometryBuffer.Indices; };
+    void Render();
+
+    inline float GetPrecision() { return m_Precision; };
+    inline void SetPrecision(float precision) { m_Precision = precision; };
+
+    // TODO: All of this Vertex and Index code is shared with Geometry, give them a base class to share
+    inline float *GetVertices() { return m_GridBuffer.Vertices; };
+    inline unsigned int *GetIndices() { return m_GridBuffer.Indices; };
 
     inline int GetVertexCount() { return m_VertexCount; };
     inline int GetVertexStride() { return m_VertexStride; };
@@ -33,20 +41,26 @@ namespace DataGarden
 
     inline int GetIndexCount() { return m_IndexCount; };
 
-    virtual BufferLayout GetLayout() = 0;
+    BufferLayout GetLayout();
 
   protected:
+    Transform m_Transform;
+
+    float m_Precision;
+
     int m_VertexCount;
     int m_VertexStride;
     int m_IndexCount;
 
-    BufferObject m_GeometryBuffer;
+    BufferObject m_GridBuffer;
 
     VertexArray *m_VertexArray;
     VertexBuffer *m_VertexBuffer;
     IndexBuffer *m_IndexBuffer;
 
-    // TODO: Add virtual create and delete Buffer Object methods
+    void _SetGridUniforms();
+
+    void _DrawIndexedLines();
 
     void _Initialize();
     void _TearDown();

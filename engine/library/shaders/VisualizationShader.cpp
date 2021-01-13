@@ -162,9 +162,11 @@ namespace DataGarden
 
   void VisualizationShader::_Setup()
   {
+    Bind();
     Renderer &renderer = Engine::Get().GetRenderer();
     renderer.SetUniform1i(m_ProgramID, "u_AmbientTexture", 0);
     renderer.SetUniform1i(m_ProgramID, "u_DiffuseTexture", 3);
     renderer.SetUniform1i(m_ProgramID, "u_SpecularTexture", 6);
+    Unbind();
   }
 } // namespace DataGarden

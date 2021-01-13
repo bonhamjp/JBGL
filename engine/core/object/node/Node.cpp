@@ -77,8 +77,9 @@ namespace DataGarden
     if (m_CanRender)
     {
       _SetNodeUniforms();
+
       // TODO: Batch draw alike Nodes
-      _DrawIndexed();
+      _DrawIndexedTriangles();
     }
 
     // render children next
@@ -145,15 +146,17 @@ namespace DataGarden
     m_Mesh->PrepareForRender();
 
     VisualizationShader *visualizationShader = Engine::Get().GetShaderManager().GetVisualizationShader();
+    visualizationShader->Bind();
     visualizationShader->SetModelUniform(m_Transform.GetModel());
+    visualizationShader->Unbind();
 
     m_Material->SetMaterialUniforms();
   }
 
-  void Node::_DrawIndexed()
+  void Node::_DrawIndexedTriangles()
   {
     Renderer &renderer = Engine::Get().GetRenderer();
 
-    renderer.DrawIndexed(m_Mesh->GetGeometry()->GetIndexCount());
+    renderer.DrawIndexedTriangles(m_Mesh->GetGeometry()->GetIndexCount());
   }
 } // namespace DataGarden

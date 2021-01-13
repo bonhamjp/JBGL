@@ -84,7 +84,8 @@ namespace DataGarden
   void UpdateSpotLightUniforms(LightListOfType spotLightList)
   {
     VisualizationShader *visualizationShader = Engine::Get().GetShaderManager().GetVisualizationShader();
-
+    visualizationShader->Bind();
     visualizationShader->SetSpotLightUniforms(spotLightList);
+    visualizationShader->Unbind();
   }
 } // namespace DataGarden

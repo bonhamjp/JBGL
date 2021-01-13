@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "Engine.h"
 
 #include "core/canvas/Canvas.h"

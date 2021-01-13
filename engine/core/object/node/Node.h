@@ -80,7 +80,8 @@ namespace DataGarden
     void _UpdateCanRender();
 
     void _SetNodeUniforms();
-    void _DrawIndexed();
+
+    void _DrawIndexedTriangles();
   };
 } // namespace DataGarden
 
