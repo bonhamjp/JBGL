@@ -20,7 +20,8 @@ namespace DataGarden
 
     void SetModelUniform(glm::mat4 model);
 
-    void SetColorUniform(glm::vec3 color);
+    void SetPrimaryColorUniform(glm::vec3 color);
+    void SetSecondaryColorUniform(glm::vec3 color);
 
   private:
     void _Setup();

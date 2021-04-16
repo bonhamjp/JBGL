@@ -8,12 +8,17 @@
 
     <title>DataGarden</title>
 
+    <link href="/assets/css/app/visualization.css" rel="stylesheet">
+
     <script src="/assets/engine/engine.js"></script>
   </head>
 
   <body>
     {{ template "content" . }}
   </body>
+
+  <!-- load scripts last, after module and DOM created -->
+  <script src="/assets/javascript/visualization_menu.js"></script>
 </html>
 
 {{ end }}

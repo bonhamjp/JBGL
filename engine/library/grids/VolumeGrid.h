@@ -10,7 +10,8 @@ namespace DataGarden
   class VolumeGrid : public Grid
   {
   public:
-    VolumeGrid(float precision);
+    VolumeGrid(glm::vec3 primaryColor, glm::vec3 secondaryColor, float precision);
+    VolumeGrid(glm::vec3 primaryColor, float precision);
     virtual ~VolumeGrid();
 
   private:

@@ -2,10 +2,18 @@
 
 #include "core/renderer/BufferLayout.h"
 
+#include "utility/NormalGenerator.h"
+
+#include <glm/glm.hpp>
+
 namespace DataGarden
 {
   CubeGeometry::CubeGeometry()
   {
+    // m_VertexCount = 8;
+    // m_VertexStride = 8;
+    // m_IndexCount = 36;
+
     m_VertexCount = 24;
     m_VertexStride = 8;
     m_IndexCount = 36;
@@ -32,6 +40,15 @@ namespace DataGarden
 
   void CubeGeometry::_CreateBufferObject()
   {
+    glm::vec3 backLeftBottom = glm::vec3(-0.5f, -0.5f, 0.5f);
+    glm::vec3 backRightBottom = glm::vec3(0.5f, -0.5f, 0.5f);
+    glm::vec3 frontLeftBottom = glm::vec3(-0.5f, -0.5f, -0.5f);
+    glm::vec3 frontRightBottom = glm::vec3(0.5f, -0.5f, -0.5f);
+    glm::vec3 backLeftTop = glm::vec3(-0.5f, 0.5f, 0.5f);
+    glm::vec3 backRightTop = glm::vec3(0.5f, 0.5f, 0.5f);
+    glm::vec3 frontLeftTop = glm::vec3(-0.5f, 0.5f, -0.5f);
+    glm::vec3 frontRightTop = glm::vec3(0.5f, 0.5f, -0.5f);
+
     // counter clockwise winding
     float defaultBox[] = {
         // back face
@@ -103,6 +120,8 @@ namespace DataGarden
     {
       m_GeometryBuffer.Indices[i] = defaultIndices[i];
     }
+
+    // GenerateSurfaceNormals(GetVertices(), GetIndices(), GetIndexCount(), GetVertexStride());
   }
 
   void CubeGeometry::_DestroyBufferObject()

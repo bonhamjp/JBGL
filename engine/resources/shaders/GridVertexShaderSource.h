@@ -10,6 +10,7 @@ precision highp float;
 layout(location = 0) in vec3 v_Position;
 
 out vec4 f_Position;
+flat out int f_UsePrimaryColor;
 
 uniform mat4 u_ViewProjection;
 uniform vec3 u_ViewPosition;
@@ -25,6 +26,7 @@ void main()
   gl_Position = u_ViewProjection * u_Vertex.Model * vec4(v_Position, 1.0f);
 
   f_Position = u_ViewProjection * u_Vertex.Model * vec4(v_Position, 1.0f);
+  f_UsePrimaryColor = (gl_VertexID % 4) < 2 ? 0 : 1;
 }
 )";
 

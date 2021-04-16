@@ -33,10 +33,16 @@ namespace DataGarden
     renderer.SetUniformMatrix4fv(m_ProgramID, "u_Vertex.Model", model);
   }
 
-  void GridShader::SetColorUniform(glm::vec3 color)
+  void GridShader::SetPrimaryColorUniform(glm::vec3 color)
   {
     Renderer &renderer = Engine::Get().GetRenderer();
-    renderer.SetUniform3fv(m_ProgramID, "u_Color", color);
+    renderer.SetUniform3fv(m_ProgramID, "u_PrimaryColor", color);
+  }
+
+  void GridShader::SetSecondaryColorUniform(glm::vec3 color)
+  {
+    Renderer &renderer = Engine::Get().GetRenderer();
+    renderer.SetUniform3fv(m_ProgramID, "u_SecondaryColor", color);
   }
 
   void GridShader::_Setup()

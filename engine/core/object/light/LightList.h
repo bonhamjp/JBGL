@@ -5,7 +5,7 @@
 
 #include "Light.h"
 
-#define MAX_LIGHT_COUNT 16
+#define MAX_LIGHT_COUNT 32
 
 namespace DataGarden
 {

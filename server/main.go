@@ -23,15 +23,6 @@ func newRouter() *mux.Router {
 
 	router.HandleFunc("/user/{userId}", getUserHandler).Methods("GET")
 
-	// router.HandleFunc("/zones", getZonesHandler).Methods("GET")
-	// router.HandleFunc("/zone/{fqdn}/edit", getZoneEditHandler).Methods("GET")
-	// router.HandleFunc("/zone/{fqdn}", putZoneHandler).Methods("POST")
-	// router.HandleFunc("/zone/new", getNewZoneHandler).Methods("GET")
-	// router.HandleFunc("/zone", postNewZoneHandler).Methods("POST")
-	// router.HandleFunc("/zone/{fqdn}/delete", getZoneDeleteHandler).Methods("GET")
-
-	// router.HandleFunc("/zone/{fqdn}/{domain}/{type}", getRecordEditHandler).Methods("GET")
-
 	return router
 }
 

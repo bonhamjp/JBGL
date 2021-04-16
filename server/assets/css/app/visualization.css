@@ -1,0 +1,26 @@
+body {
+  background-color: #838383;
+  padding: 0;
+  margin: 0;
+}
+
+#visualization-canvas {
+  z-index: 1;
+  /* cursor: none; */
+}
+
+#main-menu {
+  /* TODO extract variables with branded colors */
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100px;
+  height: 100px;
+  background-color: #838383;
+  /* hidden: true; */
+}
+
+#left-menu-bar p {
+  padding: 1em;
+}
+

@@ -13,17 +13,24 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <glm/vec3.hpp>
 
 #include <iostream>
 
 namespace DataGarden
 {
-  Grid::Grid(float precision)
+  Grid::Grid(glm::vec3 primaryColor, glm::vec3 secondaryColor, float precision)
   {
+    m_PrimaryColor = primaryColor;
+    m_SecondaryColor = secondaryColor;
     m_Precision = precision;
 
-    m_VertexStride = 3; // position
+    m_VertexStride = 3;
+
+    _SetPosition();
+  }
+
+  Grid::Grid(glm::vec3 primaryColor, float precision) : Grid(primaryColor, primaryColor, precision)
+  {
   }
 
   Grid::~Grid()
@@ -46,17 +53,20 @@ namespace DataGarden
     return BufferLayout({{BufferDataType::Float3, "v_Position"}});
   }
 
+  void Grid::_SetPosition()
+  {
+    m_Transform.SetScale(glm::vec3(100.0f));
+    m_Transform.SetPosition(glm::vec3(-50.0f, -50.0f, -50.0f));
+    m_Transform.UpdateModel(glm::mat4(1.0f));
+  }
+
   void Grid::_SetGridUniforms()
   {
     GridShader *gridShader = Engine::Get().GetShaderManager().GetGridShader();
     gridShader->Bind();
-    // TODO: Store transform on in Grid for model, so that it can be propery scaled and positioned
-    m_Transform.SetScale(glm::vec3(100.0f));
-    m_Transform.SetPosition(glm::vec3(-50.0f, -50.0f, -50.0f));
-    m_Transform.UpdateModel(glm::mat4(1.0f));
     gridShader->SetModelUniform(m_Transform.GetModel());
-    // TODO: Store colors, at least a secondary and primary
-    gridShader->SetColorUniform(glm::vec3(0.0f, 0.5f, 0.0f));
+    gridShader->SetPrimaryColorUniform(m_PrimaryColor);
+    gridShader->SetSecondaryColorUniform(m_SecondaryColor);
     gridShader->Unbind();
   }
 

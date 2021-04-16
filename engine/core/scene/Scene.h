@@ -3,15 +3,13 @@
 
 #include "DataGarden.h"
 
-#include "core/ui/UI.h"
+#include "core/ui/UIList.h"
 
 #include "core/grid/Grid.h"
 
 #include "core/object/light/LightList.h"
 #include "core/object/node/NodeGraph.h"
 #include "core/object/camera/Camera.h"
-
-#define MAX_UI_COUNT 8
 
 namespace DataGarden
 {
@@ -47,10 +45,10 @@ namespace DataGarden
     MainShader GetMainShader() { return m_MainShader; };
     inline void SetMainShader(MainShader mainShader) { m_MainShader = mainShader; };
 
+    inline UIList *GetUIList() { return m_UIList; };
+
     inline Grid *GetGrid() { return m_Grid; };
     void SetGrid(Grid *grid);
-
-    void PushUi(UI *ui);
 
     inline Camera *Get3DCamera() { return m_3DCamera; };
     void Set3DCamera(Camera *camera);
@@ -62,9 +60,7 @@ namespace DataGarden
     RenderMode m_RenderMode;
     MainShader m_MainShader;
 
-    // TODO: Move UI management to a specific place
-    unsigned int m_UI_Count;
-    UI *m_UIS[MAX_UI_COUNT];
+    UIList *m_UIList;
 
     Grid* m_Grid;
 
@@ -78,11 +74,11 @@ namespace DataGarden
   private:
     void _UpdateGrid();
     void _UpdateVisualization();
-    void _UpdateUIs();
+    void _UpdateUIList();
 
     void _RenderGrid();
     void _RenderVisualization();
-    void _RenderUIs();
+    void _RenderUIList();
 
     void _DeleteCameras();
 

@@ -7,6 +7,8 @@
 
 #include "core/object/Transform.h"
 
+#include <glm/vec3.hpp>
+
 namespace DataGarden
 {
   // Forward declarations
@@ -17,7 +19,8 @@ namespace DataGarden
   class Grid
   {
   public:
-    Grid(float precision);
+    Grid(glm::vec3 primaryColor, glm::vec3 secondaryColor, float precision);
+    Grid(glm::vec3 primaryColor, float precision);
     ~Grid();
 
     virtual void Update();
@@ -44,6 +47,9 @@ namespace DataGarden
     BufferLayout GetLayout();
 
   protected:
+    glm::vec3 m_PrimaryColor;
+    glm::vec3 m_SecondaryColor;
+
     Transform m_Transform;
 
     float m_Precision;
@@ -57,6 +63,8 @@ namespace DataGarden
     VertexArray *m_VertexArray;
     VertexBuffer *m_VertexBuffer;
     IndexBuffer *m_IndexBuffer;
+
+    void _SetPosition();
 
     void _SetGridUniforms();
 

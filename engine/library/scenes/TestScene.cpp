@@ -19,6 +19,9 @@
 #include "library/cameras/3d/FreeCamera.h"
 #include "library/cameras/2d/PanCamera.h"
 
+#include "library/UIs/DebugUI.h"
+#include "library/UIs/MainControlsUI.h"
+
 #include "library/lights/PointLight.h"
 #include "library/lights/DirectionalLight.h"
 #include "library/lights/SpotLight.h"
@@ -29,17 +32,29 @@ namespace DataGarden
 {
   TestScene::TestScene() : Scene()
   {
-    FreeCamera *freeCamera = new FreeCamera(45.0f, 0.1f, 100.0f);
+    FreeCamera *freeCamera = new FreeCamera(45.0f, 0.1f, 1000.0f);
     freeCamera->SetTransform(
         Transform(glm::vec3(-6.0f, 0.0f, 3.0f),
                   glm::vec3(1.0f, 1.0f, 1.0f), 0.0f, 0.0f, 0.0f));
     Set3DCamera(freeCamera);
 
-    PanCamera *panCamera = new PanCamera(0.0f, 0.1f, 100.0f);
+    PanCamera *panCamera = new PanCamera(0.0f, 0.1f, 1000.0f);
     panCamera->SetTransform(
         Transform(glm::vec3(-6.0f, 0.0f, 3.0f),
                   glm::vec3(1.0f, 1.0f, 1.0f), 0.0f, 0.0f, 0.0f));
     Set2DCamera(panCamera);
+
+    DebugUI *debugUI = new DebugUI();
+    m_UIList->PushUI(debugUI);
+
+    MainControlsUI *mainControlsUI = new MainControlsUI();
+    m_UIList->PushUI(mainControlsUI);
+
+    VolumeGrid *volumeGrid = new VolumeGrid(
+        ColorFromHex(0xCDD7DF),
+        ColorFromHex(0xB4C3CF),
+        40);
+    SetGrid(volumeGrid);
 
     glm::vec4 whiteLight = glm::vec4(0.2f, 0.2f, 0.2f, 1.0f);
 
@@ -62,9 +77,6 @@ namespace DataGarden
             glm::vec4(1.0f, 0.0f, 0.0f, 0.0f),
             whiteLight, 1.0f, 0.045f, 0.0075f, 12.5f, 17.5f));
 
-    VolumeGrid *volumeGrid = new VolumeGrid(100);
-    SetGrid(volumeGrid);
-
     Node *cube = Factory::Create(
         FactoryType::Cube,
         glm::vec3(-1.0f, 2.0f, 3.0f),
@@ -78,7 +90,7 @@ namespace DataGarden
         glm::vec3(0.0f, -3.0f, 2.0f),
         glm::vec3(3.0f),
         ColorFromHex(0xCDDFA0));
-    cube2->AddComponent<RotationComponent>(cube2, 0.6f);
+    // cube2->AddComponent<RotationComponent>(cube2, 0.6f);
     m_NodeGraph->PushNode(cube2);
 
     Node *cube3 = Factory::Create(
@@ -104,12 +116,12 @@ namespace DataGarden
     pyramid->AddComponent<RotationComponent>(pyramid, 1.0f);
     m_NodeGraph->PushNode(pyramid);
 
-    Node *cylinder = Factory::Create(
-        FactoryType::Cylinder,
-        glm::vec3(6.0f, 0.0f, 0.0f),
-        glm::vec3(1.0f),
-        ColorFromHex(0xE6C79C));
-    m_NodeGraph->PushNode(cylinder);
+    // Node *cylinder = Factory::Create(
+    //     FactoryType::Cylinder,
+    //     glm::vec3(6.0f, 0.0f, 0.0f),
+    //     glm::vec3(1.0f),
+    //     ColorFromHex(0xE6C79C));
+    // m_NodeGraph->PushNode(cylinder);
 
     // Node *plane = Factory::Create(
     //     FactoryType::Plane,

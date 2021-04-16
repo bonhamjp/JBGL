@@ -11,7 +11,7 @@ namespace DataGarden
     m_RenderMode = RenderMode::THREE_DIMENSIONS;
     m_MainShader = MainShader::LIGHTING;
 
-    m_UI_Count = 0;
+    m_UIList = nullptr;
 
     m_Grid = nullptr;
 
@@ -30,14 +30,14 @@ namespace DataGarden
   {
     _UpdateGrid();
     _UpdateVisualization();
-    _UpdateUIs();
+    _UpdateUIList();
   }
 
   void Scene::Render()
   {
     _RenderGrid();
     _RenderVisualization();
-    _RenderUIs();
+    _RenderUIList();
   }
 
   void Scene::SetGrid(Grid *grid)
@@ -48,11 +48,6 @@ namespace DataGarden
     }
 
     m_Grid = grid;
-  }
-
-  void Scene::PushUi(UI *ui)
-  {
-    m_UIS[m_UI_Count++] = ui;
   }
 
   void Scene::Set3DCamera(Camera *camera)
@@ -100,12 +95,9 @@ namespace DataGarden
     m_NodeGraph->Update();
   }
 
-  void Scene::_UpdateUIs()
+  void Scene::_UpdateUIList()
   {
-    for (int i = 0; i < m_UI_Count; i++)
-    {
-      m_UIS[i]->Update();
-    }
+    m_UIList->Update();
   }
 
   void Scene::_RenderGrid()
@@ -146,12 +138,9 @@ namespace DataGarden
     visualizationShader->Unbind();
   }
 
-  void Scene::_RenderUIs()
+  void Scene::_RenderUIList()
   {
-    for (int i = 0; i < m_UI_Count; i++)
-    {
-      m_UIS[i]->Render();
-    }
+    m_UIList->Render();
   }
 
   void Scene::_DeleteCameras()
@@ -162,12 +151,14 @@ namespace DataGarden
 
   void Scene::_SetupScene()
   {
+    m_UIList = new UIList();
     m_NodeGraph = new NodeGraph();
     m_LightList = new LightList();
   }
 
   void Scene::_TeardownScene()
   {
+    delete m_UIList;
     delete m_NodeGraph;
     delete m_LightList;
 
