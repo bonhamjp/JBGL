@@ -12,14 +12,14 @@ EM_JS(void, webGLInterfaceSetupContext, (), {
 
   canvasElement = document.getElementById("visualization-canvas");
 
-  // Event listeners
-  canvasElement.addEventListener("mouseenter", function(e){
-                                                   // Module._onMouseEnter();
-                                               });
+  // // Event listeners
+  // canvasElement.addEventListener("mouseenter", function(e){
+  //                                                  // Module._onMouseEnter();
+  //                                              });
 
-  canvasElement.addEventListener("mouseleave", function(e){
-                                                   // Module._onMouseLeave();
-                                               });
+  // canvasElement.addEventListener("mouseleave", function(e){
+  //                                                  // Module._onMouseLeave();
+  //                                              });
 
   canvasElement.addEventListener(
       "mouseup", function(e) {
@@ -31,10 +31,41 @@ EM_JS(void, webGLInterfaceSetupContext, (), {
         Module._onMouseDown(1);
       });
 
-  canvasElement.addEventListener(
-      "mousemove", function(e) {
-        Module._onMouseMove(e.screenX, e.screenY);
-      });
+  // Firefex handles pointer lock differently, so must be configured here
+  canvasElement.requestPointerLock =
+      canvasElement.requestPointerLock ||
+      canvasElement.mozRequestPointerLock ||
+      canvasElement.webkitRequestPointerLock;
+
+  // TODO: Setup in a better way, and arrange both on and off pointer lock
+  // in a clean way
+  function mouseChangeCallback(e)
+  {
+  }
+
+  function mouseMoveCallback(e)
+  {
+    var movementX = e.movementX ||
+                    e.mozMovementX ||
+                    e.webkitMovementX ||
+                    0;
+    var movementY = e.movementY ||
+                    e.mozMovementY ||
+                    e.webkitMovementY ||
+                    0;
+
+    Module._onMouseMove(movementX, movementY);
+  }
+
+  document.addEventListener("pointerlockchange", mouseChangeCallback, false);
+  document.addEventListener("mozpointerlockchange", mouseChangeCallback, false);
+  document.addEventListener("webkitpointerlockchange", mouseChangeCallback, false);
+  document.addEventListener("mousemove", mouseMoveCallback, false);
+
+  // Begin with pointer lock
+  canvasElement.requestPointerLock();
+
+  // TODO: Hook up mechanism to get out of pointer lock
 
   // TODO: Set this up somewhere else, this function should only setup WebGL stuff
   window.addEventListener(

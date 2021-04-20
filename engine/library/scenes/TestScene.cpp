@@ -53,7 +53,7 @@ namespace DataGarden
     VolumeGrid *volumeGrid = new VolumeGrid(
         ColorFromHex(0xCDD7DF),
         ColorFromHex(0xB4C3CF),
-        40);
+        10);
     SetGrid(volumeGrid);
 
     glm::vec4 whiteLight = glm::vec4(0.2f, 0.2f, 0.2f, 1.0f);

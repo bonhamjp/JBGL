@@ -15,6 +15,8 @@ namespace DataGarden
     // TODO: Copy all data at once
     inputFrameA.mouseX = inputFrameB.mouseX;
     inputFrameA.mouseY = inputFrameB.mouseY;
+    inputFrameA.mouseXDelta = inputFrameB.mouseXDelta;
+    inputFrameA.mouseYDelta = inputFrameB.mouseYDelta;
     inputFrameA.mouseLeftPressed = inputFrameB.mouseLeftPressed;
     inputFrameA.mouseRightPressed = inputFrameB.mouseRightPressed;
     inputFrameA.mouseMiddlePressed = inputFrameB.mouseMiddlePressed;
@@ -33,6 +35,8 @@ namespace DataGarden
     // TODO: Clear all data at once
     inputFrame.mouseX = 0;
     inputFrame.mouseY = 0;
+    inputFrame.mouseXDelta = 0;
+    inputFrame.mouseYDelta = 0;
     inputFrame.mouseLeftPressed = false;
     inputFrame.mouseRightPressed = false;
     inputFrame.mouseMiddlePressed = false;
@@ -59,20 +63,20 @@ namespace DataGarden
     _Teardown();
   }
 
-  void InputManager::MouseMoved(int mouseX, int mouseY)
+  void InputManager::MouseMove(int mouseX, int mouseY)
   {
-    m_CurrentFrame.mouseX = mouseX;
-    m_CurrentFrame.mouseY = mouseY;
+    m_CurrentFrame.mouseXDelta = mouseX;
+    m_CurrentFrame.mouseYDelta = mouseY;
   }
 
   int InputManager::GetDeltaMouseX()
   {
-    return m_CurrentFrame.mouseX - m_PreviousFrame.mouseX;
+    return m_CurrentFrame.mouseXDelta;
   }
 
   int InputManager::GetDeltaMouseY()
   {
-    return m_CurrentFrame.mouseY - m_PreviousFrame.mouseY;
+    return m_CurrentFrame.mouseYDelta;
   }
 
   std::pair<int, int> InputManager::GetDeltaMouseCoords()
@@ -206,6 +210,10 @@ namespace DataGarden
   void InputManager::Clear()
   {
     copyInputFrame(m_PreviousFrame, m_CurrentFrame);
+
+    // TODO: Should I clear everything
+    m_CurrentFrame.mouseXDelta = 0;
+    m_CurrentFrame.mouseYDelta = 0;
   }
 
   bool InputManager::IsKeyDown(int keyCode)
