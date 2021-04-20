@@ -40,7 +40,7 @@ extern "C"
 
   void onMouseMove(int mouseX, int mouseY)
   {
-    DataGarden::Engine::Get().GetInputManager().MouseMoved(mouseX, mouseY);
+    DataGarden::Engine::Get().GetInputManager().MouseMove(mouseX, mouseY);
   }
 }
 

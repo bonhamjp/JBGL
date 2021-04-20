@@ -9,6 +9,8 @@ namespace DataGarden
   {
     int mouseX;
     int mouseY;
+    int mouseXDelta;
+    int mouseYDelta;
     bool mouseLeftPressed;
     bool mouseRightPressed;
     bool mouseMiddlePressed;
@@ -29,7 +31,7 @@ namespace DataGarden
     InputManager();
     ~InputManager();
 
-    void MouseMoved(int mouseX, int mouseY);
+    void MouseMove(int mouseX, int mouseY);
     int GetDeltaMouseX();
     int GetDeltaMouseY();
     std::pair<int, int> GetDeltaMouseCoords();
