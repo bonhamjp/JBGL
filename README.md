@@ -1,2 +1,2 @@
 # DataGarden
-Modern 3D Data Visualizer
+Browser based 3D Data Visualizer
